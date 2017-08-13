@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jackniulin&#39;s blog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-08-13T07:32:43.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Lin Niu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>day1</title>
+    <link href="http://yoursite.com/2017/08/13/day1/"/>
+    <id>http://yoursite.com/2017/08/13/day1/</id>
+    <published>2017-08-13T07:26:01.000Z</published>
+    <updated>2017-08-13T07:32:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>first page</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1&quot;&gt;&lt;a href=&quot;#1&quot; class=&quot;headerlink&quot; title=&quot;1&quot;&gt;&lt;/a&gt;1&lt;/h2&gt;&lt;p&gt;first page&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
