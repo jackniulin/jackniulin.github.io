@@ -348,9 +348,14 @@
       
         
           
-            <p>#sed</p>
-<h2 id="1-sed删除含有特定字符或字符串的行"><a href="#1-sed删除含有特定字符或字符串的行" class="headerlink" title="1. sed删除含有特定字符或字符串的行"></a>1. sed删除含有特定字符或字符串的行</h2><p><strong>实例:</strong><br>‘’’<br>    line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v ‘#’|                      awk ‘BEGIN     {FS=”:”} {print $1}’)<br>    N=$line<br>    echo “$N”<br>    if [ “$N” != “0” ];then<br>        sed -i ‘/fs2/d’ /etc/exports<br>    fi<br>‘’’</p>
-
+            <h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h1><h2 id="1-sed删除含有特定字符或字符串的行"><a href="#1-sed删除含有特定字符或字符串的行" class="headerlink" title="1. sed删除含有特定字符或字符串的行"></a>1. sed删除含有特定字符或字符串的行</h2><p><strong>实例:</strong>     </p>
+<pre><code>line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &apos;#&apos;|awk &apos;BEGIN {FS=&quot;:&quot;} {print $1}&apos;)    
+N=$line    
+echo &quot;$N&quot;     
+if [ &quot;$N&quot; != &quot;0&quot; ];then      
+    sed -i &apos;/fs2/d&apos; /etc/exports    
+fi    
+</code></pre>
           
         
       

@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="#sed 1. sed删除含有特定字符或字符串的行实例:‘’’    line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v ‘#’|                      awk ‘BEGIN     {FS=”:”} {print $1}’)    N=$line    echo “$N”    if [ “$N” != “0” ];then">
+<meta name="description" content="sed1. sed删除含有特定字符或字符串的行实例:      line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &amp;apos;#&amp;apos;|awk &amp;apos;BEGIN {FS=&amp;quot;:&amp;quot;} {print $1}&amp;apos;)     N=$line     echo &amp;quot;$N&amp;quot;      if [ &amp;quot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="厚积薄发">
 <meta property="og:url" content="http://yoursite.com/2017/08/13/sed/index.html">
 <meta property="og:site_name" content="厚积薄发">
-<meta property="og:description" content="#sed 1. sed删除含有特定字符或字符串的行实例:‘’’    line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v ‘#’|                      awk ‘BEGIN     {FS=”:”} {print $1}’)    N=$line    echo “$N”    if [ “$N” != “0” ];then">
+<meta property="og:description" content="sed1. sed删除含有特定字符或字符串的行实例:      line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &amp;apos;#&amp;apos;|awk &amp;apos;BEGIN {FS=&amp;quot;:&amp;quot;} {print $1}&amp;apos;)     N=$line     echo &amp;quot;$N&amp;quot;      if [ &amp;quot">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-18T09:13:13.000Z">
+<meta property="og:updated_time" content="2017-08-18T09:19:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="厚积薄发">
-<meta name="twitter:description" content="#sed 1. sed删除含有特定字符或字符串的行实例:‘’’    line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v ‘#’|                      awk ‘BEGIN     {FS=”:”} {print $1}’)    N=$line    echo “$N”    if [ “$N” != “0” ];then">
+<meta name="twitter:description" content="sed1. sed删除含有特定字符或字符串的行实例:      line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &amp;apos;#&amp;apos;|awk &amp;apos;BEGIN {FS=&amp;quot;:&amp;quot;} {print $1}&amp;apos;)     N=$line     echo &amp;quot;$N&amp;quot;      if [ &amp;quot">
 
 
 
@@ -346,9 +346,14 @@
       
 
       
-        <p>#sed</p>
-<h2 id="1-sed删除含有特定字符或字符串的行"><a href="#1-sed删除含有特定字符或字符串的行" class="headerlink" title="1. sed删除含有特定字符或字符串的行"></a>1. sed删除含有特定字符或字符串的行</h2><p><strong>实例:</strong><br>‘’’<br>    line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v ‘#’|                      awk ‘BEGIN     {FS=”:”} {print $1}’)<br>    N=$line<br>    echo “$N”<br>    if [ “$N” != “0” ];then<br>        sed -i ‘/fs2/d’ /etc/exports<br>    fi<br>‘’’</p>
-
+        <h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h1><h2 id="1-sed删除含有特定字符或字符串的行"><a href="#1-sed删除含有特定字符或字符串的行" class="headerlink" title="1. sed删除含有特定字符或字符串的行"></a>1. sed删除含有特定字符或字符串的行</h2><p><strong>实例:</strong>     </p>
+<pre><code>line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &apos;#&apos;|awk &apos;BEGIN {FS=&quot;:&quot;} {print $1}&apos;)    
+N=$line    
+echo &quot;$N&quot;     
+if [ &quot;$N&quot; != &quot;0&quot; ];then      
+    sed -i &apos;/fs2/d&apos; /etc/exports    
+fi    
+</code></pre>
       
     </div>
     
@@ -542,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sed删除含有特定字符或字符串的行"><span class="nav-number">1.</span> <span class="nav-text">1. sed删除含有特定字符或字符串的行</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sed"><span class="nav-number">1.</span> <span class="nav-text">sed</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sed删除含有特定字符或字符串的行"><span class="nav-number">1.1.</span> <span class="nav-text">1. sed删除含有特定字符或字符串的行</span></a></li></ol></li></ol></div>
             
 
           </div>
