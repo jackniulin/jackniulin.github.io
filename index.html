@@ -285,7 +285,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/13/sed/" itemprop="url">SHELL sed用法</a></h1>
+                <a class="post-title-link" href="/2017/08/13/sed/" itemprop="url">sed用法</a></h1>
         
 
         <div class="post-meta">
@@ -348,7 +348,10 @@
       
         
           
-            <h2 id="1-删除行"><a href="#1-删除行" class="headerlink" title="1. 删除行"></a>1. 删除行</h2><p><strong>实例:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &apos;#&apos;|awk &apos;BEGIN &#123;FS=&quot;:&quot;&#125; &#123;print $1&#125;&apos;)       </div><div class="line">N=$line      </div><div class="line">echo &quot;$N&quot;        </div><div class="line">if [ &quot;$N&quot; != &quot;0&quot; ];then      </div><div class="line">    sed -i &apos;/fs2/d&apos; /etc/exports    </div><div class="line">fi    </div></pre></td></tr></table></figure></p>
+            <h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><blockquote>
+<p>sed is a stream editor. A stream editor is used to perform basic text transformations on an input stream (a file or input from a pipeline). While in some ways similar to an editor which permits scripted edits (such as ed), sed works by making only one pass over the input(s), and is consequently more efficient. But it is sed’s ability to filter text in a pipeline which particularly distinguishes it from other types of editors.    </p>
+</blockquote>
+<h2 id="1-删除行"><a href="#1-删除行" class="headerlink" title="1. 删除行"></a>1. 删除行</h2><p><strong>实例:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">    </div><div class="line">line=$(cat /etc/exports|grep -n /bwfs/fs2|grep -v &apos;#&apos;|awk &apos;BEGIN &#123;FS=&quot;:&quot;&#125; &#123;print $1&#125;&apos;)       </div><div class="line">N=$line      </div><div class="line">echo &quot;$N&quot;        </div><div class="line">if [ &quot;$N&quot; != &quot;0&quot; ]; then      </div><div class="line">    sed -i &apos;/fs2/d&apos; /etc/exports    </div><div class="line">fi    </div></pre></td></tr></table></figure></p>
 
           
         
