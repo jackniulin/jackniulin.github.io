@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-22T03:50:20.000Z</updated>
+  <updated>2017-08-22T04:09:15.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CLion中的apue编译问题</title>
+    <link href="http://yoursite.com/2017/08/22/apue-h/"/>
+    <id>http://yoursite.com/2017/08/22/apue-h/</id>
+    <published>2017-08-22T03:59:53.000Z</published>
+    <updated>2017-08-22T04:09:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。<br>网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。&lt;br&gt;网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：&lt;br&gt;&lt;img src=
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>apue_hole遇到的坑</title>
