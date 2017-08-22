@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-21T04:06:17.000Z</updated>
+  <updated>2017-08-22T03:50:20.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>apue_hole遇到的坑</title>
+    <link href="http://yoursite.com/2017/08/22/apue-hole/"/>
+    <id>http://yoursite.com/2017/08/22/apue-hole/</id>
+    <published>2017-08-22T03:34:54.000Z</published>
+    <updated>2017-08-22T03:50:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>##1.编译c文件出错<br><strong>报错如下：</strong><br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apue_hole.png" alt=""></p>
+<p>看到<strong>clang error</strong></p>
+<blockquote>
+<p>clang是一个C、C++、Objective-C和Objective-C++编程语言的编译器前端。它采用了底层虚拟机（LLVM）作为其后端。</p>
+</blockquote>
+<p>然后用gcc编译：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc-7 -o hole file_hole.c</div></pre></td></tr></table></figure></p>
+<p><strong>报错如下：</strong><br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apu_hole1.png" alt=""></p>
+<p>额。。。再回去看源码发现是把creat函数写成了create…</p>
+<p>改过来之后，ok<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">➜  ~ ls -l file.hole		</div><div class="line">-rw-r--r--  1 xxx  staff  16394 Aug 22 11:48 file.hole    </div><div class="line">➜  ~ od -c file.hole</div><div class="line">0000000    a   b   c   d   e   f   g   h   i   j  \0  \0  \0  \0  \0  \0</div><div class="line">0000020   \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0</div><div class="line">*</div><div class="line">0040000    A   B   C   D   E   F   G   H   I   J</div><div class="line">0040012</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;##1.编译c文件出错&lt;br&gt;&lt;strong&gt;报错如下：&lt;/strong&gt;&lt;br&gt;&lt;img src=&quot;http://ous5r4na6.bkt.clouddn.com/static/images/apue_hole.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;看到&lt;strong
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>sed用法</title>
