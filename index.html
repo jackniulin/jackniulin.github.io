@@ -348,12 +348,12 @@
       
         
           
-            <p>##1.filebench下载<br>客户端安装：<a href="https://github.com/zfsonlinux/filebench" target="_blank" rel="external">filebench</a>       </p>
+            <h2 id="1-filebench下载"><a href="#1-filebench下载" class="headerlink" title="1.filebench下载"></a>1.filebench下载</h2><p>客户端安装：<a href="https://github.com/zfsonlinux/filebench" target="_blank" rel="external">filebench</a>       </p>
 <p>系统:SUSE Linux Enterprise Server 11 SP1  (x86_64)       </p>
 <blockquote>
 <p>Filebench is a file system and storage benchmark that can generate a large<br>variety of workloads. Unlike typical benchmarks it is extremely flexible and<br>allows to specify application’s I/O behavior using its extensive Workload Model<br>Language (WML).       </p>
 </blockquote>
-<p>##2.用户自定义工作负载<br>示例：<br>一个负载包含2个进程，其中每个进程又含有三个线程。    </p>
+<h2 id="2-用户自定义工作负载"><a href="#2-用户自定义工作负载" class="headerlink" title="2.用户自定义工作负载"></a>2.用户自定义工作负载</h2><p>示例：<br>一个负载包含2个进程，其中每个进程又含有三个线程。    </p>
 <pre><code>01  define fileset name=&quot;testF&quot;,entries=10000,filesize=16k,prealloc,path=&quot;/tmp&quot;
 02
 03  define process name=&quot;readerP&quot;,instances=2 {
@@ -512,7 +512,7 @@
         
           
             <p>##unlink元数据操作</p>
-<p>###1.客户端执行unlink：<br><strong>nfs/dir.c: nfs_unlink</strong></p>
+<h3 id="1-客户端执行unlink："><a href="#1-客户端执行unlink：" class="headerlink" title="1.客户端执行unlink："></a>1.客户端执行unlink：</h3><p><strong>nfs/dir.c: nfs_unlink</strong></p>
 <blockquote>
 <p>silly rename:  Unix applications often open a <strong>scratch file</strong>(a temporary computer file that is created to hold information while a program is being used) and then unlink it. They do this so that the file is not visible in the file system name space to any other applications, and so that the system will automatically clean up (delete) the file when the application exits. This is known as “delete on last close”, and is a tradition among Unix applications.    </p>
 <p>Because of the design of the NFS protocol, there is no way for a file to be deleted from the name space but still remain in use by an application. Thus NFS clients have to emulate this using what already exists in the protocol. If an open file is unlinked, an NFS client renames it to a special name that looks like “.nfsXXXXX”. This “hides” the file while it remains in use. This is known as a “silly rename.” Note that NFS servers have nothing to do with this behavior.     </p>
@@ -525,7 +525,7 @@
 <p>[ 2059.792584] NFS: safe_remove(/alink)    </p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">error = NFS_PROTO(dir)-&gt;remove(dir, &amp;dentry-&gt;d_name);        </div><div class="line">```     </div><div class="line"></div><div class="line">从宏定义NFS_PROTO入手，找到-&gt;remove实际对应的函数</div></pre></td></tr></table></figure>
-<p>1.return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops<br>2.clp-&gt;rpc_ops = &amp;nfs_v4_clientops;<br>remove实际对应的函数为：_nfs4_proc_remove<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">___    </div><div class="line"></div><div class="line">###2.服务器端</div><div class="line">**nfsd/nfssvc.c:nfsd()**</div></pre></td></tr></table></figure></p>
+<p>1.return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops<br>2.clp-&gt;rpc_ops = &amp;nfs_v4_clientops;<br>remove实际对应的函数为：_nfs4_proc_remove<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">___    </div><div class="line"></div><div class="line">### 2.服务器端</div><div class="line">**nfsd/nfssvc.c:nfsd()**</div></pre></td></tr></table></figure></p>
 <p>svc_process()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd() 处理rpc请求**</div></pre></td></tr></table></figure></p>
 <p>svc_process_common()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd_dispatch**    </div><div class="line"></div><div class="line">&gt;[ 2062.505906] nfsd_dispatch: vers 4 proc 1</div></pre></td></tr></table></figure></p>
 <p>procp-&gt;pc_decode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">实际执行: nfs4svc\_decode\_compoundargs()，转至nfsd4\_decode\_compound()</div></pre></td></tr></table></figure></p>
