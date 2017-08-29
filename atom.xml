@@ -71,7 +71,7 @@
     <link href="http://yoursite.com/2017/08/24/unlink/"/>
     <id>http://yoursite.com/2017/08/24/unlink/</id>
     <published>2017-08-24T02:46:43.000Z</published>
-    <updated>2017-08-29T08:47:14.000Z</updated>
+    <updated>2017-08-29T12:41:59.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="1-客户端执行unlink："><a href="#1-客户端执行unlink：" class="headerlink" title="1.客户端执行unlink："></a>1.客户端执行unlink：</h3><p><strong>nfs/dir.c: nfs_unlink</strong></p>
 <blockquote>
@@ -85,7 +85,7 @@
 <p>1.return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops<br>2.clp-&gt;rpc_ops = &amp;nfs_v4_clientops;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">remove实际对应的函数为：_nfs4_proc_remove</div><div class="line"></div><div class="line"></div><div class="line">### 2.服务器端</div><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd()**</div></pre></td></tr></table></figure></p>
 <p>svc_process()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd() 处理rpc请求**</div></pre></td></tr></table></figure></p>
 <p>svc_process_common()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd_dispatch**    </div><div class="line"></div><div class="line">&gt;[ 2062.505906] nfsd_dispatch: vers 4 proc 1</div></pre></td></tr></table></figure></p>
-<p>procp-&gt;pc_decode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">实际执行: nfs4svc\_decode\_compoundargs()，转至nfsd4\_decode\_compound()</div></pre></td></tr></table></figure></p>
+<p>procp-&gt;pc_decode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">实际执行: nfs4svc_decode_compoundargs()，转至nfsd4_decode_compound()</div></pre></td></tr></table></figure></p>
 <p>procp-&gt;pc_func()<br>```    </p>
 <p>实际执行：nfsd4_proc_compound()    </p>
 ]]></content>
