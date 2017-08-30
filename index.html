@@ -266,6 +266,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/MultiMS-filebench/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="人生实苦，但请你足够相信">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="厚积薄发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/30/MultiMS-filebench/" itemprop="url">MultiMS_filebench</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T17:00:08+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/30/MultiMS-filebench/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/30/MultiMS-filebench/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/filebench/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -511,17 +641,17 @@
       
         
           
-            <h3 id="1-客户端执行unlink："><a href="#1-客户端执行unlink：" class="headerlink" title="1.客户端执行unlink："></a>1.客户端执行unlink：</h3><p><strong>nfs/dir.c: nfs_unlink</strong></p>
+            <h3 id="1-客户端执行unlink："><a href="#1-客户端执行unlink：" class="headerlink" title="1.客户端执行unlink："></a>1.客户端执行unlink：</h3><p>nfs/dir.c: nfs_unlink</p>
 <blockquote>
 <p>silly rename:  Unix applications often open a <strong>scratch file</strong>(a temporary computer file that is created to hold information while a program is being used) and then unlink it. They do this so that the file is not visible in the file system name space to any other applications, and so that the system will automatically clean up (delete) the file when the application exits. This is known as “delete on last close”, and is a tradition among Unix applications.<br>Because of the design of the NFS protocol, there is no way for a file to be deleted from the name space but still remain in use by an application. Thus NFS clients have to emulate this using what already exists in the protocol. If an open file is unlinked, an NFS client renames it to a special name that looks like “.nfsXXXXX”. This “hides” the file while it remains in use. This is known as a “silly rename.” Note that NFS servers have nothing to do with this behavior.<br>After all applications on a client have closed the silly-renamed file, the client automatically finishes the unlink by deleting the file on the server. Generally this is effective, but if the client crashes before the file is removed, it will leave the .nfsXXXXX file. If you are sure that the applications using these files are no longer running, it is safe to delete these files manually.<br>The NFS version 4 protocol is stateful, and could actually support delete-on-last-close. Unfortunately there isn’t an easy way to do this and remain backwards-compatible with version 2 and 3 accessors.    </p>
 </blockquote>
-<p><strong>nfs/dir.c: nfs_safe_remove</strong>   </p>
+<p>nfs/dir.c: nfs_safe_remove </p>
 <blockquote>
 <p>[ 2059.792582] NFS: unlink(0:14/4294967298, alink)<br> [ 2059.792584] NFS: safe_remove(/alink)    </p>
 </blockquote>
 <p>从宏定义NFS_PROTO入手，找到-&gt;remove实际对应的函数 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">error = NFS_PROTO(dir)-&gt;remove(dir, &amp;dentry-&gt;d_name);        </div><div class="line">1. return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops</div><div class="line">2. clp-&gt;rpc_ops = &amp;nfs_v4_clientops;</div><div class="line">```    </div><div class="line"></div><div class="line">remove实际对应的函数为：_nfs4_proc_remove</div><div class="line"></div><div class="line"></div><div class="line">### 2.服务器端</div><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd()**</div></pre></td></tr></table></figure>
-<p>svc_process()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd() 处理rpc请求**</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">error = NFS_PROTO(dir)-&gt;remove(dir, &amp;dentry-&gt;d_name);        </div><div class="line">1. return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops</div><div class="line">2. clp-&gt;rpc_ops = &amp;nfs_v4_clientops;</div><div class="line">```    </div><div class="line"></div><div class="line">remove实际对应的函数为：_nfs4_proc_remove</div><div class="line"></div><div class="line"></div><div class="line">### 2.服务器端</div><div class="line"></div><div class="line">nfsd/nfssvc.c:nfsd()</div></pre></td></tr></table></figure>
+<p>svc_process()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">nfsd/nfssvc.c:nfsd() 处理rpc请求</div></pre></td></tr></table></figure></p>
 <p>svc_process_common()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">**nfsd/nfssvc.c:nfsd_dispatch**    </div><div class="line"></div><div class="line">&gt;[ 2062.505906] nfsd_dispatch: vers 4 proc 1</div></pre></td></tr></table></figure></p>
 <p>procp-&gt;pc_decode<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">实际执行: nfs4svc_decode_compoundargs()，转至nfsd4_decode_compound()</div></pre></td></tr></table></figure></p>
 <p>procp-&gt;pc_func()<br>```    </p>
@@ -1011,7 +1141,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
