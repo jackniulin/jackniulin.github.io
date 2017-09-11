@@ -2,14 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2017/08/30/MultiMS-filebench/</loc>
+    <loc>http://yoursite.com/2017/09/11/mdtest/</loc>
+    
+    <lastmod>2017-09-11T13:57:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/09/01/VMM1/</loc>
+    
+    <lastmod>2017-09-04T14:02:34.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index-1.html</loc>
+    
+    <lastmod>2017-09-01T09:53:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/08/30/MultiMS_filebench/</loc>
     
     <lastmod>2017-08-30T09:00:50.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/08/22/apue-hole/</loc>
+    <loc>http://yoursite.com/2017/08/22/apue_hole/</loc>
     
     <lastmod>2017-08-29T08:38:52.000Z</lastmod>
     
@@ -23,7 +44,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/08/22/apue-h/</loc>
+    <loc>http://yoursite.com/2017/08/22/apue_h/</loc>
     
     <lastmod>2017-08-22T04:09:15.000Z</lastmod>
     

@@ -266,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/MultiMS-filebench/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/mdtest/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="人生实苦，但请你足够相信">
@@ -285,7 +285,293 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/30/MultiMS-filebench/" itemprop="url">MultiMS_filebench</a></h1>
+                <a class="post-title-link" href="/2017/09/11/mdtest/" itemprop="url">mdtest元数据测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T21:32:34+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/11/mdtest/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/11/mdtest/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>环境为SUSE11<br><code>CLT1:~ # zypper in openmpi openmpi-devel</code><br>报错：    </p>
+<blockquote>
+<p>Error building the cache:<br>[|] Repository type can’t be determined.<br>Warning: Disabling repository ‘nonoss’ because of the above error.<br>Error building the cache:<br>[|] Repository type can’t be determined.<br>Warning: Disabling repository ‘update’ because of the above error.<br>Failed to mount dvd:///?devices=/dev/sr1 on /var/adm/mount/AP_0x00000001: Mounting media failed (mount: no medium found on /dev/sr1)    </p>
+</blockquote>
+<p>解决：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest.png" alt=""></p>
+<p><code>CLT1:~ # zypper mr --disable 1    
+Repository &#39;SUSE-Linux-Enterprise-Server-11-SP1_11.1.1-1.152&#39; has been successfully disabled.</code><br><code>CLT1:~ # zypper mr --disable 2
+Repository &#39;SUSE-Linux-Enterprise-Software-Development-Kit-11-SP1_11.1.1-1.57&#39; has been successfully disabled.</code><br><code>CLT1:~ # zypper mr --disable 4
+Repository &#39;nonoss&#39; has been successfully disabled.</code><br><code>CLT1:~ # zypper mr --disable 5
+Repository &#39;update&#39; has been successfully disabled.</code></p>
+<p><strong>下载</strong><br><a href="https://jaist.dl.sourceforge.net/project/mdtest/mdtest%20latest/mdtest-1.9.3/mdtest-1.9.3.tgz" target="_blank" rel="external">mdtest</a><br>需要修改Makefile文件：    </p>
+<p><code>mdtest: mdtest.c
+    mpicc -Wall -D $(OS) $(LARGE_FILE) $(MDTEST_FLAGS) -g -o mdtest mdtest.c -lm</code><br><code>make mdtest</code></p>
+<p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest1.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/VMM1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="人生实苦，但请你足够相信">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="厚积薄发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/01/VMM1/" itemprop="url">VMM1_描述物理内存</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T17:49:30+08:00">
+                2017-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/01/VMM1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/01/VMM1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><ul>
+<li>Non Uniform Memory Access (NUMA) 非统一内存访问    </li>
+</ul>
+<blockquote>
+<p>With large-scale machines, memory may be arranged into banks that incur a different cost to access depending on their distance from the processor.     </p>
+<p>Each bank is called a node. presented by struct <strong>pglist_data</strong>, always referenced by its typedef <strong>pg_data_t</strong>.    </p>
+<p>Every node in the system is kept on a NULL terminated list called pgdat_list, and each node is linked to the next with the field pg_data_t→node_next.    </p>
+<p>Each node is divided into a number of blocks called zones, which represent ranges within memory.    </p>
+</blockquote>
+<p>Physical Address Extension (PAE)<br>Page Global Directory (PGD)<br>Page Middle Directory (PMD)<br>Page Table Entry (PTE)   </p>
+<p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/linearAddr.png" alt=""></p>
+<p>Translation Lookaside Buffer (TLB)<br>Page Attribute Table (PAT)<br>Page Size Extension (PSE)<br>Page Frame Number (PFN)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/MultiMS_filebench/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="人生实苦，但请你足够相信">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="厚积薄发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/30/MultiMS_filebench/" itemprop="url">MultiMS_filebench</a></h1>
         
 
         <div class="post-meta">
@@ -316,9 +602,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/30/MultiMS-filebench/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/30/MultiMS_filebench/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/30/MultiMS-filebench/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/30/MultiMS_filebench/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -559,7 +845,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue-h/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue_h/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="人生实苦，但请你足够相信">
@@ -578,7 +864,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/22/apue-h/" itemprop="url">CLion中的apue编译问题</a></h1>
+                <a class="post-title-link" href="/2017/08/22/apue_h/" itemprop="url">CLion中的apue编译问题</a></h1>
         
 
         <div class="post-meta">
@@ -609,9 +895,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/22/apue-h/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/22/apue_h/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/22/apue-h/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/22/apue_h/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -690,7 +976,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue-hole/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue_hole/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="人生实苦，但请你足够相信">
@@ -709,7 +995,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/22/apue-hole/" itemprop="url">apue_hole遇到的坑</a></h1>
+                <a class="post-title-link" href="/2017/08/22/apue_hole/" itemprop="url">apue_hole遇到的坑</a></h1>
         
 
         <div class="post-meta">
@@ -740,9 +1026,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/22/apue-hole/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/22/apue_hole/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/22/apue-hole/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/22/apue_hole/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -996,7 +1282,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
