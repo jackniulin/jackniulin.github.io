@@ -353,15 +353,31 @@
 <p>Error building the cache:<br>[|] Repository type can’t be determined.<br>Warning: Disabling repository ‘nonoss’ because of the above error.<br>Error building the cache:<br>[|] Repository type can’t be determined.<br>Warning: Disabling repository ‘update’ because of the above error.<br>Failed to mount dvd:///?devices=/dev/sr1 on /var/adm/mount/AP_0x00000001: Mounting media failed (mount: no medium found on /dev/sr1)    </p>
 </blockquote>
 <p>解决：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest.png" alt=""></p>
-<p><code>CLT1:~ # zypper mr --disable 1    
-Repository &#39;SUSE-Linux-Enterprise-Server-11-SP1_11.1.1-1.152&#39; has been successfully disabled.</code><br><code>CLT1:~ # zypper mr --disable 2
-Repository &#39;SUSE-Linux-Enterprise-Software-Development-Kit-11-SP1_11.1.1-1.57&#39; has been successfully disabled.</code><br><code>CLT1:~ # zypper mr --disable 4
-Repository &#39;nonoss&#39; has been successfully disabled.</code><br><code>CLT1:~ # zypper mr --disable 5
-Repository &#39;update&#39; has been successfully disabled.</code></p>
+<p><code>CLT1:~ # zypper mr --disable 1</code>    </p>
+<blockquote>
+<p>Repository ‘SUSE-Linux-Enterprise-Server-11-SP1_11.1.1-1.152’ has been successfully disabled. </p>
+</blockquote>
+<p><code>CLT1:~ # zypper mr --disable 2</code>    </p>
+<blockquote>
+<p>Repository ‘SUSE-Linux-Enterprise-Software-Development-Kit-11-SP1_11.1.1-1.57’ has been successfully disabled.</p>
+</blockquote>
+<p><code>CLT1:~ # zypper mr --disable 4</code>    </p>
+<blockquote>
+<p>Repository ‘nonoss’ has been successfully disabled.</p>
+</blockquote>
+<p><code>CLT1:~ # zypper mr --disable 5</code>    </p>
+<blockquote>
+<p>Repository ‘update’ has been successfully disabled.</p>
+</blockquote>
 <p><strong>下载</strong><br><a href="https://jaist.dl.sourceforge.net/project/mdtest/mdtest%20latest/mdtest-1.9.3/mdtest-1.9.3.tgz" target="_blank" rel="external">mdtest</a><br>需要修改Makefile文件：    </p>
 <p><code>mdtest: mdtest.c
     mpicc -Wall -D $(OS) $(LARGE_FILE) $(MDTEST_FLAGS) -g -o mdtest mdtest.c -lm</code><br><code>make mdtest</code></p>
 <p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest1.png" alt=""></p>
+<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>把openmpi和mdtest环境变量导出来<br><code>CLT1:~ # cat ./.bashrc</code>    </p>
+<blockquote>
+<p>export PATH=$PATH:/usr/lib64/mpi/gcc/openmpi/bin<br>export PATH=$PATH:/root/mdtest</p>
+</blockquote>
+<p>mdtest -h 看下选项，README里有几个例子。看完基本就可以用了。</p>
 
           
         
