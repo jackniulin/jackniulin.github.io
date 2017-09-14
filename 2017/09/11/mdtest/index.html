@@ -105,7 +105,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest.png">
 <meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest1.png">
-<meta property="og:updated_time" content="2017-09-14T06:37:35.000Z">
+<meta property="og:updated_time" content="2017-09-14T06:43:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mdtest元数据测试">
 <meta name="twitter:description" content="1.安装环境为SUSE11CLT1:~ # zypper in openmpi openmpi-devel报错：      Error building the cache:[|] Repository type can’t be determined.Warning: Disabling repository ‘nonoss’ because of the above error.Error b">
@@ -371,8 +371,10 @@
 <p>Repository ‘update’ has been successfully disabled.</p>
 </blockquote>
 <p><strong>下载</strong><br><a href="https://jaist.dl.sourceforge.net/project/mdtest/mdtest%20latest/mdtest-1.9.3/mdtest-1.9.3.tgz" target="_blank" rel="external">mdtest</a><br>需要修改Makefile文件：    </p>
-<p><code>mdtest: mdtest.c
-    mpicc -Wall -D $(OS) $(LARGE_FILE) $(MDTEST_FLAGS) -g -o mdtest mdtest.c -lm</code><br><code>make mdtest</code></p>
+<blockquote>
+<p>mdtest: mdtest.c<br>    mpicc -Wall -D $(OS) $(LARGE_FILE) $(MDTEST_FLAGS) -g -o mdtest mdtest.c -lm</p>
+</blockquote>
+<p><code>make mdtest</code></p>
 <p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest1.png" alt=""></p>
 <h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>把openmpi和mdtest环境变量导出来<br><code>CLT1:~ # cat ./.bashrc</code>    </p>
 <blockquote>
