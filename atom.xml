@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-14T06:43:20.000Z</updated>
+  <updated>2017-09-19T01:28:39.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/09/11/mdtest/"/>
     <id>http://yoursite.com/2017/09/11/mdtest/</id>
     <published>2017-09-11T13:32:34.000Z</published>
-    <updated>2017-09-14T06:43:20.000Z</updated>
+    <updated>2017-09-19T01:28:39.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>环境为SUSE11<br><code>CLT1:~ # zypper in openmpi openmpi-devel</code><br>报错：    </p>
 <blockquote>
@@ -53,7 +53,7 @@
 <blockquote>
 <p>export PATH=$PATH:/usr/lib64/mpi/gcc/openmpi/bin<br>export PATH=$PATH:/root/mdtest</p>
 </blockquote>
-<p>mdtest -h 看下选项，README里有几个例子。看完基本就可以用了。</p>
+<p>mdtest -h 看下选项，README里有几个例子。</p>
 ]]></content>
     
     <summary type="html">
@@ -155,6 +155,53 @@
     <summary type="html">
     
       &lt;h2 id=&quot;1-filebench下载&quot;&gt;&lt;a href=&quot;#1-filebench下载&quot; class=&quot;headerlink&quot; title=&quot;1.filebench下载&quot;&gt;&lt;/a&gt;1.filebench下载&lt;/h2&gt;&lt;p&gt;客户端安装：&lt;a href=&quot;https://git
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>unlink元数据操作</title>
+    <link href="http://yoursite.com/2017/08/24/unlink/"/>
+    <id>http://yoursite.com/2017/08/24/unlink/</id>
+    <published>2017-08-24T02:46:43.000Z</published>
+    <updated>2017-09-22T09:50:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-客户端执行unlink："><a href="#1-客户端执行unlink：" class="headerlink" title="1.客户端执行unlink："></a>1.客户端执行unlink：</h3><p>nfs/dir.c: nfs_unlink</p>
+<blockquote>
+<p>silly rename:  Unix applications often open a <strong>scratch file</strong>(a temporary computer file that is created to hold information while a program is being used) and then unlink it. They do this so that the file is not visible in the file system name space to any other applications, and so that the system will automatically clean up (delete) the file when the application exits. This is known as “delete on last close”, and is a tradition among Unix applications.<br>Because of the design of the NFS protocol, there is no way for a file to be deleted from the name space but still remain in use by an application. Thus NFS clients have to emulate this using what already exists in the protocol. If an open file is unlinked, an NFS client renames it to a special name that looks like “.nfsXXXXX”. This “hides” the file while it remains in use. This is known as a “silly rename.” Note that NFS servers have nothing to do with this behavior.<br>After all applications on a client have closed the silly-renamed file, the client automatically finishes the unlink by deleting the file on the server. Generally this is effective, but if the client crashes before the file is removed, it will leave the .nfsXXXXX file. If you are sure that the applications using these files are no longer running, it is safe to delete these files manually.<br>The NFS version 4 protocol is stateful, and could actually support delete-on-last-close. Unfortunately there isn’t an easy way to do this and remain backwards-compatible with version 2 and 3 accessors.    </p>
+</blockquote>
+<p>nfs/dir.c: nfs_safe_remove </p>
+<p>[ 2059.792582] NFS: unlink(0:14/4294967298, alink)<br>[ 2059.792584] NFS: safe_remove(/alink)    </p>
+<p>nfs_safe_remove-&gt;nfs_unlink-&gt;nfs4_dir_inode_operations-&gt;nfs_v4_clientops<br>clp-&gt;ops = &amp;nfs_v4_clientops(nfs4_init_client)<br>nfs4_set_client<br>nfs4_init_server<br>nfs4_create_server</p>
+<p>找nfs_safe_remove实际对应的函数 </p>
+<pre><code>error = NFS_PROTO(dir)-&gt;remove(dir, &amp;dentry-&gt;d_name);
+</code></pre><ol>
+<li>return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops</li>
+<li>clp-&gt;rpc_ops = &amp;nfs_v4_clientops;</li>
+</ol>
+<p>remove实际对应的函数为：nfs4_proc_remove-&gt;_nfs4_proc_remove</p>
+<p>_nfs4_proc_remove<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png" alt=""><br>enum编号21<br>nfs4_procedures[21]<br>PROC(REMOVE, enc_remove, dec_remove)<br>.p_encode = nfs_xdr_enc_remove<br>.p_decode = nfs_xdr_dec_remove    </p>
+<p>msg结构体的赋值完成    </p>
+<p>nfs4_call_sync<br>clp-&gt;cl_call_sync = nfs4_call_sync_session</p>
+<p>[ 1169.204021] –&gt;_nfs4_call_sync_session:       </p>
+<p>nfs4_call_sync_sequence   </p>
+<p>[ 1169.204024] –&gt;nfs4_call_sync_sequence:    </p>
+<p>这里先省略一部分的说明，现在知道的是：task-&gt;tk_action实际执行的是nfs41_call_sync_prepare   </p>
+<p>[ 1169.204030] –&gt; nfs41_call_sync_prepare data-&gt;clp-&gt;cl_session ffff88003bde6c00    </p>
+<p>[ 1169.204034] –&gt; nfs4_setup_sequence clp ffff88003b92a000 session ffff88003bde6c00 sr_slotid 128   </p>
+<p>[ 1169.204037] –&gt; nfs41_setup_sequence    </p>
+<p>[ 1169.204040] –&gt; nfs4_find_slot used_slots=0000 highest_used=-1 max_slots=16<br>[ 1169.204043] &lt;– nfs4_find_slot used_slots=0001 highest_used=0 slotid=0<br>[ 1169.204046] &lt;– nfs41_setup_sequence slotid=0 seqid=33<br>[ 1169.204048] &lt;– nfs4_setup_sequence status=0    </p>
+<h3 id="2-服务器端"><a href="#2-服务器端" class="headerlink" title="2.服务器端"></a>2.服务器端</h3><p>nfsd/nfssvc.c:nfsd()<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/nfsd_remove.png" alt=""><br>svc_process()<br>svc_process_common()        </p>
+<blockquote>
+<p>[ 2062.505906] nfsd_dispatch: vers 4 proc 1</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-客户端执行unlink：&quot;&gt;&lt;a href=&quot;#1-客户端执行unlink：&quot; class=&quot;headerlink&quot; title=&quot;1.客户端执行unlink：&quot;&gt;&lt;/a&gt;1.客户端执行unlink：&lt;/h3&gt;&lt;p&gt;nfs/dir.c: nfs_unlink&lt;
     
     </summary>
     

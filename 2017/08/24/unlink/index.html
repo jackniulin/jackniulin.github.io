@@ -96,14 +96,20 @@
 
 
 
+<meta name="description" content="1.客户端执行unlink：nfs/dir.c: nfs_unlink  silly rename:  Unix applications often open a scratch file(a temporary computer file that is created to hold information while a program is being used) and then un">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MultiMS_filebench">
-<meta property="og:url" content="http://yoursite.com/2017/08/30/MultiMS_filebench/index.html">
+<meta property="og:title" content="unlink元数据操作">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/unlink/index.html">
 <meta property="og:site_name" content="厚积薄发">
+<meta property="og:description" content="1.客户端执行unlink：nfs/dir.c: nfs_unlink  silly rename:  Unix applications often open a scratch file(a temporary computer file that is created to hold information while a program is being used) and then un">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-30T09:00:50.000Z">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/nfsd_remove.png">
+<meta property="og:updated_time" content="2017-09-22T09:50:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MultiMS_filebench">
+<meta name="twitter:title" content="unlink元数据操作">
+<meta name="twitter:description" content="1.客户端执行unlink：nfs/dir.c: nfs_unlink  silly rename:  Unix applications often open a scratch file(a temporary computer file that is created to hold information while a program is being used) and then un">
+<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png">
 
 
 
@@ -132,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/30/MultiMS_filebench/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/24/unlink/"/>
 
 
 
 
 
-  <title>MultiMS_filebench | 厚积薄发</title>
+  <title>unlink元数据操作 | 厚积薄发</title>
   
 
 
@@ -265,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/MultiMS_filebench/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/unlink/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="人生实苦，但请你足够相信">
@@ -282,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MultiMS_filebench</h1>
+          <h1 class="post-title" itemprop="name headline">unlink元数据操作</h1>
         
 
         <div class="post-meta">
@@ -294,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T17:00:08+08:00">
-                2017-08-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T10:46:43+08:00">
+                2017-08-24
               </time>
             
 
@@ -313,9 +319,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/30/MultiMS_filebench/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/24/unlink/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/30/MultiMS_filebench/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/24/unlink/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -343,7 +349,36 @@
       
 
       
-        
+        <h3 id="1-客户端执行unlink："><a href="#1-客户端执行unlink：" class="headerlink" title="1.客户端执行unlink："></a>1.客户端执行unlink：</h3><p>nfs/dir.c: nfs_unlink</p>
+<blockquote>
+<p>silly rename:  Unix applications often open a <strong>scratch file</strong>(a temporary computer file that is created to hold information while a program is being used) and then unlink it. They do this so that the file is not visible in the file system name space to any other applications, and so that the system will automatically clean up (delete) the file when the application exits. This is known as “delete on last close”, and is a tradition among Unix applications.<br>Because of the design of the NFS protocol, there is no way for a file to be deleted from the name space but still remain in use by an application. Thus NFS clients have to emulate this using what already exists in the protocol. If an open file is unlinked, an NFS client renames it to a special name that looks like “.nfsXXXXX”. This “hides” the file while it remains in use. This is known as a “silly rename.” Note that NFS servers have nothing to do with this behavior.<br>After all applications on a client have closed the silly-renamed file, the client automatically finishes the unlink by deleting the file on the server. Generally this is effective, but if the client crashes before the file is removed, it will leave the .nfsXXXXX file. If you are sure that the applications using these files are no longer running, it is safe to delete these files manually.<br>The NFS version 4 protocol is stateful, and could actually support delete-on-last-close. Unfortunately there isn’t an easy way to do this and remain backwards-compatible with version 2 and 3 accessors.    </p>
+</blockquote>
+<p>nfs/dir.c: nfs_safe_remove </p>
+<p>[ 2059.792582] NFS: unlink(0:14/4294967298, alink)<br>[ 2059.792584] NFS: safe_remove(/alink)    </p>
+<p>nfs_safe_remove-&gt;nfs_unlink-&gt;nfs4_dir_inode_operations-&gt;nfs_v4_clientops<br>clp-&gt;ops = &amp;nfs_v4_clientops(nfs4_init_client)<br>nfs4_set_client<br>nfs4_init_server<br>nfs4_create_server</p>
+<p>找nfs_safe_remove实际对应的函数 </p>
+<pre><code>error = NFS_PROTO(dir)-&gt;remove(dir, &amp;dentry-&gt;d_name);
+</code></pre><ol>
+<li>return NFS_SERVER(inode)-&gt;nfs_client-&gt;rpc_ops</li>
+<li>clp-&gt;rpc_ops = &amp;nfs_v4_clientops;</li>
+</ol>
+<p>remove实际对应的函数为：nfs4_proc_remove-&gt;_nfs4_proc_remove</p>
+<p>_nfs4_proc_remove<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png" alt=""><br>enum编号21<br>nfs4_procedures[21]<br>PROC(REMOVE, enc_remove, dec_remove)<br>.p_encode = nfs_xdr_enc_remove<br>.p_decode = nfs_xdr_dec_remove    </p>
+<p>msg结构体的赋值完成    </p>
+<p>nfs4_call_sync<br>clp-&gt;cl_call_sync = nfs4_call_sync_session</p>
+<p>[ 1169.204021] –&gt;_nfs4_call_sync_session:       </p>
+<p>nfs4_call_sync_sequence   </p>
+<p>[ 1169.204024] –&gt;nfs4_call_sync_sequence:    </p>
+<p>这里先省略一部分的说明，现在知道的是：task-&gt;tk_action实际执行的是nfs41_call_sync_prepare   </p>
+<p>[ 1169.204030] –&gt; nfs41_call_sync_prepare data-&gt;clp-&gt;cl_session ffff88003bde6c00    </p>
+<p>[ 1169.204034] –&gt; nfs4_setup_sequence clp ffff88003b92a000 session ffff88003bde6c00 sr_slotid 128   </p>
+<p>[ 1169.204037] –&gt; nfs41_setup_sequence    </p>
+<p>[ 1169.204040] –&gt; nfs4_find_slot used_slots=0000 highest_used=-1 max_slots=16<br>[ 1169.204043] &lt;– nfs4_find_slot used_slots=0001 highest_used=0 slotid=0<br>[ 1169.204046] &lt;– nfs41_setup_sequence slotid=0 seqid=33<br>[ 1169.204048] &lt;– nfs4_setup_sequence status=0    </p>
+<h3 id="2-服务器端"><a href="#2-服务器端" class="headerlink" title="2.服务器端"></a>2.服务器端</h3><p>nfsd/nfssvc.c:nfsd()<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/nfsd_remove.png" alt=""><br>svc_process()<br>svc_process_common()        </p>
+<blockquote>
+<p>[ 2062.505906] nfsd_dispatch: vers 4 proc 1</p>
+</blockquote>
+
       
     </div>
     
@@ -391,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/29/filebench/" rel="next" title="filebench测试">
-                <i class="fa fa-chevron-left"></i> filebench测试
+              <a href="/2017/08/22/apue_h/" rel="next" title="CLion中的apue编译问题">
+                <i class="fa fa-chevron-left"></i> CLion中的apue编译问题
               </a>
             
           </div>
@@ -401,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/01/VMM1/" rel="prev" title="VMM1_描述物理内存">
-                VMM1_描述物理内存 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/29/filebench/" rel="prev" title="filebench测试">
+                filebench测试 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -462,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -538,6 +582,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-客户端执行unlink："><span class="nav-number">1.</span> <span class="nav-text">1.客户端执行unlink：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-服务器端"><span class="nav-number">2.</span> <span class="nav-text">2.服务器端</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -687,9 +747,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/08/30/MultiMS_filebench/';
-          this.page.identifier = '2017/08/30/MultiMS_filebench/';
-          this.page.title = 'MultiMS_filebench';
+          this.page.url = 'http://yoursite.com/2017/08/24/unlink/';
+          this.page.identifier = '2017/08/24/unlink/';
+          this.page.title = 'unlink元数据操作';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
