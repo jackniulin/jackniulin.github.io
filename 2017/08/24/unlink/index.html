@@ -105,7 +105,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png">
 <meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/nfsd_remove.png">
-<meta property="og:updated_time" content="2017-09-22T09:50:14.000Z">
+<meta property="og:updated_time" content="2017-11-03T07:21:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="unlink元数据操作">
 <meta name="twitter:description" content="1.客户端执行unlink：nfs/dir.c: nfs_unlink  silly rename:  Unix applications often open a scratch file(a temporary computer file that is created to hold information while a program is being used) and then un">
@@ -363,7 +363,7 @@
 <li>clp-&gt;rpc_ops = &amp;nfs_v4_clientops;</li>
 </ol>
 <p>remove实际对应的函数为：nfs4_proc_remove-&gt;_nfs4_proc_remove</p>
-<p>_nfs4_proc_remove<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png" alt=""><br>enum编号21<br>nfs4_procedures[21]<br>PROC(REMOVE, enc_remove, dec_remove)<br>.p_encode = nfs_xdr_enc_remove<br>.p_decode = nfs_xdr_dec_remove    </p>
+<p>_nfs4_proc_remove<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/proc_remove.png" alt=""><br>enum编号21<br>nfs4_procedures[21]<br>PROC(REMOVE, ennc_remove, dec_remove)<br>.p_encode = nfs_xdr_enc_remove<br>.p_decode = nfs_xdr_dec_remove    </p>
 <p>msg结构体的赋值完成    </p>
 <p>nfs4_call_sync<br>clp-&gt;cl_call_sync = nfs4_call_sync_session</p>
 <p>[ 1169.204021] –&gt;_nfs4_call_sync_session:       </p>
@@ -522,7 +522,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -616,7 +616,7 @@
 <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
