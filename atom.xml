@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>厚积薄发</title>
+  <title>少年游</title>
   
   <link href="/atom.xml" rel="self"/>
   
@@ -9,7 +9,7 @@
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>人生实苦，但请你足够相信</name>
+    <name>燕云十八飞骑，奔腾如虎风烟举</name>
     
   </author>
   
