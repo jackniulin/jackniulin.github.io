@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-01T12:24:28.000Z</updated>
+  <updated>2018-03-15T04:11:20.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>两阶段和三阶段提交协议</title>
+    <link href="http://yoursite.com/2018/03/15/2pcAnd3pc/"/>
+    <id>http://yoursite.com/2018/03/15/2pcAnd3pc/</id>
+    <published>2018-03-15T04:09:16.000Z</published>
+    <updated>2018-03-15T04:11:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/3pc.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://ous5r4na6.bkt.clouddn.com/static/images/3pc.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>剑指1_二维数组中的查找</title>
