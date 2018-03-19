@@ -96,13 +96,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lin Niu">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+<meta name="description" content="1.分布式事务的提交分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。 在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的后处理（确认消息的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务的提交">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/dt/index.html">
 <meta property="og:site_name" content="Lin Niu">
+<meta property="og:description" content="1.分布式事务的提交分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。 在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的后处理（确认消息的">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-19T09:36:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lin Niu">
+<meta name="twitter:title" content="分布式事务的提交">
+<meta name="twitter:description" content="1.分布式事务的提交分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。 在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的后处理（确认消息的">
 
 
 
@@ -131,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2017/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/19/dt/"/>
 
 
 
 
 
-  <title>归档 | Lin Niu</title>
+  <title>分布式事务的提交 | Lin Niu</title>
   
 
 
@@ -156,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -250,222 +254,177 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/dt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">分布式事务的提交</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-19T17:31:48+08:00">
+                2018-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-          </div>
-        
-        
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/19/dt/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/19/dt/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/09/11/mdtest/" itemprop="url">
-              
-                <span itemprop="name">mdtest元数据测试</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-09-11T21:32:34+08:00"
-              content="2017-09-11" >
-          09-11
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/29/filebench/" itemprop="url">
-              
-                <span itemprop="name">filebench测试</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-29T11:38:29+08:00"
-              content="2017-08-29" >
-          08-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/22/apue_h/" itemprop="url">
-              
-                <span itemprop="name">CLion中的apue编译问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-22T11:59:53+08:00"
-              content="2017-08-22" >
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="1-分布式事务的提交"><a href="#1-分布式事务的提交" class="headerlink" title="1.分布式事务的提交"></a>1.分布式事务的提交</h2><p>分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。</p>
+<p>在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的<strong>后处理</strong>（确认消息的发送）  </p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/22/apue_hole/" itemprop="url">
-              
-                <span itemprop="name">apue_hole遇到的坑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-22T11:34:54+08:00"
-              content="2017-08-22" >
-          08-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/13/sed/" itemprop="url">
-              
-                <span itemprop="name">sed用法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-13T15:26:01+08:00"
-              content="2017-08-13" >
-          08-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，感谢您的支持</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="燕云十八飞骑，奔腾如虎风烟举 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/15/2pcAnd3pc/" rel="next" title="两阶段和三阶段提交协议的理解">
+                <i class="fa fa-chevron-left"></i> 两阶段和三阶段提交协议的理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -473,6 +432,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -493,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar1.jpg"
@@ -569,6 +548,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-分布式事务的提交"><span class="nav-number">1.</span> <span class="nav-text">1.分布式事务的提交</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -694,11 +689,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
@@ -717,6 +710,18 @@
       <script id="dsq-count-scr" src="https://jackniulin-com.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/03/19/dt/';
+          this.page.identifier = '2018/03/19/dt/';
+          this.page.title = '分布式事务的提交';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jackniulin-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

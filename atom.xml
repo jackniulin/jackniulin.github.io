@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-16T09:24:07.000Z</updated>
+  <updated>2018-03-19T09:36:46.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分布式事务的提交</title>
+    <link href="http://yoursite.com/2018/03/19/dt/"/>
+    <id>http://yoursite.com/2018/03/19/dt/</id>
+    <published>2018-03-19T09:31:48.000Z</published>
+    <updated>2018-03-19T09:36:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-分布式事务的提交"><a href="#1-分布式事务的提交" class="headerlink" title="1.分布式事务的提交"></a>1.分布式事务的提交</h2><p>分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。</p>
+<p>在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的<strong>后处理</strong>（确认消息的发送）  </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-分布式事务的提交&quot;&gt;&lt;a href=&quot;#1-分布式事务的提交&quot; class=&quot;headerlink&quot; title=&quot;1.分布式事务的提交&quot;&gt;&lt;/a&gt;1.分布式事务的提交&lt;/h2&gt;&lt;p&gt;分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>两阶段和三阶段提交协议的理解</title>

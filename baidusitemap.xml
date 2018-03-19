@@ -4,6 +4,21 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/03/19/dt/</loc>
+    <lastmod>2018-03-19T09:36:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>分布式事务的提交</title>
+        <pubTime>2018-03-19T09:31:48.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/03/15/2pcAnd3pc/</loc>
     <lastmod>2018-03-16T09:24:07.000Z</lastmod>
     <data>
