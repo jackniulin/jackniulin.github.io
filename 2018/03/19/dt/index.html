@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Lin Niu">
 <meta property="og:description" content="1.分布式事务的提交分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。 在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的后处理（确认消息的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-19T09:36:46.000Z">
+<meta property="og:updated_time" content="2018-04-08T10:26:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式事务的提交">
 <meta name="twitter:description" content="1.分布式事务的提交分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。 在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的后处理（确认消息的">
@@ -308,6 +308,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/分布式/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -372,8 +394,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/01/剑指1/" rel="next" title="剑指1_二维数组中的查找">
-                <i class="fa fa-chevron-left"></i> 剑指1_二维数组中的查找
+              <a href="/2018/03/15/2pcAnd3pc/" rel="next" title="两阶段和三阶段提交协议的理解">
+                <i class="fa fa-chevron-left"></i> 两阶段和三阶段提交协议的理解
               </a>
             
           </div>
@@ -382,8 +404,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/22/jbd/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/22/jbd/" rel="prev" title="jbd源代码分析">
+                jbd源代码分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -468,14 +490,32 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>

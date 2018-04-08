@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-22T12:46:32.000Z</updated>
+  <updated>2018-04-08T10:28:47.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,23 +16,29 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>jbd源代码分析</title>
     <link href="http://yoursite.com/2018/03/22/jbd/"/>
     <id>http://yoursite.com/2018/03/22/jbd/</id>
     <published>2018-03-22T12:42:35.000Z</published>
-    <updated>2018-03-22T12:46:32.000Z</updated>
+    <updated>2018-04-08T10:28:47.000Z</updated>
     
-    <content type="html"><![CDATA[<hr>
-<h2 id="jbd源代码分析"><a href="#jbd源代码分析" class="headerlink" title="jbd源代码分析"></a>jbd源代码分析</h2><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>1.buffer_head<br>内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个磁盘块。</p>
+    <content type="html"><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>1.buffer_head<br>内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个磁盘块。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;h2 id=&quot;jbd源代码分析&quot;&gt;&lt;a href=&quot;#jbd源代码分析&quot; class=&quot;headerlink&quot; title=&quot;jbd源代码分析&quot;&gt;&lt;/a&gt;jbd源代码分析&lt;/h2&gt;&lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerl
+      &lt;h2 id=&quot;基本概念&quot;&gt;&lt;a href=&quot;#基本概念&quot; class=&quot;headerlink&quot; title=&quot;基本概念&quot;&gt;&lt;/a&gt;基本概念&lt;/h2&gt;&lt;p&gt;1.buffer_head&lt;br&gt;内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个
     
     </summary>
     
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="kernel" scheme="http://yoursite.com/tags/kernel/"/>
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="jbd" scheme="http://yoursite.com/tags/jbd/"/>
     
   </entry>
   
@@ -41,7 +47,7 @@
     <link href="http://yoursite.com/2018/03/19/dt/"/>
     <id>http://yoursite.com/2018/03/19/dt/</id>
     <published>2018-03-19T09:31:48.000Z</published>
-    <updated>2018-03-19T09:36:46.000Z</updated>
+    <updated>2018-04-08T10:26:47.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-分布式事务的提交"><a href="#1-分布式事务的提交" class="headerlink" title="1.分布式事务的提交"></a>1.分布式事务的提交</h2><p>分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。</p>
 <p>在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的<strong>后处理</strong>（确认消息的发送）  </p>
@@ -53,6 +59,37 @@
     
     </summary>
     
+      <category term="分布式" scheme="http://yoursite.com/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>两阶段和三阶段提交协议的理解</title>
+    <link href="http://yoursite.com/2018/03/15/2pcAnd3pc/"/>
+    <id>http://yoursite.com/2018/03/15/2pcAnd3pc/</id>
+    <published>2018-03-15T04:09:16.000Z</published>
+    <updated>2018-04-08T10:26:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-2pc说明"><a href="#1-2pc说明" class="headerlink" title="1. 2pc说明"></a>1. 2pc说明</h2><p><strong>第一阶段(请求提交阶段)</strong><br>1.协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。<br>2.参与者节点执行询问发起为止的所有事务操作，并将undo和redo信息写进日志<br>3.各参与者节点响应协调者节点发起的询问。<br><strong>第二阶段(提交执行阶段)</strong><br>成功：<br>当协调者节点从所有参与者节点获得的相应消息都为”同意”时：<br>1.协调者节点向所有参与者节点发出”正式提交”的请求。<br>2.与者节点正式完成操作，并释放在整个事务期间内占用的资源。<br>3.参与者节点向协调者节点发送”完成”消息。<br>4.协调者节点收到所有参与者节点反馈的”完成”消息后，完成事务。<br>失败：<br>如果任一参与者节点在第一阶段返回的响应消息为”终止”，或者 协调者节点在第一阶段的询问超时之前无法获取所有参与者节点的响应消息时：<br>1.协调者节点向所有参与者节点发出”回滚操作”的请求。<br>2.参与者节点利用之前写入的Undo信息执行回滚，并释放在整个事务期间内占用的资源。<br>3.参与者节点向协调者节点发送”回滚完成”消息。<br>4.协调者节点收到所有参与者节点反馈的”回滚完成”消息后，取消事务。<br><strong>缺点</strong><br>很明显，容易陷入阻塞状态，占用资源得不到释放；另外，第二阶段如果协调者向参与者发出提交操作，而参与者此时崩溃，协调者无法获取参与者的响应信息。</p>
+<h2 id="2-3pc说明"><a href="#2-3pc说明" class="headerlink" title="2. 3pc说明"></a>2. 3pc说明</h2><p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/3pc.png" alt="">  </p>
+<p>下面这段是网上看到的，解释3pc为什么相对于2pc会减少阻塞：</p>
+<blockquote>
+<p>在doCommit阶段，如果参与者无法及时接收到来自协调者的doCommit或者rebort请求时，会在等待超时之后，会继续进行事务的提交。（其实这个应该是基于概率来决定的，当进入第三阶段时，说明参与者在第二阶段已经收到了PreCommit请求，那么协调者产生PreCommit请求的前提条件是他在第二阶段开始之前，收到所有参与者的CanCommit响应都是Yes。（一旦参与者收到了PreCommit，意味他知道大家其实都同意修改了）所以，一句话概括就是，当进入第三阶段时，由于网络超时等原因，虽然参与者没有收到commit或者abort响应，但是他有理由相信：成功提交的几率很大） </p>
+</blockquote>
+<p>特殊情况：如果协调者发送了abort而某个参与者没有收到，超时之后执行commit，其他的参与者接收abort之后执行回滚，这种情况下参与者之间存在数据不一致的问题。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-2pc说明&quot;&gt;&lt;a href=&quot;#1-2pc说明&quot; class=&quot;headerlink&quot; title=&quot;1. 2pc说明&quot;&gt;&lt;/a&gt;1. 2pc说明&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;第一阶段(请求提交阶段)&lt;/strong&gt;&lt;br&gt;1.协调者节点向所有参与者节点
+    
+    </summary>
+    
+      <category term="分布式" scheme="http://yoursite.com/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="协议" scheme="http://yoursite.com/tags/%E5%8D%8F%E8%AE%AE/"/>
     
   </entry>
   
@@ -61,7 +98,7 @@
     <link href="http://yoursite.com/2018/03/01/%E5%89%91%E6%8C%871/"/>
     <id>http://yoursite.com/2018/03/01/剑指1/</id>
     <published>2018-03-01T11:52:56.000Z</published>
-    <updated>2018-03-01T12:24:28.000Z</updated>
+    <updated>2018-04-08T10:30:33.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><p>在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
 <h2 id="2-源代码"><a href="#2-源代码" class="headerlink" title="2.源代码"></a>2.源代码</h2><pre><code>class Solution {
@@ -91,6 +128,8 @@ public:
     
     </summary>
     
+      <category term="剑指offer" scheme="http://yoursite.com/categories/%E5%89%91%E6%8C%87offer/"/>
+    
     
   </entry>
   
@@ -99,7 +138,7 @@ public:
     <link href="http://yoursite.com/2017/09/11/mdtest/"/>
     <id>http://yoursite.com/2017/09/11/mdtest/</id>
     <published>2017-09-11T13:32:34.000Z</published>
-    <updated>2017-09-19T01:28:39.000Z</updated>
+    <updated>2018-04-08T10:29:16.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>环境为SUSE11<br><code>CLT1:~ # zypper in openmpi openmpi-devel</code><br>报错：    </p>
 <blockquote>
@@ -141,6 +180,14 @@ public:
     
     </summary>
     
+      <category term="Test" scheme="http://yoursite.com/categories/Test/"/>
+    
+    
+      <category term="test" scheme="http://yoursite.com/tags/test/"/>
+    
+      <category term="metadata" scheme="http://yoursite.com/tags/metadata/"/>
+    
+      <category term="mdtest" scheme="http://yoursite.com/tags/mdtest/"/>
     
   </entry>
   
@@ -149,7 +196,7 @@ public:
     <link href="http://yoursite.com/2017/08/29/filebench/"/>
     <id>http://yoursite.com/2017/08/29/filebench/</id>
     <published>2017-08-29T03:38:29.000Z</published>
-    <updated>2017-08-29T08:32:58.000Z</updated>
+    <updated>2018-04-08T10:27:49.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-filebench下载"><a href="#1-filebench下载" class="headerlink" title="1.filebench下载"></a>1.filebench下载</h2><p>客户端安装：<a href="https://github.com/zfsonlinux/filebench" target="_blank" rel="external">filebench</a>       </p>
 <p>系统:SUSE Linux Enterprise Server 11 SP1  (x86_64)       </p>
@@ -192,6 +239,14 @@ public:
     
     </summary>
     
+      <category term="Test" scheme="http://yoursite.com/categories/Test/"/>
+    
+    
+      <category term="test" scheme="http://yoursite.com/tags/test/"/>
+    
+      <category term="filebench" scheme="http://yoursite.com/tags/filebench/"/>
+    
+      <category term="metadata" scheme="http://yoursite.com/tags/metadata/"/>
     
   </entry>
   
@@ -200,7 +255,7 @@ public:
     <link href="http://yoursite.com/2017/08/22/apue_h/"/>
     <id>http://yoursite.com/2017/08/22/apue_h/</id>
     <published>2017-08-22T03:59:53.000Z</published>
-    <updated>2017-08-22T04:09:15.000Z</updated>
+    <updated>2018-04-08T10:26:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。<br>网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png" alt=""></p>
 ]]></content>
@@ -211,6 +266,12 @@ public:
     
     </summary>
     
+      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
+    
+    
+      <category term="apue" scheme="http://yoursite.com/tags/apue/"/>
+    
+      <category term="CLion" scheme="http://yoursite.com/tags/CLion/"/>
     
   </entry>
   
@@ -219,7 +280,7 @@ public:
     <link href="http://yoursite.com/2017/08/22/apue_hole/"/>
     <id>http://yoursite.com/2017/08/22/apue_hole/</id>
     <published>2017-08-22T03:34:54.000Z</published>
-    <updated>2017-08-29T08:38:52.000Z</updated>
+    <updated>2018-04-08T10:25:44.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-编译c文件出错"><a href="#1-编译c文件出错" class="headerlink" title="1.编译c文件出错"></a>1.编译c文件出错</h2><p><strong>报错如下：</strong><br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apue_hole.png" alt=""></p>
 <p>看到<strong>clang error</strong></p>
@@ -238,6 +299,12 @@ public:
     
     </summary>
     
+      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
+    
+    
+      <category term="apue" scheme="http://yoursite.com/tags/apue/"/>
+    
+      <category term="clang" scheme="http://yoursite.com/tags/clang/"/>
     
   </entry>
   
@@ -246,7 +313,7 @@ public:
     <link href="http://yoursite.com/2017/08/13/sed/"/>
     <id>http://yoursite.com/2017/08/13/sed/</id>
     <published>2017-08-13T07:26:01.000Z</published>
-    <updated>2017-08-21T04:06:17.000Z</updated>
+    <updated>2018-04-08T10:29:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><blockquote>
 <p>sed is a stream editor. A stream editor is used to perform basic text transformations on an input stream (a file or input from a pipeline). While in some ways similar to an editor which permits scripted edits (such as ed), sed works by making only one pass over the input(s), and is consequently more efficient. But it is sed’s ability to filter text in a pipeline which particularly distinguishes it from other types of editors.    </p>
@@ -261,6 +328,12 @@ public:
     
     </summary>
     
+      <category term="shell" scheme="http://yoursite.com/categories/shell/"/>
+    
+    
+      <category term="shell" scheme="http://yoursite.com/tags/shell/"/>
+    
+      <category term="sed" scheme="http://yoursite.com/tags/sed/"/>
     
   </entry>
   
