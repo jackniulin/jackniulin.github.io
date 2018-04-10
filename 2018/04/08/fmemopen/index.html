@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="apue,CLion," />
+  <meta name="keywords" content="apue,IO," />
 
 
 
@@ -96,20 +96,18 @@
 
 
 
-<meta name="description" content="刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：">
-<meta name="keywords" content="apue,CLion">
+<meta name="description" content="1.内存流FILE fmemopen(void restrict buf, size_t size, const char *restrict type);返回值： 成功返回流指针，错误返回NULL 2.示例1234567891011121314151617int main() &amp;#123;    FILE *fp;    char buf[BSZ];    memset(buf, &amp;apos;a">
+<meta name="keywords" content="apue,IO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CLion中的apue编译问题">
-<meta property="og:url" content="http://yoursite.com/2017/08/22/apue_h/index.html">
+<meta property="og:title" content="冲洗内存流和追加写null字节策略">
+<meta property="og:url" content="http://yoursite.com/2018/04/08/fmemopen/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：">
+<meta property="og:description" content="1.内存流FILE fmemopen(void restrict buf, size_t size, const char *restrict type);返回值： 成功返回流指针，错误返回NULL 2.示例1234567891011121314151617int main() &amp;#123;    FILE *fp;    char buf[BSZ];    memset(buf, &amp;apos;a">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png">
-<meta property="og:updated_time" content="2018-04-08T10:26:27.000Z">
+<meta property="og:updated_time" content="2018-04-10T08:55:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CLion中的apue编译问题">
-<meta name="twitter:description" content="刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：">
-<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png">
+<meta name="twitter:title" content="冲洗内存流和追加写null字节策略">
+<meta name="twitter:description" content="1.内存流FILE fmemopen(void restrict buf, size_t size, const char *restrict type);返回值： 成功返回流指针，错误返回NULL 2.示例1234567891011121314151617int main() &amp;#123;    FILE *fp;    char buf[BSZ];    memset(buf, &amp;apos;a">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/22/apue_h/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/08/fmemopen/"/>
 
 
 
 
 
-  <title>CLion中的apue编译问题 | Lin Niu</title>
+  <title>冲洗内存流和追加写null字节策略 | Lin Niu</title>
   
 
 
@@ -271,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue_h/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/fmemopen/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
@@ -288,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CLion中的apue编译问题</h1>
+          <h1 class="post-title" itemprop="name headline">冲洗内存流和追加写null字节策略</h1>
         
 
         <div class="post-meta">
@@ -300,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T11:59:53+08:00">
-                2017-08-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T19:43:42+08:00">
+                2018-04-08
               </time>
             
 
@@ -341,9 +339,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/22/apue_h/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/08/fmemopen/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/22/apue_h/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/08/fmemopen/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +369,29 @@
       
 
       
-        <p>刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。<br>网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png" alt=""></p>
+        <h2 id="1-内存流"><a href="#1-内存流" class="headerlink" title="1.内存流"></a>1.内存流</h2><p>FILE <em>fmemopen(void </em>restrict buf, size_t size, const char *restrict type);<br>返回值： 成功返回流指针，错误返回NULL</p>
+<h2 id="2-示例"><a href="#2-示例" class="headerlink" title="2.示例"></a>2.示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int main() &#123;</div><div class="line">    FILE *fp;</div><div class="line">    char buf[BSZ];</div><div class="line"></div><div class="line">    memset(buf, &apos;a&apos;, BSZ - 2);</div><div class="line">    buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">    buf[BSZ-1] = &apos;X&apos;;</div><div class="line">    </div><div class="line">	 //&quot;w+&quot;:把文件截断至0，为读和写打开</div><div class="line">    if ((fp = fmemopen(buf, BSZ, &quot;w+&quot;)) == NULL)</div><div class="line">        err_sys(&quot;fmemopen failed\n&quot;);</div><div class="line">    //1</div><div class="line">    //2</div><div class="line">    //3</div><div class="line">    //4    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>任何时候需要增加流缓冲中数据量以及调用fclose,fflush, fseek, fseeko以及fsetpos时会在当前位置写入一个null字节</strong><br>调用fmemopen函数在缓冲区开始放置null字符</p>
+<h3 id="1-offset-0"><a href="#1-offset-0" class="headerlink" title="(1).offset=0"></a>(1).offset=0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">printf(&quot;initial buffer contents: %s\n&quot;, buf);</div><div class="line">fprintf(fp, &quot;hello, world&quot;);  //hello, world写入</div><div class="line">printf(&quot;before flush: %s\n&quot;, buf);</div><div class="line">fflush(fp);</div><div class="line">printf(&quot;after fflush: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12    </p>
+</blockquote>
+<p>hello, world共12个字符，此时offset=12, 偏移12处的内容为null(上面加深部分有提：调用fflush会在当前位置写入一个null字节)</p>
+<h3 id="2-offset-12"><a href="#2-offset-12" class="headerlink" title="(2).offset=12"></a>(2).offset=12</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;b&apos;, BSZ - 2);</div><div class="line">buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">buf[BSZ-1] = &apos;X&apos;;</div><div class="line">fprintf(fp, &quot;hello, world&quot;);</div><div class="line">fseek(fp, 0, SEEK_CUR);</div><div class="line">printf(&quot;after fseek SEEK_CUR: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24</p>
+</blockquote>
+<p>前12个被b填充，从offset=12开始填充hello, world字符串。同时，seek设置SEEK_CUR, offset=24.</p>
+<h3 id="3-offset-24"><a href="#3-offset-24" class="headerlink" title="(3).offset=24"></a>(3).offset=24</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;c&apos;, BSZ - 2);</div><div class="line">buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">buf[BSZ-1] = &apos;X&apos;;</div><div class="line">fprintf(fp, &quot;hello, world&quot;);</div><div class="line">fseek(fp, 0, SEEK_SET);</div><div class="line">printf(&quot;after fseek SEEK_SET: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24<br>after fseek SEEK_SET: cccccccccccccccccccccccchello, world<br>length of string in buf = 36  </p>
+</blockquote>
+<p>seek设置SEEK_SET之后，偏移值设置为缓冲区开始位置，即offset=0  </p>
+<h3 id="4-offset-0"><a href="#4-offset-0" class="headerlink" title="(4).offset=0"></a>(4).offset=0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;d&apos;, BSZ - 2);</div><div class="line">   buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">   buf[BSZ-1] = &apos;X&apos;;</div><div class="line">   fprintf(fp, &quot;hello, world&quot;);</div><div class="line">   </div><div class="line">   fclose(fp);</div><div class="line">   printf(&quot;after close: %s\n&quot;, buf);</div><div class="line">   printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24<br>after fseek SEEK_SET: cccccccccccccccccccccccchello, world<br>length of string in buf = 36<br>after close: hello, worlddddddddddddddddddddddddddddddddddd<br>length of string in buf = 46    </p>
+</blockquote>
+<p>这里调用了fclose，前面提到本应追加null字节，但是这里没有，为什么呢？？？    </p>
 
       
     </div>
@@ -391,7 +411,7 @@
           
             <a href="/tags/apue/" rel="tag"># apue</a>
           
-            <a href="/tags/CLion/" rel="tag"># CLion</a>
+            <a href="/tags/IO/" rel="tag"># IO</a>
           
         </div>
       
@@ -404,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/22/apue_hole/" rel="next" title="apue_hole遇到的坑">
-                <i class="fa fa-chevron-left"></i> apue_hole遇到的坑
+              <a href="/2018/03/28/vfs/" rel="next" title="VFS虚拟文件系统">
+                <i class="fa fa-chevron-left"></i> VFS虚拟文件系统
               </a>
             
           </div>
@@ -413,10 +433,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/29/filebench/" rel="prev" title="filebench测试">
-                filebench测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar1.jpg"
@@ -569,6 +594,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-内存流"><span class="nav-number">1.</span> <span class="nav-text">1.内存流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-示例"><span class="nav-number">2.</span> <span class="nav-text">2.示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-offset-0"><span class="nav-number">2.1.</span> <span class="nav-text">(1).offset=0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-offset-12"><span class="nav-number">2.2.</span> <span class="nav-text">(2).offset=12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-offset-24"><span class="nav-number">2.3.</span> <span class="nav-text">(3).offset=24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-offset-0"><span class="nav-number">2.4.</span> <span class="nav-text">(4).offset=0</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -718,9 +759,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/08/22/apue_h/';
-          this.page.identifier = '2017/08/22/apue_h/';
-          this.page.title = 'CLion中的apue编译问题';
+          this.page.url = 'http://yoursite.com/2018/04/08/fmemopen/';
+          this.page.identifier = '2018/04/08/fmemopen/';
+          this.page.title = '冲洗内存流和追加写null字节策略';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
