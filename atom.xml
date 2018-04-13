@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-13T09:43:52.000Z</updated>
+  <updated>2018-04-13T09:46:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>避免zomble process</title>
+    <title>避免zombie process</title>
     <link href="http://yoursite.com/2018/04/13/twofork/"/>
     <id>http://yoursite.com/2018/04/13/twofork/</id>
     <published>2018-04-13T09:21:52.000Z</published>
-    <updated>2018-04-13T09:43:52.000Z</updated>
+    <updated>2018-04-13T09:46:58.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-僵死进程"><a href="#1-僵死进程" class="headerlink" title="1.僵死进程"></a>1.僵死进程</h2><p>是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的资源等。</p>
 <h2 id="2-两次fork避免zombie"><a href="#2-两次fork避免zombie" class="headerlink" title="2.两次fork避免zombie"></a>2.两次fork避免zombie</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">int main(void) &#123;</div><div class="line">    pid_t pid;</div><div class="line">    printf(&quot;parent id=%ld\n&quot;, (long)getpid());</div><div class="line">    if ((pid = fork()) &lt; 0)</div><div class="line">        err_sys(&quot;fork error&quot;);</div><div class="line">    else if (pid == 0) &#123;</div><div class="line">        if ((pid = fork()) &lt; 0)</div><div class="line">            err_sys(&quot;fork error&quot;);</div><div class="line">        else if (pid &gt; 0) </div><div class="line">            exit(0); //first child die</div><div class="line">        sleep(2);  </div><div class="line">        printf(&quot;second child, parent pid=%ld\n&quot;, (long)getppid());</div><div class="line">        exit(0);</div><div class="line">    &#125;</div><div class="line">    if (waitpid(pid, NULL ,0) != pid)</div><div class="line">        err_sys(&quot;waitpid error&quot;);</div><div class="line">    else</div><div class="line">        printf(&quot;first child pid=%d\n&quot;, pid);</div><div class="line">    exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
