@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/04/13/twofork/</loc>
+    
+    <lastmod>2018-04-13T09:43:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/04/08/fmemopen/</loc>
     
     <lastmod>2018-04-10T08:55:43.000Z</lastmod>
@@ -9,7 +16,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/03/01/%E5%89%91%E6%8C%871/</loc>
+    <loc>http://yoursite.com/2018/03/01/searinarray/</loc>
     
     <lastmod>2018-04-08T10:30:33.000Z</lastmod>
     
@@ -44,7 +51,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/03/19/dt/</loc>
+    <loc>http://yoursite.com/2018/03/19/committransaction/</loc>
     
     <lastmod>2018-04-08T10:26:47.000Z</lastmod>
     

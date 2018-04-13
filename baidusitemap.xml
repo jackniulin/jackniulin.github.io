@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/13/twofork/</loc>
+    <lastmod>2018-04-13T09:43:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>避免zomble process</title>
+        <pubTime>2018-04-13T09:21:52.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="apue" url="http://yoursite.com/categories/apue/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/04/08/fmemopen/</loc>
     <lastmod>2018-04-10T08:55:43.000Z</lastmod>
     <data>
@@ -26,7 +44,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/03/01/%E5%89%91%E6%8C%871/</loc>
+    <loc>http://yoursite.com/2018/03/01/searinarray/</loc>
     <lastmod>2018-04-08T10:30:33.000Z</lastmod>
     <data>
         <display>
@@ -138,7 +156,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/03/19/dt/</loc>
+    <loc>http://yoursite.com/2018/03/19/committransaction/</loc>
     <lastmod>2018-04-08T10:26:47.000Z</lastmod>
     <data>
         <display>

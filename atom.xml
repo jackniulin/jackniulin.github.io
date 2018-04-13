@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-10T08:55:43.000Z</updated>
+  <updated>2018-04-13T09:43:52.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>避免zomble process</title>
+    <link href="http://yoursite.com/2018/04/13/twofork/"/>
+    <id>http://yoursite.com/2018/04/13/twofork/</id>
+    <published>2018-04-13T09:21:52.000Z</published>
+    <updated>2018-04-13T09:43:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-僵死进程"><a href="#1-僵死进程" class="headerlink" title="1.僵死进程"></a>1.僵死进程</h2><p>是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的资源等。</p>
+<h2 id="2-两次fork避免zombie"><a href="#2-两次fork避免zombie" class="headerlink" title="2.两次fork避免zombie"></a>2.两次fork避免zombie</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">int main(void) &#123;</div><div class="line">    pid_t pid;</div><div class="line">    printf(&quot;parent id=%ld\n&quot;, (long)getpid());</div><div class="line">    if ((pid = fork()) &lt; 0)</div><div class="line">        err_sys(&quot;fork error&quot;);</div><div class="line">    else if (pid == 0) &#123;</div><div class="line">        if ((pid = fork()) &lt; 0)</div><div class="line">            err_sys(&quot;fork error&quot;);</div><div class="line">        else if (pid &gt; 0) </div><div class="line">            exit(0); //first child die</div><div class="line">        sleep(2);  </div><div class="line">        printf(&quot;second child, parent pid=%ld\n&quot;, (long)getppid());</div><div class="line">        exit(0);</div><div class="line">    &#125;</div><div class="line">    if (waitpid(pid, NULL ,0) != pid)</div><div class="line">        err_sys(&quot;waitpid error&quot;);</div><div class="line">    else</div><div class="line">        printf(&quot;first child pid=%d\n&quot;, pid);</div><div class="line">    exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>parent id=3483<br>first child pid=3484<br>[root@centos apue]# second child, parent pid=1</p>
+</blockquote>
+<p>这里，第二个子进程最终由init进程（pid=1）收养， 那么它会变成一个僵死进程吗？<br>apue中给出的解释： 对于init，任何时候只要有一个子进程终止，它就会调用一个wait函数取得这个子进程的终止状态，这样就防止系统中塞满僵死进程。<br>一个init子进程可能是init直接产生的子进程，还有一种，就是如上，父进程终止，由init接管的子进程。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-僵死进程&quot;&gt;&lt;a href=&quot;#1-僵死进程&quot; class=&quot;headerlink&quot; title=&quot;1.僵死进程&quot;&gt;&lt;/a&gt;1.僵死进程&lt;/h2&gt;&lt;p&gt;是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的
+    
+    </summary>
+    
+      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>冲洗内存流和追加写null字节策略</title>
@@ -110,8 +136,8 @@
   
   <entry>
     <title>分布式事务的提交</title>
-    <link href="http://yoursite.com/2018/03/19/dt/"/>
-    <id>http://yoursite.com/2018/03/19/dt/</id>
+    <link href="http://yoursite.com/2018/03/19/committransaction/"/>
+    <id>http://yoursite.com/2018/03/19/committransaction/</id>
     <published>2018-03-19T09:31:48.000Z</published>
     <updated>2018-04-08T10:26:47.000Z</updated>
     
@@ -161,8 +187,8 @@
   
   <entry>
     <title>剑指1_二维数组中的查找</title>
-    <link href="http://yoursite.com/2018/03/01/%E5%89%91%E6%8C%871/"/>
-    <id>http://yoursite.com/2018/03/01/剑指1/</id>
+    <link href="http://yoursite.com/2018/03/01/searinarray/"/>
+    <id>http://yoursite.com/2018/03/01/searinarray/</id>
     <published>2018-03-01T11:52:56.000Z</published>
     <updated>2018-04-08T10:30:33.000Z</updated>
     
