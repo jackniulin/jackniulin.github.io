@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-30T08:08:26.000Z</updated>
+  <updated>2018-05-30T14:16:13.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>826. Most Profit Assigning Work</title>
+    <link href="http://yoursite.com/2018/05/30/leetcode826/"/>
+    <id>http://yoursite.com/2018/05/30/leetcode826/</id>
+    <published>2018-05-30T13:45:41.000Z</published>
+    <updated>2018-05-30T14:16:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><blockquote>
+<p>We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.    </p>
+<p>Now we have some workers. worker[i] is the ability of the ith worker, which means that this worker can only complete a job with difficulty at most worker[i].    </p>
+<p>Every worker can be assigned at most one job, but one job can be completed multiple times.</p>
+<p>For example, if 3 people attempt the same job that pays $1, then the total profit will be $3.  If a worker cannot complete any job, his profit is $0.</p>
+<p>What is the most profit we can make?   </p>
+<p><strong>Example 1:</strong>    </p>
+<p>Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], worker = [4,5,6,7]<br>Output: 100<br>Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and they get profit of [20,20,30,30] seperately.</p>
+<p><strong>Notes:</strong></p>
+<p>1 &lt;= difficulty.length = profit.length &lt;= 10000<br>1 &lt;= worker.length &lt;= 10000<br>difficulty[i], profit[i], worker[i]  are in range [1, 10^5]    </p>
+</blockquote>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>题目的目的是得到worker数组能拿到的最大的profit. 用一个map来保存一对difficulty, profit之间的对应关系。需要注意的是题目给的difficulty数组和profit数组都是没有排序的，这就可能存在两个difficulty相同但是对应的profit大小不同的情况，我们保留profit大的项，舍弃profit小的项。<br>如果difficulty大但是它的profit却比比它difficulty小的profit小，这是问题的关键，需要把difficulty大的对应的profit变为它前面diffculty小profit却大的值。调整完profit之后，把difficulty从大到小排序。<br>从前往后遍历worker数组，找到每个worker实际能做的difficulty,并将该difficulty保存在对应的worker项中。最后计算总的收益。</p>
+<h2 id="3-源代码"><a href="#3-源代码" class="headerlink" title="3.源代码"></a>3.源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int maxProfitAssignment(vector&lt;int&gt;&amp; difficulty, vector&lt;int&gt;&amp; profit, vector&lt;int&gt;&amp; worker) &#123;</div><div class="line">        int res = 0;</div><div class="line">        unordered_map&lt;int, int&gt; map; </div><div class="line">        for (int i = 0; i &lt; difficulty.size(); i++) &#123;</div><div class="line">            if (map.count(difficulty[i]) &gt; 0) &#123;</div><div class="line">                if (map[difficulty[i]] &lt; profit[i])</div><div class="line">                    map[difficulty[i]] = profit[i];</div><div class="line">                else</div><div class="line">                    continue;</div><div class="line">            &#125; else &#123;</div><div class="line">                map[difficulty[i]] = profit[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        sort(difficulty.begin(), difficulty.end());</div><div class="line">      </div><div class="line">        for (int i = 1; i &lt; difficulty.size(); i++)</div><div class="line">            if (map[difficulty[i]] &lt; map[difficulty[i - 1]])</div><div class="line">                map[difficulty[i]] =  map[difficulty[i - 1]];</div><div class="line">        </div><div class="line">        for (int i = 0; i &lt; worker.size(); i++) &#123;</div><div class="line">            for (int j = 0; j &lt; difficulty.size(); ) &#123;</div><div class="line">                while (j &lt; difficulty.size() &amp;&amp; worker[i] &gt; difficulty[j]) </div><div class="line">                    j++;</div><div class="line">                if (j == difficulty.size()) &#123;</div><div class="line">                    worker[i] = difficulty[j - 1];</div><div class="line">                    break;</div><div class="line">                &#125;               </div><div class="line">                if (worker[i] == difficulty[j]) </div><div class="line">                    break;</div><div class="line"></div><div class="line">                if (worker[i] &lt; difficulty[j]) &#123;</div><div class="line">                    if (j == 0)  </div><div class="line">                        worker[i] = 0;</div><div class="line">                    else </div><div class="line">                        worker[i] = difficulty[j - 1];</div><div class="line">                    break;</div><div class="line">                &#125;        </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; worker.size(); i++) &#123;</div><div class="line">            if (worker[i] == 0)</div><div class="line">                continue;</div><div class="line">            res += map[worker[i]];</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1.题目描述&quot;&gt;&lt;/a&gt;1.题目描述&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;We have jobs: difficulty[i] is the diffic
+    
+    </summary>
+    
+      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Linux 0.12内核中signal的实现</title>
