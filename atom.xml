@@ -126,7 +126,7 @@
     <link href="http://yoursite.com/2018/05/20/signal/"/>
     <id>http://yoursite.com/2018/05/20/signal/</id>
     <published>2018-05-19T16:00:00.000Z</published>
-    <updated>2018-05-30T08:08:52.000Z</updated>
+    <updated>2018-05-30T08:13:49.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>信号是一种软中断，它提供了一种异步事件处理的方法<br>信号出现时，内核的处理方式有三种：<br>1.忽略信号<br>2.捕捉信号<br>3.执行系统默认动作     </p>
 <h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><blockquote>
