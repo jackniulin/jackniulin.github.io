@@ -394,7 +394,7 @@
     act.sa_flags = 0;
     if (signo == SIGALARM) {
 #ifdef SA_INTERRUPT
-            act.sa_flags |= SA_INTERRUPT; //由此信号中断的系统调用不自动重启
+        act.sa_flags |= SA_INTERRUPT; //由此信号中断的系统调用不自动重启
 #endif      
     } else {
         act.sa_flags |= SA_RESTART;   //由此信号中断的系统调用自动重启
