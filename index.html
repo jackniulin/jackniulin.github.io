@@ -564,7 +564,7 @@
     unsigned long * esp, long ss)
 {
     unsigned long sa_handler;
-    long old_eip=eip;
+    long old_eip=eip;  //eip为原本要执行的代码
     struct sigaction * sa = current-&gt;sigaction + signr - 1;
     int longs;
 
@@ -586,7 +586,7 @@
         }
     }
     sa_handler = (unsigned long) sa-&gt;sa_handler;
-    if (sa_handler==1)
+    if (sa_handler==1)  //默认忽略句柄SIG_IGN,不作任何处理
         return(1);   /* Ignore, see if there are more signals... */
     if (!sa_handler) {
         switch (signr) {
@@ -615,15 +615,15 @@
                 do_exit(signr|0x80);
             /* fall through */
         default:
-            do_exit(signr);
+            do_exit(signr);  //可作为wait()或wait_pid()函数的状态信息，取得进程的退出状态码或子进程终止的原因
         }
     }
     /*
      * OK, we&apos;re invoking a handler
      */
     if (sa-&gt;sa_flags &amp; SA_ONESHOT)
-        sa-&gt;sa_handler = NULL;
-    *(&amp;eip) = sa_handler;
+        sa-&gt;sa_handler = NULL; //该句柄只执行一次
+    *(&amp;eip) = sa_handler; //eip指向信号处理程序
     longs = (sa-&gt;sa_flags &amp; SA_NOMASK)?7:8;
     *(&amp;esp) -= longs;
     verify_area(esp,longs*4);
@@ -640,7 +640,8 @@
     current-&gt;blocked |= sa-&gt;sa_mask;
     return(0);        /* Continue, execute handler */
 }
-</code></pre>
+</code></pre><p>do_signal()执行完后，system_call.s将会把内核态堆栈上eip以下的所有值弹出。<br>在执行iret之后，内核态堆栈上的cs:eip，eflags, ss:esp被弹出，恢复到用户态中执行<br>而eip已经指向了信号处理程序，因此会立即执行用户自定义信号处理程序。<br>在该信号处理程序执行完后，通过ret指令，cpu把控制权交给sa_restorer所指向的恢复程序，sa_restorer会清理用户态堆栈，弹出信息，一直弹到old_eip，最后通过sa_restorer的ret弹出old_eip并跳转到其指向的代码中运行。</p>
+
           
         
       

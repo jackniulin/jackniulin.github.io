@@ -73,7 +73,7 @@
     <link href="http://yoursite.com/2018/05/20/signal1/"/>
     <id>http://yoursite.com/2018/05/20/signal1/</id>
     <published>2018-05-19T16:00:00.000Z</published>
-    <updated>2018-05-30T07:47:14.000Z</updated>
+    <updated>2018-05-30T08:04:42.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-sys-signal"><a href="#1-sys-signal" class="headerlink" title="1.sys_signal"></a>1.sys_signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">int sys_signal(int signum, long handler, long restorer)</div><div class="line">&#123;</div><div class="line">	struct sigaction tmp;</div><div class="line">	//SIGKILL和SIGSTOP不能被进程捕获</div><div class="line">	if (signum&lt;1 || signum&gt;32 || signum==SIGKILL || signum==SIGSTOP)</div><div class="line">		return -EINVAL;</div><div class="line">	tmp.sa_handler = (void (*)(int)) handler; //设置信号处理句柄</div><div class="line">	tmp.sa_mask = 0; </div><div class="line">	//该信号处理句柄只使用一次就恢复到默认值</div><div class="line">	tmp.sa_flags = SA_ONESHOT | SA_NOMASK; </div><div class="line">	tmp.sa_restorer = (void (*)(void)) restorer;</div><div class="line">	//取该信号原来的处理句柄，安装新句柄，返回旧句柄</div><div class="line">	handler = (long) current-&gt;sigaction[signum-1].sa_handler;</div><div class="line">	current-&gt;sigaction[signum-1] = tmp;</div><div class="line">	return handler;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-sys-sigaction"><a href="#2-sys-sigaction" class="headerlink" title="2.sys_sigaction"></a>2.sys_sigaction</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">int sys_sigaction(int signum, const struct sigaction * action,</div><div class="line">	struct sigaction * oldaction)</div><div class="line">&#123;</div><div class="line">	struct sigaction tmp;</div><div class="line"></div><div class="line">	if (signum&lt;1 || signum&gt;32 || signum==SIGKILL || signum==SIGSTOP)</div><div class="line">		return -EINVAL;</div><div class="line">	//取原sigaction</div><div class="line">	tmp = current-&gt;sigaction[signum-1];</div><div class="line">	//利用参数action设置新的sigaction</div><div class="line">	get_new((char *) action,</div><div class="line">		(char *) (signum-1+current-&gt;sigaction));</div><div class="line">	//若oldaction非空，利用前面保存的tmp填装oldaction</div><div class="line">	if (oldaction)</div><div class="line">		save_old((char *) &amp;tmp,(char *) oldaction);</div><div class="line">	//如果允许信号在自己的句柄中收到，设置sa_mak为0， 否则屏蔽这个信号</div><div class="line">	if (current-&gt;sigaction[signum-1].sa_flags &amp; SA_NOMASK)</div><div class="line">		current-&gt;sigaction[signum-1].sa_mask = 0;</div><div class="line">	else</div><div class="line">		current-&gt;sigaction[signum-1].sa_mask |= (1&lt;&lt;(signum-1));</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -84,7 +84,7 @@
     unsigned long * esp, long ss)
 {
     unsigned long sa_handler;
-    long old_eip=eip;
+    long old_eip=eip;  //eip为原本要执行的代码
     struct sigaction * sa = current-&gt;sigaction + signr - 1;
     int longs;
 
@@ -106,7 +106,7 @@
         }
     }
     sa_handler = (unsigned long) sa-&gt;sa_handler;
-    if (sa_handler==1)
+    if (sa_handler==1)  //默认忽略句柄SIG_IGN,不作任何处理
         return(1);   /* Ignore, see if there are more signals... */
     if (!sa_handler) {
         switch (signr) {
@@ -135,15 +135,15 @@
                 do_exit(signr|0x80);
             /* fall through */
         default:
-            do_exit(signr);
+            do_exit(signr);  //可作为wait()或wait_pid()函数的状态信息，取得进程的退出状态码或子进程终止的原因
         }
     }
     /*
      * OK, we&apos;re invoking a handler
      */
     if (sa-&gt;sa_flags &amp; SA_ONESHOT)
-        sa-&gt;sa_handler = NULL;
-    *(&amp;eip) = sa_handler;
+        sa-&gt;sa_handler = NULL; //该句柄只执行一次
+    *(&amp;eip) = sa_handler; //eip指向信号处理程序
     longs = (sa-&gt;sa_flags &amp; SA_NOMASK)?7:8;
     *(&amp;esp) -= longs;
     verify_area(esp,longs*4);
@@ -160,7 +160,8 @@
     current-&gt;blocked |= sa-&gt;sa_mask;
     return(0);        /* Continue, execute handler */
 }
-</code></pre>]]></content>
+</code></pre><p>do_signal()执行完后，system_call.s将会把内核态堆栈上eip以下的所有值弹出。<br>在执行iret之后，内核态堆栈上的cs:eip，eflags, ss:esp被弹出，恢复到用户态中执行<br>而eip已经指向了信号处理程序，因此会立即执行用户自定义信号处理程序。<br>在该信号处理程序执行完后，通过ret指令，cpu把控制权交给sa_restorer所指向的恢复程序，sa_restorer会清理用户态堆栈，弹出信息，一直弹到old_eip，最后通过sa_restorer的ret弹出old_eip并跳转到其指向的代码中运行。</p>
+]]></content>
     
     <summary type="html">
     
