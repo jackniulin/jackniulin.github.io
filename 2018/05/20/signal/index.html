@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. 概念一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。    2. 线程标识12(1) 比较两个线程idint">
+<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作      2. 函数signal void (*signal (int signo, void ( *func )(int))) (int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址  signa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程（1）： 线程和线程标识">
-<meta property="og:url" content="http://yoursite.com/2018/04/18/pthread1/index.html">
+<meta property="og:title" content="信号">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/signal/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 概念一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。    2. 线程标识12(1) 比较两个线程idint">
+<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作      2. 函数signal void (*signal (int signo, void ( *func )(int))) (int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址  signa">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-18T12:04:48.000Z">
+<meta property="og:updated_time" content="2018-05-30T08:08:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线程（1）： 线程和线程标识">
-<meta name="twitter:description" content="1. 概念一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。    2. 线程标识12(1) 比较两个线程idint">
+<meta name="twitter:title" content="信号">
+<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作      2. 函数signal void (*signal (int signo, void ( *func )(int))) (int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址  signa">
 
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/18/pthread1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/20/signal/"/>
 
 
 
 
 
-  <title>线程（1）： 线程和线程标识 | Lin Niu</title>
+  <title>信号 | Lin Niu</title>
   
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/pthread1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/signal/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
@@ -285,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程（1）： 线程和线程标识</h1>
+          <h1 class="post-title" itemprop="name headline">信号</h1>
         
 
         <div class="post-meta">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-18T19:28:27+08:00">
-                2018-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T00:00:00+08:00">
+                2018-05-20
               </time>
             
 
@@ -320,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apue-pthread/" itemprop="url" rel="index">
-                    <span itemprop="name">apue, pthread</span>
+                  <a href="/categories/apue-signal/" itemprop="url" rel="index">
+                    <span itemprop="name">apue, signal</span>
                   </a>
                 </span>
 
@@ -338,9 +338,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/18/pthread1/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/20/signal/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/18/pthread1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/20/signal/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,10 +368,40 @@
       
 
       
-        <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。<br>每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。<br>一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。   </p>
-<h2 id="2-线程标识"><a href="#2-线程标识" class="headerlink" title="2. 线程标识"></a>2. 线程标识</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(1) 比较两个线程id</div><div class="line">int pthread_equal(pthread_t tid1, pthread_t tid2);</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(2) 获得自身线程id</div><div class="line">pthread_t pthread_self(void);</div></pre></td></tr></table></figure>
-
+        <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>信号是一种软中断，它提供了一种异步事件处理的方法<br>信号出现时，内核的处理方式有三种：<br>1.忽略信号<br>2.捕捉信号<br>3.执行系统默认动作     </p>
+<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><blockquote>
+<p>void (*signal (int signo, void ( *func )(int))) (int);<br>参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</p>
+</blockquote>
+<p>signal函数实例:     </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int main(void) &#123;</div><div class="line">	if (signal(SIGUSR1, sig_usr) == SIG_ERR)</div><div class="line">		err_sys(&quot;can&apos;t catch SIGUSR1&quot;);</div><div class="line">	if (signal(SIGUSR2, sig_usr) == SIG_ERR)</div><div class="line">		err_sys(&quot;can&apos;t catch SIGUSR1&quot;);</div><div class="line">	for ( ; ; )</div><div class="line">		pause();     </div><div class="line">&#125;</div><div class="line">static void sig_usr(int signo) &#123;</div><div class="line">	if (signo == SIGUSR1)</div><div class="line">		printf(&quot;received SIGUSR1\n&quot;);</div><div class="line"></div><div class="line">	else if (signo == SIGUSR2)</div><div class="line">		printf(&quot;received SIGUSR2\n&quot;);</div><div class="line">	else</div><div class="line">		err_dump(&quot;received signal %d\n&quot;, signo);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# kill -SIGUSR1 13082<br>received SIGUSR1<br>[root@centos apue]# kill -SIGUSR2 13082<br>received SIGUSR2<br>[root@centos apue]# kill  13082<br>SIGTERM默认的处理动作为终止！   </p>
+</blockquote>
+<h2 id="3-函数sigaction"><a href="#3-函数sigaction" class="headerlink" title="3.函数sigaction"></a>3.函数sigaction</h2><blockquote>
+<p>int sigaction(int signo, const struct sigaction *restrict act, struct sigaction *restrict oact);<br>参数说明：signo为信号编号， 若act非空，修改其动作。若oact非空，借助oact指针返回该信号的上一个动作   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct sigaction &#123;</div><div class="line">	void (*sa_handler)(int);</div><div class="line">	sigset_t sa_mask;</div><div class="line">	int sa_flags;</div><div class="line">	void (*sa_restorer)(void);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>sa_mask是一个信号集，在调用信号捕捉函数之前，要将该信号集加到进程的信号屏蔽字中，仅当从捕捉函数返回之时再恢复进程之前的信号屏蔽字</p>
+</blockquote>
+<p>用sigaction实现signal函数      </p>
+<pre><code>Sigfunc* signal(int signo, Sigfunc* func) {    
+    struct sigaction act, oact;    
+    act.sa_handler = func;    
+    sigemptyset(&amp;act.sa_mask); //初始化，清除指定信号集中的所有信号,也就是响应所有信号
+    act.sa_flags = 0;
+    if (signo == SIGALARM) {
+#ifdef SA_INTERRUPT
+        act.sa_flags |= SA_INTERRUPT; //由此信号中断的系统调用不自动重启
+#endif      
+    } else {
+        act.sa_flags |= SA_RESTART;   //由此信号中断的系统调用自动重启
+    }
+    if (sigaction(signo, &amp;act, &amp;ocat) &lt; 0)
+        return SIG_ERR;
+    return oact.sa_handler;
+}
+</code></pre>
       
     </div>
     
@@ -395,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/13/twofork/" rel="next" title="避免zombie process">
-                <i class="fa fa-chevron-left"></i> 避免zombie process
+              <a href="/2018/04/18/pthread1/" rel="next" title="线程（1）： 线程和线程标识">
+                <i class="fa fa-chevron-left"></i> 线程（1）： 线程和线程标识
               </a>
             
           </div>
@@ -405,8 +435,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/20/signal/" rel="prev" title="信号">
-                信号 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/25/signal1/" rel="prev" title="Linux 0.12内核中signal的实现">
+                Linux 0.12内核中signal的实现 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -579,7 +609,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线程标识"><span class="nav-number">2.</span> <span class="nav-text">2. 线程标识</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-函数signal"><span class="nav-number">2.</span> <span class="nav-text">2. 函数signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-函数sigaction"><span class="nav-number">3.</span> <span class="nav-text">3.函数sigaction</span></a></li></ol></div>
             
 
           </div>
@@ -734,9 +764,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/04/18/pthread1/';
-          this.page.identifier = '2018/04/18/pthread1/';
-          this.page.title = '线程（1）： 线程和线程标识';
+          this.page.url = 'http://yoursite.com/2018/05/20/signal/';
+          this.page.identifier = '2018/05/20/signal/';
+          this.page.title = '信号';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
