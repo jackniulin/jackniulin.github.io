@@ -373,8 +373,7 @@
             <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>信号是一种软中断，它提供了一种异步事件处理的方法<br>信号出现时，内核的处理方式有三种：<br>1.忽略信号<br>2.捕捉信号<br>3.执行系统默认动作   </p>
 <p>Linux 0.12内核中对信号的声明(不存在编号为0的信号)：   </p>
 <blockquote>
-<p>#define SIGHUP         1</p>
-<p>#define SIGINT         2</p>
+<p>/#define SIGHUP         1<br>/#define SIGINT         2</p>
 <p>#define SIGQUIT         3</p>
 <p>#define SIGILL         4</p>
 <p>#define SIGTRAP         5</p>

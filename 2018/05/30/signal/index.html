@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     #define SIGHUP         1 #define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
+<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     /#define SIGHUP         1/#define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信号">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/signal/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     #define SIGHUP         1 #define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
+<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     /#define SIGHUP         1/#define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T03:45:07.000Z">
+<meta property="og:updated_time" content="2018-05-30T03:46:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信号">
-<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     #define SIGHUP         1 #define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
+<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     /#define SIGHUP         1/#define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
 
 
 
@@ -371,8 +371,7 @@
         <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>信号是一种软中断，它提供了一种异步事件处理的方法<br>信号出现时，内核的处理方式有三种：<br>1.忽略信号<br>2.捕捉信号<br>3.执行系统默认动作   </p>
 <p>Linux 0.12内核中对信号的声明(不存在编号为0的信号)：   </p>
 <blockquote>
-<p>#define SIGHUP         1</p>
-<p>#define SIGINT         2</p>
+<p>/#define SIGHUP         1<br>/#define SIGINT         2</p>
 <p>#define SIGQUIT         3</p>
 <p>#define SIGILL         4</p>
 <p>#define SIGTRAP         5</p>
