@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="kernel,linux,jbd," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -96,18 +96,17 @@
 
 
 
-<meta name="description" content="基本概念1.buffer_head内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个磁盘块。">
-<meta name="keywords" content="kernel,linux,jbd">
+<meta name="description" content="1. 概念一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。    2. 线程标识12(1) 比较两个线程idint">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jbd源代码分析">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/jbd/index.html">
+<meta property="og:title" content="线程（1）： 线程和线程标识">
+<meta property="og:url" content="http://yoursite.com/2018/04/18/pthread1/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="基本概念1.buffer_head内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个磁盘块。">
+<meta property="og:description" content="1. 概念一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。    2. 线程标识12(1) 比较两个线程idint">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T10:28:47.000Z">
+<meta property="og:updated_time" content="2018-04-18T12:04:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jbd源代码分析">
-<meta name="twitter:description" content="基本概念1.buffer_head内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个磁盘块。">
+<meta name="twitter:title" content="线程（1）： 线程和线程标识">
+<meta name="twitter:description" content="1. 概念一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。    2. 线程标识12(1) 比较两个线程idint">
 
 
 
@@ -136,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/22/jbd/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/18/pthread1/"/>
 
 
 
 
 
-  <title>jbd源代码分析 | Lin Niu</title>
+  <title>线程（1）： 线程和线程标识 | Lin Niu</title>
   
 
 
@@ -269,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/jbd/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/18/pthread1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
@@ -286,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jbd源代码分析</h1>
+          <h1 class="post-title" itemprop="name headline">线程（1）： 线程和线程标识</h1>
         
 
         <div class="post-meta">
@@ -298,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T20:42:35+08:00">
-                2018-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-18T19:28:27+08:00">
+                2018-04-18
               </time>
             
 
@@ -321,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/apue-pthread/" itemprop="url" rel="index">
+                    <span itemprop="name">apue, pthread</span>
                   </a>
                 </span>
 
@@ -339,9 +338,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/22/jbd/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/18/pthread1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/22/jbd/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/18/pthread1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -369,7 +368,9 @@
       
 
       
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>1.buffer_head<br>内核用于管理磁盘缓冲区的数据结构，一个buffer_head对应一个文件系统块，即对应一个磁盘块。</p>
+        <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>一个进程中的所有线程都可以访问该进程的组成部件，包括文件描述符和内存。<br>每个线程包含有表示执行环境所需要的信息，其中包括标识信息线程ID， 一组寄存器值，栈，调度优先级和策略、信号屏蔽字， error变量以及线程私有数据。<br>一个进程的所有信息对该进程的所有线程都是共享的， 包括可执行程序代码、程序的全局内存和堆内存，栈以及文件描述符。   </p>
+<h2 id="2-线程标识"><a href="#2-线程标识" class="headerlink" title="2. 线程标识"></a>2. 线程标识</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(1) 比较两个线程id</div><div class="line">int pthread_equal(pthread_t tid1, pthread_t tid2);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(2) 获得自身线程id</div><div class="line">pthread_t pthread_self(void);</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -385,16 +386,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/kernel/" rel="tag"># kernel</a>
-          
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
-            <a href="/tags/jbd/" rel="tag"># jbd</a>
-          
-        </div>
-      
 
       
       
@@ -404,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/19/committransaction/" rel="next" title="分布式事务的提交">
-                <i class="fa fa-chevron-left"></i> 分布式事务的提交
+              <a href="/2018/04/13/twofork/" rel="next" title="避免zombie process">
+                <i class="fa fa-chevron-left"></i> 避免zombie process
               </a>
             
           </div>
@@ -414,8 +405,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/28/vfs/" rel="prev" title="VFS虚拟文件系统">
-                VFS虚拟文件系统 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/30/signal/" rel="prev" title="信号">
+                信号 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -588,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念"><span class="nav-number">1.</span> <span class="nav-text">1. 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线程标识"><span class="nav-number">2.</span> <span class="nav-text">2. 线程标识</span></a></li></ol></div>
             
 
           </div>
@@ -743,9 +734,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/22/jbd/';
-          this.page.identifier = '2018/03/22/jbd/';
-          this.page.title = 'jbd源代码分析';
+          this.page.url = 'http://yoursite.com/2018/04/18/pthread1/';
+          this.page.identifier = '2018/04/18/pthread1/';
+          this.page.title = '线程（1）： 线程和线程标识';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
