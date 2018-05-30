@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Lin Niu">
 <meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     #define SIGHUP         1 #define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T03:42:55.000Z">
+<meta property="og:updated_time" content="2018-05-30T03:45:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信号">
 <meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作    Linux 0.12内核中对信号的声明(不存在编号为0的信号)：     #define SIGHUP         1 #define SIGINT         2 #define SIGQUIT         3 #define SIGILL">
@@ -395,7 +395,7 @@
 <p>#define SIGTTIN        21</p>
 <p>#define SIGTTOU        22</p>
 </blockquote>
-<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#include &lt;signal.h&gt;</div><div class="line">void (*signal(int signo, void(*func)(int)))(int); </div><div class="line">```    </div><div class="line">&gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</div><div class="line"></div><div class="line">**signal函数实例：**</div></pre></td></tr></table></figure>
+<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#include &lt;signal.h&gt;</div><div class="line">void (*signal(int signo, void(*func)(int)))(int); </div><div class="line">```    </div><div class="line"></div><div class="line">&gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</div><div class="line"></div><div class="line">**signal函数实例：**</div></pre></td></tr></table></figure>
 <p>static void sig_usr(int);</p>
 <p>int main(void) {<br>    if (signal(SIGUSR1, sig_usr) == SIG_ERR)<br>        err_sys(“can’t catch SIGUSR1”);</p>
 <pre><code>if (signal(SIGUSR2, sig_usr) == SIG_ERR)
