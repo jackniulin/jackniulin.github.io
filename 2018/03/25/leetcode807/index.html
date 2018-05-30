@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1.题目描述 We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.     Now we have some workers. worker[i] is the ability of the ith worker, which means t">
+<meta name="description" content="1.题目描述 在二维数组grid中，grid[i][j]代表位于某处的建筑物的高度。 我们被允许增加任何数量（不同建筑物的数量可能不同）的建筑物的高度。 高度 0 也被认为是建筑物。 最后，从新数组的所有四个方向（即顶部，底部，左侧和右侧）观看的“天际线”必须与原始数组的天际线相同。 城市的天际线是从远处观看时，由所有建筑物形成的矩形的外部轮廓。 请看下面的例子。 建筑物高度可以增加的最大总和是多">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode 826. Most Profit Assigning Work">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/leetcode826/index.html">
+<meta property="og:title" content="Leetcode 807.保持城市天际线">
+<meta property="og:url" content="http://yoursite.com/2018/03/25/leetcode807/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1.题目描述 We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.     Now we have some workers. worker[i] is the ability of the ith worker, which means t">
+<meta property="og:description" content="1.题目描述 在二维数组grid中，grid[i][j]代表位于某处的建筑物的高度。 我们被允许增加任何数量（不同建筑物的数量可能不同）的建筑物的高度。 高度 0 也被认为是建筑物。 最后，从新数组的所有四个方向（即顶部，底部，左侧和右侧）观看的“天际线”必须与原始数组的天际线相同。 城市的天际线是从远处观看时，由所有建筑物形成的矩形的外部轮廓。 请看下面的例子。 建筑物高度可以增加的最大总和是多">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T14:19:52.000Z">
+<meta property="og:updated_time" content="2018-05-30T15:03:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 826. Most Profit Assigning Work">
-<meta name="twitter:description" content="1.题目描述 We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.     Now we have some workers. worker[i] is the ability of the ith worker, which means t">
+<meta name="twitter:title" content="Leetcode 807.保持城市天际线">
+<meta name="twitter:description" content="1.题目描述 在二维数组grid中，grid[i][j]代表位于某处的建筑物的高度。 我们被允许增加任何数量（不同建筑物的数量可能不同）的建筑物的高度。 高度 0 也被认为是建筑物。 最后，从新数组的所有四个方向（即顶部，底部，左侧和右侧）观看的“天际线”必须与原始数组的天际线相同。 城市的天际线是从远处观看时，由所有建筑物形成的矩形的外部轮廓。 请看下面的例子。 建筑物高度可以增加的最大总和是多">
 
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/22/leetcode826/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/25/leetcode807/"/>
 
 
 
 
 
-  <title>Leetcode 826. Most Profit Assigning Work | Lin Niu</title>
+  <title>Leetcode 807.保持城市天际线 | Lin Niu</title>
   
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/22/leetcode826/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/leetcode807/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
@@ -285,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Leetcode 826. Most Profit Assigning Work</h1>
+          <h1 class="post-title" itemprop="name headline">Leetcode 807.保持城市天际线</h1>
         
 
         <div class="post-meta">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T00:00:00+08:00">
-                2018-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T00:00:00+08:00">
+                2018-03-25
               </time>
             
 
@@ -338,9 +338,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/22/leetcode826/#comments" itemprop="discussionUrl">
+                <a href="/2018/03/25/leetcode807/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/22/leetcode826/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/03/25/leetcode807/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -369,16 +369,16 @@
 
       
         <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><blockquote>
-<p>We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith job.    </p>
-<p>Now we have some workers. worker[i] is the ability of the ith worker, which means that this worker can only complete a job with difficulty at most worker[i].    </p>
-<p>Every worker can be assigned at most one job, but one job can be completed multiple times.</p>
-<p>For example, if 3 people attempt the same job that pays $1, then the total profit will be $3.  If a worker cannot complete any job, his profit is $0.</p>
-<p>What is the most profit we can make?   </p>
-<p><strong>Example 1:</strong><br>Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], worker = [4,5,6,7]<br>Output: 100<br>Explanation: Workers are assigned jobs of difficulty [4,4,6,6] and they get profit of [20,20,30,30] seperately.</p>
-<p><strong>Notes:</strong><br>1 &lt;= difficulty.length = profit.length &lt;= 10000<br>1 &lt;= worker.length &lt;= 10000<br>difficulty[i], profit[i], worker[i]  are in range [1, 10^5]    </p>
+<p>在二维数组grid中，grid[i][j]代表位于某处的建筑物的高度。 我们被允许增加任何数量（不同建筑物的数量可能不同）的建筑物的高度。 高度 0 也被认为是建筑物。</p>
+<p>最后，从新数组的所有四个方向（即顶部，底部，左侧和右侧）观看的“天际线”必须与原始数组的天际线相同。 城市的天际线是从远处观看时，由所有建筑物形成的矩形的外部轮廓。 请看下面的例子。</p>
+<p>建筑物高度可以增加的最大总和是多少？<br>例子：<br>输入： grid = [[3,0,8,4],[2,4,5,7],[9,2,6,3],[0,3,1,0]]<br>输出： 35<br>解释：<br>The grid is:<br>[ [3, 0, 8, 4],<br> [2, 4, 5, 7],<br> [9, 2, 6, 3],<br> [0, 3, 1, 0] ]   </p>
+<p>从数组竖直方向（即顶部，底部）看“天际线”是：[9, 4, 8, 7]<br>从水平水平方向（即左侧，右侧）看“天际线”是：[8, 7, 9, 3]   </p>
+<p>在不影响天际线的情况下对建筑物进行增高后，新数组如下：</p>
+<p>gridNew = [ [8, 4, 8, 7],<br>           [7, 4, 7, 7],<br>           [9, 4, 8, 7],<br>           [3, 3, 3, 3] ]   </p>
 </blockquote>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>题目的目的是得到worker数组能拿到的最大的profit. 用一个map来保存一对difficulty, profit之间的对应关系。需要注意的是题目给的difficulty数组和profit数组都是没有排序的，这就可能存在两个difficulty相同但是对应的profit大小不同的情况，我们保留profit大的项，舍弃profit小的项。<br>如果difficulty大但是它的profit却比比它difficulty小的profit小，这是问题的关键，需要把difficulty大的对应的profit变为它前面diffculty小profit却大的值。调整完profit之后，把difficulty从大到小排序。<br>从前往后遍历worker数组，找到每个worker实际能做的difficulty,并将该difficulty保存在对应的worker项中。最后计算总的收益。</p>
-<h2 id="3-源代码"><a href="#3-源代码" class="headerlink" title="3.源代码"></a>3.源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int maxProfitAssignment(vector&lt;int&gt;&amp; difficulty, vector&lt;int&gt;&amp; profit, vector&lt;int&gt;&amp; worker) &#123;</div><div class="line">        int res = 0;</div><div class="line">        unordered_map&lt;int, int&gt; map; </div><div class="line">        for (int i = 0; i &lt; difficulty.size(); i++) &#123;</div><div class="line">            if (map.count(difficulty[i]) &gt; 0) &#123;</div><div class="line">                if (map[difficulty[i]] &lt; profit[i])</div><div class="line">                    map[difficulty[i]] = profit[i];</div><div class="line">                else</div><div class="line">                    continue;</div><div class="line">            &#125; else &#123;</div><div class="line">                map[difficulty[i]] = profit[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        sort(difficulty.begin(), difficulty.end());</div><div class="line">      </div><div class="line">        for (int i = 1; i &lt; difficulty.size(); i++)</div><div class="line">            if (map[difficulty[i]] &lt; map[difficulty[i - 1]])</div><div class="line">                map[difficulty[i]] =  map[difficulty[i - 1]];</div><div class="line">        </div><div class="line">        for (int i = 0; i &lt; worker.size(); i++) &#123;</div><div class="line">            for (int j = 0; j &lt; difficulty.size(); ) &#123;</div><div class="line">                while (j &lt; difficulty.size() &amp;&amp; worker[i] &gt; difficulty[j]) </div><div class="line">                    j++;</div><div class="line">                if (j == difficulty.size()) &#123;</div><div class="line">                    worker[i] = difficulty[j - 1];</div><div class="line">                    break;</div><div class="line">                &#125;               </div><div class="line">                if (worker[i] == difficulty[j]) </div><div class="line">                    break;</div><div class="line"></div><div class="line">                if (worker[i] &lt; difficulty[j]) &#123;</div><div class="line">                    if (j == 0)  </div><div class="line">                        worker[i] = 0;</div><div class="line">                    else </div><div class="line">                        worker[i] = difficulty[j - 1];</div><div class="line">                    break;</div><div class="line">                &#125;        </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; worker.size(); i++) &#123;</div><div class="line">            if (worker[i] == 0)</div><div class="line">                continue;</div><div class="line">            res += map[worker[i]];</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>首先明确题意，侧面就是从每行看，顶部就是从每列看。用两个数组side和top分别记录每行与每列的最大值。最后就是遍历二维数组，将原数组中对应项的值更换为其所处的行与列之间的最小值，并记录这个值与原来值的差，并叠加到结果res中。</p>
+<h2 id="3-源代码"><a href="#3-源代码" class="headerlink" title="3.源代码"></a>3.源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int maxIncreaseKeepingSkyline(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</div><div class="line">        int rows = grid.size();</div><div class="line">        int cols = grid[0].size();</div><div class="line">        vector&lt;int&gt; top;</div><div class="line">        vector&lt;int&gt; side;</div><div class="line">        for (int i = 0; i &lt; rows; i++) &#123;</div><div class="line">            int m = INT_MIN;</div><div class="line">            for (int j = 0; j &lt; cols; j++) &#123;</div><div class="line">                if (grid[i][j] &gt; m)</div><div class="line">                    m = grid[i][j];</div><div class="line">            &#125;</div><div class="line">            side.push_back(m);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        for (int i = 0; i &lt; cols; i++) &#123;</div><div class="line">            int m = INT_MIN;</div><div class="line">            for (int j = 0; j &lt; rows; j++) &#123;</div><div class="line">                if (grid[j][i] &gt; m)</div><div class="line">                    m = grid[j][i];</div><div class="line">            &#125;</div><div class="line">            top.push_back(m);</div><div class="line">        &#125;</div><div class="line">        int res = 0;</div><div class="line">        for (int i = 0; i &lt; rows; i++) &#123;</div><div class="line">            for (int j = 0; j &lt; cols; j++) &#123;</div><div class="line">                int tmp = min(top[j], side[i]);</div><div class="line">                res += tmp - grid[i][j];</div><div class="line">                grid[i][j] = tmp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -402,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/19/committransaction/" rel="next" title="分布式事务的提交">
-                <i class="fa fa-chevron-left"></i> 分布式事务的提交
+              <a href="/2018/03/22/leetcode826/" rel="next" title="Leetcode 826. Most Profit Assigning Work">
+                <i class="fa fa-chevron-left"></i> Leetcode 826. Most Profit Assigning Work
               </a>
             
           </div>
@@ -412,8 +412,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/25/leetcode807/" rel="prev" title="Leetcode 807.保持城市天际线">
-                Leetcode 807.保持城市天际线 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/08/fmemopen/" rel="prev" title="冲洗内存流和追加写null字节策略">
+                冲洗内存流和追加写null字节策略 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -741,9 +741,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/22/leetcode826/';
-          this.page.identifier = '2018/03/22/leetcode826/';
-          this.page.title = 'Leetcode 826. Most Profit Assigning Work';
+          this.page.url = 'http://yoursite.com/2018/03/25/leetcode807/';
+          this.page.identifier = '2018/03/25/leetcode807/';
+          this.page.title = 'Leetcode 807.保持城市天际线';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
