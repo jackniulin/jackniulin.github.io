@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal void ( signal(int signo, void (\func)(int)))(int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址  si">
+<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal void (*signal (int signo, void ( *func )(int))) (int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信号">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/signal/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal void ( signal(int signo, void (\func)(int)))(int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址  si">
+<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal void (*signal (int signo, void ( *func )(int))) (int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T04:28:00.000Z">
+<meta property="og:updated_time" content="2018-05-30T04:32:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信号">
-<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal void ( signal(int signo, void (\func)(int)))(int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址  si">
+<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal void (*signal (int signo, void ( *func )(int))) (int);参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址">
 
 
 
@@ -370,7 +370,7 @@
       
         <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>信号是一种软中断，它提供了一种异步事件处理的方法<br>信号出现时，内核的处理方式有三种：<br>1.忽略信号<br>2.捕捉信号<br>3.执行系统默认动作            </p>
 <h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><blockquote>
-<p>void (<em> signal(int signo, void (\</em>func)(int)))(int);<br>参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</p>
+<p>void (*signal (int signo, void ( *func )(int))) (int);<br>参数说明：signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</p>
 </blockquote>
 <p>signal函数实例:     </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int main(void) &#123;</div><div class="line">	if (signal(SIGUSR1, sig_usr) == SIG_ERR)</div><div class="line">		err_sys(&quot;can&apos;t catch SIGUSR1&quot;);</div><div class="line">	if (signal(SIGUSR2, sig_usr) == SIG_ERR)</div><div class="line">		err_sys(&quot;can&apos;t catch SIGUSR1&quot;);</div><div class="line">	for ( ; ; )</div><div class="line">		pause();     </div><div class="line">&#125;</div><div class="line">static void sig_usr(int signo) &#123;</div><div class="line">	if (signo == SIGUSR1)</div><div class="line">		printf(&quot;received SIGUSR1\n&quot;);</div><div class="line"></div><div class="line">	else if (signo == SIGUSR2)</div><div class="line">		printf(&quot;received SIGUSR2\n&quot;);</div><div class="line">	else</div><div class="line">		err_dump(&quot;received signal %d\n&quot;, signo);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
