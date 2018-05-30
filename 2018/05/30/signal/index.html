@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal1234567void (*signal(int signo, void(*func)(int)))(int); ```    &amp;gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理">
+<meta name="description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal12345void (*signal(int signo, void(*func)(int)))(int);```    &amp;gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信号">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/signal/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal1234567void (*signal(int signo, void(*func)(int)))(int); ```    &amp;gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理">
+<meta property="og:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal12345void (*signal(int signo, void(*func)(int)))(int);```    &amp;gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-30T03:55:16.000Z">
+<meta property="og:updated_time" content="2018-05-30T03:58:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信号">
-<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal1234567void (*signal(int signo, void(*func)(int)))(int); ```    &amp;gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理">
+<meta name="twitter:description" content="1. 概念信号是一种软中断，它提供了一种异步事件处理的方法信号出现时，内核的处理方式有三种：1.忽略信号2.捕捉信号3.执行系统默认动作             2. 函数signal12345void (*signal(int signo, void(*func)(int)))(int);```    &amp;gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号">
 
 
 
@@ -369,7 +369,7 @@
 
       
         <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>信号是一种软中断，它提供了一种异步事件处理的方法<br>信号出现时，内核的处理方式有三种：<br>1.忽略信号<br>2.捕捉信号<br>3.执行系统默认动作            </p>
-<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">void (*signal(int signo, void(*func)(int)))(int); </div><div class="line"></div><div class="line">```    </div><div class="line"></div><div class="line">&gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</div><div class="line"></div><div class="line">**signal函数实例：**</div></pre></td></tr></table></figure>
+<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2. 函数signal"></a>2. 函数signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">void (*signal(int signo, void(*func)(int)))(int);</div><div class="line">```    </div><div class="line">&gt;signo是信号名， func为常量SIG_IGN, SIG_DFL, 或者处理该信号的函数地址</div><div class="line"></div><div class="line">**signal函数实例：**</div></pre></td></tr></table></figure>
 <p>static void sig_usr(int);</p>
 <p>int main(void) {<br>    if (signal(SIGUSR1, sig_usr) == SIG_ERR)<br>        err_sys(“can’t catch SIGUSR1”);</p>
 <pre><code>if (signal(SIGUSR2, sig_usr) == SIG_ERR)
@@ -382,14 +382,15 @@ for ( ; ; )
 else
     err_dump(&quot;received signal %d\n&quot;, signo);
 </code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&gt;运行结果：    </div><div class="line">&gt;[root@centos apue]# kill -SIGUSR1 13082    </div><div class="line">received SIGUSR1    </div><div class="line">[root@centos apue]# kill -SIGUSR2 13082    </div><div class="line">received SIGUSR2    </div><div class="line">[root@centos apue]# kill  13082       </div><div class="line">SIGTERM默认的处理动作为终止！   </div><div class="line">         </div><div class="line"></div><div class="line">## 3.函数sigaction</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&gt;运行结果：    </div><div class="line">&gt;[root@centos apue]# kill -SIGUSR1 13082    </div><div class="line">received SIGUSR1    </div><div class="line">[root@centos apue]# kill -SIGUSR2 13082    </div><div class="line">received SIGUSR2    </div><div class="line">[root@centos apue]# kill  13082       </div><div class="line">SIGTERM默认的处理动作为终止！   </div><div class="line">         </div><div class="line">## 3.函数sigaction</div></pre></td></tr></table></figure>
 <p>int sigaction(int signo, const struct sigaction<em> restrict act, struct sigaction </em> restrict oact);</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;signo为信号编号， 若act非空，修改其动作。若oact非空，借助oact指针返回该信号的上一个动作</div></pre></td></tr></table></figure>
-<p>struct sigaction {<br>    void (<em>sa_handler)(int);<br>    sigset_t sa_mask;<br>    int sa_flags;<br>    void (</em>sa_restorer)(void);<br>};<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&gt;sa_mask是一个信号集，在调用信号捕捉函数之前，要将该信号集加到进程的信号屏蔽字中，仅当从捕捉函数返回之时再恢复进程之前的信号屏蔽字</div><div class="line">    </div><div class="line"></div><div class="line">用sigaction实现signal函数</div></pre></td></tr></table></figure></p>
-<p>Sigfunc<em> signal(int signo, Sigfunc</em> func) {<br>    struct sigaction act, oact;<br>    act.sa_handler = func;<br>    sigemptyset(&amp;act.sa_mask); //初始化，清除指定信号集中的所有信号<br>    act.sa_flags = 0;<br>    if (signo == SIGALARM) {</p>
-<p>#ifdef SA_INTERRUPT<br>            act.sa_flags |= SA_INTERRUPT; //由此信号中断的系统调用不自动重启</p>
-<p>#endif<br>    } else {<br>        act.sa_flags |= SA_RESTART;   //由此信号中断的系统调用自动重启<br>    }<br>    if (sigaction(signo, &amp;act, &amp;ocat) &lt; 0)<br>        return SIG_ERR;<br>    return oact.sa_handler;<br>}</p>
-<p>```</p>
+<p>struct sigaction {<br>    void (<em>sa_handler)(int);<br>    sigset_t sa_mask;<br>    int sa_flags;<br>    void (</em>sa_restorer)(void);<br>};</p>
+<pre><code>&gt;sa_mask是一个信号集，在调用信号捕捉函数之前，要将该信号集加到进程的信号屏蔽字中，仅当从捕捉函数返回之时再恢复进程之前的信号屏蔽字
+
+
+用sigaction实现signal函数
+</code></pre><p>Sigfunc<em> signal(int signo, Sigfunc</em> func) {<br>    struct sigaction act, oact;<br>    act.sa_handler = func;<br>    sigemptyset(&amp;act.sa_mask); //初始化，清除指定信号集中的所有信号<br>    act.sa_flags = 0;<br>    if (signo == SIGALARM) {<br>#ifdef SA_INTERRUPT<br>            act.sa_flags |= SA_INTERRUPT; //由此信号中断的系统调用不自动重启<br>#endif<br>    } else {<br>        act.sa_flags |= SA_RESTART;   //由此信号中断的系统调用自动重启<br>    }<br>    if (sigaction(signo, &amp;act, &amp;ocat) &lt; 0)<br>        return SIG_ERR;<br>    return oact.sa_handler;<br>}<br>```    </p>
 
       
     </div>
