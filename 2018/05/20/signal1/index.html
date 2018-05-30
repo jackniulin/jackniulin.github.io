@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="apue,IO," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -96,18 +96,19 @@
 
 
 
-<meta name="description" content="1.内存流FILE fmemopen(void restrict buf, size_t size, const char *restrict type);返回值： 成功返回流指针，错误返回NULL 2.示例1234567891011121314151617int main() &amp;#123;    FILE *fp;    char buf[BSZ];    memset(buf, &amp;apos;a">
-<meta name="keywords" content="apue,IO">
+<meta name="description" content="1.sys_signal12345678910111213141516int sys_signal(int signum, long handler, long restorer)&amp;#123;	struct sigaction tmp;	//SIGKILL和SIGSTOP不能被进程捕获	if (signum&amp;lt;1 || signum&amp;gt;32 || signum==SIGKILL || si">
 <meta property="og:type" content="article">
-<meta property="og:title" content="冲洗内存流和追加写null字节策略">
-<meta property="og:url" content="http://yoursite.com/2018/04/08/fmemopen/index.html">
+<meta property="og:title" content="Lin Niu">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/signal1/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1.内存流FILE fmemopen(void restrict buf, size_t size, const char *restrict type);返回值： 成功返回流指针，错误返回NULL 2.示例1234567891011121314151617int main() &amp;#123;    FILE *fp;    char buf[BSZ];    memset(buf, &amp;apos;a">
+<meta property="og:description" content="1.sys_signal12345678910111213141516int sys_signal(int signum, long handler, long restorer)&amp;#123;	struct sigaction tmp;	//SIGKILL和SIGSTOP不能被进程捕获	if (signum&amp;lt;1 || signum&amp;gt;32 || signum==SIGKILL || si">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-10T08:55:43.000Z">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png">
+<meta property="og:updated_time" content="2018-05-30T07:40:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冲洗内存流和追加写null字节策略">
-<meta name="twitter:description" content="1.内存流FILE fmemopen(void restrict buf, size_t size, const char *restrict type);返回值： 成功返回流指针，错误返回NULL 2.示例1234567891011121314151617int main() &amp;#123;    FILE *fp;    char buf[BSZ];    memset(buf, &amp;apos;a">
+<meta name="twitter:title" content="Lin Niu">
+<meta name="twitter:description" content="1.sys_signal12345678910111213141516int sys_signal(int signum, long handler, long restorer)&amp;#123;	struct sigaction tmp;	//SIGKILL和SIGSTOP不能被进程捕获	if (signum&amp;lt;1 || signum&amp;gt;32 || signum==SIGKILL || si">
+<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png">
 
 
 
@@ -136,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/08/fmemopen/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/20/signal1/"/>
 
 
 
 
 
-  <title>冲洗内存流和追加写null字节策略 | Lin Niu</title>
+  <title> | Lin Niu</title>
   
 
 
@@ -269,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/fmemopen/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/signal1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
@@ -286,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">冲洗内存流和追加写null字节策略</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -298,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T19:43:42+08:00">
-                2018-04-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T00:00:00+08:00">
+                2018-05-20
               </time>
             
 
@@ -321,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apue/" itemprop="url" rel="index">
-                    <span itemprop="name">apue</span>
+                  <a href="/categories/kernel-0-12/" itemprop="url" rel="index">
+                    <span itemprop="name">kernel 0.12</span>
                   </a>
                 </span>
 
@@ -339,9 +340,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/08/fmemopen/#comments" itemprop="discussionUrl">
+                <a href="/2018/05/20/signal1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/08/fmemopen/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/05/20/signal1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -369,29 +370,9 @@
       
 
       
-        <h2 id="1-内存流"><a href="#1-内存流" class="headerlink" title="1.内存流"></a>1.内存流</h2><p>FILE <em>fmemopen(void </em>restrict buf, size_t size, const char *restrict type);<br>返回值： 成功返回流指针，错误返回NULL</p>
-<h2 id="2-示例"><a href="#2-示例" class="headerlink" title="2.示例"></a>2.示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int main() &#123;</div><div class="line">    FILE *fp;</div><div class="line">    char buf[BSZ];</div><div class="line"></div><div class="line">    memset(buf, &apos;a&apos;, BSZ - 2);</div><div class="line">    buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">    buf[BSZ-1] = &apos;X&apos;;</div><div class="line">    </div><div class="line">	 //&quot;w+&quot;:把文件截断至0，为读和写打开</div><div class="line">    if ((fp = fmemopen(buf, BSZ, &quot;w+&quot;)) == NULL)</div><div class="line">        err_sys(&quot;fmemopen failed\n&quot;);</div><div class="line">    //1</div><div class="line">    //2</div><div class="line">    //3</div><div class="line">    //4    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>任何时候需要增加流缓冲中数据量以及调用fclose,fflush, fseek, fseeko以及fsetpos时会在当前位置写入一个null字节</strong><br>调用fmemopen函数在缓冲区开始放置null字符</p>
-<h3 id="1-offset-0"><a href="#1-offset-0" class="headerlink" title="(1).offset=0"></a>(1).offset=0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">printf(&quot;initial buffer contents: %s\n&quot;, buf);</div><div class="line">fprintf(fp, &quot;hello, world&quot;);  //hello, world写入</div><div class="line">printf(&quot;before flush: %s\n&quot;, buf);</div><div class="line">fflush(fp);</div><div class="line">printf(&quot;after fflush: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
-<blockquote>
-<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12    </p>
-</blockquote>
-<p>hello, world共12个字符，此时offset=12, 偏移12处的内容为null(上面加深部分有提：调用fflush会在当前位置写入一个null字节)</p>
-<h3 id="2-offset-12"><a href="#2-offset-12" class="headerlink" title="(2).offset=12"></a>(2).offset=12</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;b&apos;, BSZ - 2);</div><div class="line">buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">buf[BSZ-1] = &apos;X&apos;;</div><div class="line">fprintf(fp, &quot;hello, world&quot;);</div><div class="line">fseek(fp, 0, SEEK_CUR);</div><div class="line">printf(&quot;after fseek SEEK_CUR: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
-<blockquote>
-<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24</p>
-</blockquote>
-<p>前12个被b填充，从offset=12开始填充hello, world字符串。同时，seek设置SEEK_CUR, offset=24.</p>
-<h3 id="3-offset-24"><a href="#3-offset-24" class="headerlink" title="(3).offset=24"></a>(3).offset=24</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;c&apos;, BSZ - 2);</div><div class="line">buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">buf[BSZ-1] = &apos;X&apos;;</div><div class="line">fprintf(fp, &quot;hello, world&quot;);</div><div class="line">fseek(fp, 0, SEEK_SET);</div><div class="line">printf(&quot;after fseek SEEK_SET: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
-<blockquote>
-<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24<br>after fseek SEEK_SET: cccccccccccccccccccccccchello, world<br>length of string in buf = 36  </p>
-</blockquote>
-<p>seek设置SEEK_SET之后，偏移值设置为缓冲区开始位置，即offset=0  </p>
-<h3 id="4-offset-0"><a href="#4-offset-0" class="headerlink" title="(4).offset=0"></a>(4).offset=0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;d&apos;, BSZ - 2);</div><div class="line">   buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">   buf[BSZ-1] = &apos;X&apos;;</div><div class="line">   fprintf(fp, &quot;hello, world&quot;);</div><div class="line">   </div><div class="line">   fclose(fp);</div><div class="line">   printf(&quot;after close: %s\n&quot;, buf);</div><div class="line">   printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
-<blockquote>
-<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24<br>after fseek SEEK_SET: cccccccccccccccccccccccchello, world<br>length of string in buf = 36<br>after close: hello, worlddddddddddddddddddddddddddddddddddd<br>length of string in buf = 46    </p>
-</blockquote>
-<p>这里调用了fclose，前面提到本应追加null字节，但是这里没有，为什么呢？？？    </p>
+        <h2 id="1-sys-signal"><a href="#1-sys-signal" class="headerlink" title="1.sys_signal"></a>1.sys_signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">int sys_signal(int signum, long handler, long restorer)</div><div class="line">&#123;</div><div class="line">	struct sigaction tmp;</div><div class="line">	//SIGKILL和SIGSTOP不能被进程捕获</div><div class="line">	if (signum&lt;1 || signum&gt;32 || signum==SIGKILL || signum==SIGSTOP)</div><div class="line">		return -EINVAL;</div><div class="line">	tmp.sa_handler = (void (*)(int)) handler; //设置信号处理句柄</div><div class="line">	tmp.sa_mask = 0; </div><div class="line">	//该信号处理句柄只使用一次就恢复到默认值</div><div class="line">	tmp.sa_flags = SA_ONESHOT | SA_NOMASK; </div><div class="line">	tmp.sa_restorer = (void (*)(void)) restorer;</div><div class="line">	//取该信号原来的处理句柄，安装新句柄，返回旧句柄</div><div class="line">	handler = (long) current-&gt;sigaction[signum-1].sa_handler;</div><div class="line">	current-&gt;sigaction[signum-1] = tmp;</div><div class="line">	return handler;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-sys-sigaction"><a href="#2-sys-sigaction" class="headerlink" title="2.sys_sigaction"></a>2.sys_sigaction</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">int sys_sigaction(int signum, const struct sigaction * action,</div><div class="line">	struct sigaction * oldaction)</div><div class="line">&#123;</div><div class="line">	struct sigaction tmp;</div><div class="line"></div><div class="line">	if (signum&lt;1 || signum&gt;32 || signum==SIGKILL || signum==SIGSTOP)</div><div class="line">		return -EINVAL;</div><div class="line">	//取原sigaction</div><div class="line">	tmp = current-&gt;sigaction[signum-1];</div><div class="line">	//利用参数action设置新的sigaction</div><div class="line">	get_new((char *) action,</div><div class="line">		(char *) (signum-1+current-&gt;sigaction));</div><div class="line">	//若oldaction非空，利用前面保存的tmp填装oldaction</div><div class="line">	if (oldaction)</div><div class="line">		save_old((char *) &amp;tmp,(char *) oldaction);</div><div class="line">	//如果允许信号在自己的句柄中收到，设置sa_mak为0， 否则屏蔽这个信号</div><div class="line">	if (current-&gt;sigaction[signum-1].sa_flags &amp; SA_NOMASK)</div><div class="line">		current-&gt;sigaction[signum-1].sa_mask = 0;</div><div class="line">	else</div><div class="line">		current-&gt;sigaction[signum-1].sa_mask |= (1&lt;&lt;(signum-1));</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-do-signal函数修改用户栈的过程："><a href="#3-do-signal函数修改用户栈的过程：" class="headerlink" title="3.do_signal函数修改用户栈的过程："></a>3.do_signal函数修改用户栈的过程：</h2><p><img src="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png" alt="">    </p>
 
       
     </div>
@@ -407,14 +388,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/apue/" rel="tag"># apue</a>
-          
-            <a href="/tags/IO/" rel="tag"># IO</a>
-          
-        </div>
-      
 
       
       
@@ -424,8 +397,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/28/vfs/" rel="next" title="VFS虚拟文件系统">
-                <i class="fa fa-chevron-left"></i> VFS虚拟文件系统
+              <a href="/2018/04/18/pthread1/" rel="next" title="线程（1）： 线程和线程标识">
+                <i class="fa fa-chevron-left"></i> 线程（1）： 线程和线程标识
               </a>
             
           </div>
@@ -434,8 +407,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/13/twofork/" rel="prev" title="避免zombie process">
-                避免zombie process <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/30/signal/" rel="prev" title="信号">
+                信号 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -608,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-内存流"><span class="nav-number">1.</span> <span class="nav-text">1.内存流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-示例"><span class="nav-number">2.</span> <span class="nav-text">2.示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-offset-0"><span class="nav-number">2.1.</span> <span class="nav-text">(1).offset=0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-offset-12"><span class="nav-number">2.2.</span> <span class="nav-text">(2).offset=12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-offset-24"><span class="nav-number">2.3.</span> <span class="nav-text">(3).offset=24</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-offset-0"><span class="nav-number">2.4.</span> <span class="nav-text">(4).offset=0</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sys-signal"><span class="nav-number">1.</span> <span class="nav-text">1.sys_signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-sys-sigaction"><span class="nav-number">2.</span> <span class="nav-text">2.sys_sigaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-do-signal函数修改用户栈的过程："><span class="nav-number">3.</span> <span class="nav-text">3.do_signal函数修改用户栈的过程：</span></a></li></ol></div>
             
 
           </div>
@@ -763,9 +736,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/04/08/fmemopen/';
-          this.page.identifier = '2018/04/08/fmemopen/';
-          this.page.title = '冲洗内存流和追加写null字节策略';
+          this.page.url = 'http://yoursite.com/2018/05/20/signal1/';
+          this.page.identifier = '2018/05/20/signal1/';
+          this.page.title = '';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
