@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="leetcode," />
 
 
 
@@ -96,19 +96,18 @@
 
 
 
-<meta name="description" content="1.sys_signal12345678910111213141516int sys_signal(int signum, long handler, long restorer)&amp;#123;	struct sigaction tmp;	//SIGKILL和SIGSTOP不能被进程捕获	if (signum&amp;lt;1 || signum&amp;gt;32 || signum==SIGKILL || si">
+<meta name="description" content="1. 题目描述 给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。    示例 :    输入: [1,2,1,3,2,5]输出: [3,5]注意： 结果输出的顺序并不重要，对于上面的例子， [5, 3] 也是正确答案。你的算法应该具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？  2.思路第一种容易想到的是使用map，这个比较容">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux 0.12内核中signal的实现">
-<meta property="og:url" content="http://yoursite.com/2018/05/25/signal1/index.html">
+<meta property="og:title" content="Lin Niu">
+<meta property="og:url" content="http://yoursite.com/2018/03/15/leetcode260/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1.sys_signal12345678910111213141516int sys_signal(int signum, long handler, long restorer)&amp;#123;	struct sigaction tmp;	//SIGKILL和SIGSTOP不能被进程捕获	if (signum&amp;lt;1 || signum&amp;gt;32 || signum==SIGKILL || si">
+<meta property="og:description" content="1. 题目描述 给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。    示例 :    输入: [1,2,1,3,2,5]输出: [3,5]注意： 结果输出的顺序并不重要，对于上面的例子， [5, 3] 也是正确答案。你的算法应该具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？  2.思路第一种容易想到的是使用map，这个比较容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png">
-<meta property="og:updated_time" content="2018-05-30T08:08:26.000Z">
+<meta property="og:updated_time" content="2018-05-31T06:50:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux 0.12内核中signal的实现">
-<meta name="twitter:description" content="1.sys_signal12345678910111213141516int sys_signal(int signum, long handler, long restorer)&amp;#123;	struct sigaction tmp;	//SIGKILL和SIGSTOP不能被进程捕获	if (signum&amp;lt;1 || signum&amp;gt;32 || signum==SIGKILL || si">
-<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png">
+<meta name="twitter:title" content="Lin Niu">
+<meta name="twitter:description" content="1. 题目描述 给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。    示例 :    输入: [1,2,1,3,2,5]输出: [3,5]注意： 结果输出的顺序并不重要，对于上面的例子， [5, 3] 也是正确答案。你的算法应该具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？  2.思路第一种容易想到的是使用map，这个比较容">
 
 
 
@@ -137,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/25/signal1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/15/leetcode260/"/>
 
 
 
 
 
-  <title>Linux 0.12内核中signal的实现 | Lin Niu</title>
+  <title> | Lin Niu</title>
   
 
 
@@ -270,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/signal1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/15/leetcode260/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="燕云十八飞骑，奔腾如虎风烟举">
@@ -287,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux 0.12内核中signal的实现</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -299,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T00:00:00+08:00">
-                2018-05-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T00:00:00+08:00">
+                2018-03-15
               </time>
             
 
@@ -322,8 +321,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kernel-0-12/" itemprop="url" rel="index">
-                    <span itemprop="name">kernel 0.12</span>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
                   </a>
                 </span>
 
@@ -340,9 +339,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/25/signal1/#comments" itemprop="discussionUrl">
+                <a href="/2018/03/15/leetcode260/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/25/signal1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/03/15/leetcode260/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -370,93 +369,14 @@
       
 
       
-        <h2 id="1-sys-signal"><a href="#1-sys-signal" class="headerlink" title="1.sys_signal"></a>1.sys_signal</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">int sys_signal(int signum, long handler, long restorer)</div><div class="line">&#123;</div><div class="line">	struct sigaction tmp;</div><div class="line">	//SIGKILL和SIGSTOP不能被进程捕获</div><div class="line">	if (signum&lt;1 || signum&gt;32 || signum==SIGKILL || signum==SIGSTOP)</div><div class="line">		return -EINVAL;</div><div class="line">	tmp.sa_handler = (void (*)(int)) handler; //设置信号处理句柄</div><div class="line">	tmp.sa_mask = 0; </div><div class="line">	//该信号处理句柄只使用一次就恢复到默认值</div><div class="line">	tmp.sa_flags = SA_ONESHOT | SA_NOMASK; </div><div class="line">	tmp.sa_restorer = (void (*)(void)) restorer;</div><div class="line">	//取该信号原来的处理句柄，安装新句柄，返回旧句柄</div><div class="line">	handler = (long) current-&gt;sigaction[signum-1].sa_handler;</div><div class="line">	current-&gt;sigaction[signum-1] = tmp;</div><div class="line">	return handler;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-sys-sigaction"><a href="#2-sys-sigaction" class="headerlink" title="2.sys_sigaction"></a>2.sys_sigaction</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">int sys_sigaction(int signum, const struct sigaction * action,</div><div class="line">	struct sigaction * oldaction)</div><div class="line">&#123;</div><div class="line">	struct sigaction tmp;</div><div class="line"></div><div class="line">	if (signum&lt;1 || signum&gt;32 || signum==SIGKILL || signum==SIGSTOP)</div><div class="line">		return -EINVAL;</div><div class="line">	//取原sigaction</div><div class="line">	tmp = current-&gt;sigaction[signum-1];</div><div class="line">	//利用参数action设置新的sigaction</div><div class="line">	get_new((char *) action,</div><div class="line">		(char *) (signum-1+current-&gt;sigaction));</div><div class="line">	//若oldaction非空，利用前面保存的tmp填装oldaction</div><div class="line">	if (oldaction)</div><div class="line">		save_old((char *) &amp;tmp,(char *) oldaction);</div><div class="line">	//如果允许信号在自己的句柄中收到，设置sa_mak为0， 否则屏蔽这个信号</div><div class="line">	if (current-&gt;sigaction[signum-1].sa_flags &amp; SA_NOMASK)</div><div class="line">		current-&gt;sigaction[signum-1].sa_mask = 0;</div><div class="line">	else</div><div class="line">		current-&gt;sigaction[signum-1].sa_mask |= (1&lt;&lt;(signum-1));</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="3-do-signal函数修改用户栈的过程："><a href="#3-do-signal函数修改用户栈的过程：" class="headerlink" title="3.do_signal函数修改用户栈的过程："></a>3.do_signal函数修改用户栈的过程：</h2><p><img src="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png" alt="">  </p>
-<pre><code>int do_signal(long signr,long eax,long ebx, long ecx, long edx, long orig_eax,
-    long fs, long es, long ds,
-    long eip, long cs, long eflags,
-    unsigned long * esp, long ss)
-{
-    unsigned long sa_handler;
-    long old_eip=eip;  //eip为原本要执行的代码
-    struct sigaction * sa = current-&gt;sigaction + signr - 1;
-    int longs;
-
-    unsigned long * tmp_esp;
-
-#ifdef notdef
-    printk(&quot;pid: %d, signr: %x, eax=%d, oeax = %d, int=%d\n&quot;,
-        current-&gt;pid, signr, eax, orig_eax,
-        sa-&gt;sa_flags &amp; SA_INTERRUPT);
-#endif
-    if ((orig_eax != -1) &amp;&amp;
-        ((eax == -ERESTARTSYS) || (eax == -ERESTARTNOINTR))) {
-        if ((eax == -ERESTARTSYS) &amp;&amp; ((sa-&gt;sa_flags &amp; SA_INTERRUPT) ||
-            signr &lt; SIGCONT || signr &gt; SIGTTOU))
-            *(&amp;eax) = -EINTR;
-        else {
-            *(&amp;eax) = orig_eax;
-            *(&amp;eip) = old_eip -= 2;
-        }
-    }
-    sa_handler = (unsigned long) sa-&gt;sa_handler;
-    if (sa_handler==1)  //默认忽略句柄SIG_IGN,不作任何处理
-        return(1);   /* Ignore, see if there are more signals... */
-    if (!sa_handler) {
-        switch (signr) {
-        case SIGCONT:
-        case SIGCHLD:
-            return(1);  /* Ignore, ... */
-
-        case SIGSTOP:
-        case SIGTSTP:
-        case SIGTTIN:
-        case SIGTTOU:
-            current-&gt;state = TASK_STOPPED;
-            current-&gt;exit_code = signr;
-            if (!(current-&gt;p_pptr-&gt;sigaction[SIGCHLD-1].sa_flags &amp;
-                    SA_NOCLDSTOP))
-                current-&gt;p_pptr-&gt;signal |= (1&lt;&lt;(SIGCHLD-1));
-            return(1);  /* Reschedule another event */
-
-        case SIGQUIT:
-        case SIGILL:
-        case SIGTRAP:
-        case SIGIOT:
-        case SIGFPE:
-        case SIGSEGV:
-            if (core_dump(signr))
-                do_exit(signr|0x80);
-            /* fall through */
-        default:
-            do_exit(signr);  //可作为wait()或wait_pid()函数的状态信息，取得进程的退出状态码或子进程终止的原因
-        }
-    }
-    /*
-     * OK, we&apos;re invoking a handler
-     */
-    if (sa-&gt;sa_flags &amp; SA_ONESHOT)
-        sa-&gt;sa_handler = NULL; //该句柄只执行一次
-    *(&amp;eip) = sa_handler; //eip指向信号处理程序
-    longs = (sa-&gt;sa_flags &amp; SA_NOMASK)?7:8;
-    *(&amp;esp) -= longs;
-    verify_area(esp,longs*4);
-    tmp_esp=esp;
-    put_fs_long((long) sa-&gt;sa_restorer,tmp_esp++);
-    put_fs_long(signr,tmp_esp++);
-    if (!(sa-&gt;sa_flags &amp; SA_NOMASK))
-        put_fs_long(current-&gt;blocked,tmp_esp++);
-    put_fs_long(eax,tmp_esp++);
-    put_fs_long(ecx,tmp_esp++);
-    put_fs_long(edx,tmp_esp++);
-    put_fs_long(eflags,tmp_esp++);
-    put_fs_long(old_eip,tmp_esp++);
-    current-&gt;blocked |= sa-&gt;sa_mask;
-    return(0);        /* Continue, execute handler */
-}
-</code></pre><p>do_signal()执行完后，system_call.s将会把内核态堆栈上eip以下的所有值弹出。<br>在执行iret之后，内核态堆栈上的cs:eip，eflags, ss:esp被弹出，恢复到用户态中执行<br>而eip已经指向了信号处理程序，因此会立即执行用户自定义信号处理程序。<br>在该信号处理程序执行完后，通过ret指令，cpu把控制权交给sa_restorer所指向的恢复程序，sa_restorer会清理用户态堆栈，弹出信息，一直弹到old_eip，最后通过sa_restorer的ret弹出old_eip并跳转到其指向的代码中运行。</p>
-
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><blockquote>
+<p>给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。   </p>
+<p>示例 :   </p>
+<p>输入: [1,2,1,3,2,5]<br>输出: [3,5]<br>注意：</p>
+<p>结果输出的顺序并不重要，对于上面的例子， [5, 3] 也是正确答案。<br>你的算法应该具有线性时间复杂度。你能否仅使用常数空间复杂度来实现？</p>
+</blockquote>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>第一种容易想到的是使用map，这个比较容易实现。<br>第二种，利用位运算。题目中说有两个元素出现一次，其余元素出现两次。使用异或运算，出现两次的元素经过异或运算就不存在了，这时候最后的结果就是那两个只出现过一次的元素它俩异或的结果。<br>之后，我们获取异或运算结果转化成二进制时的第一个’1’的索引号，对于题目给出的示例，异或结果为6（110），第一个’1’的索引就是1<br>将nums数组中的元素按照第index位的结果分成两组。如示例，划分结果： （1, 1, 5）, (2, 2, 3)</p>
+<h2 id="3-源代码"><a href="#3-源代码" class="headerlink" title="3.源代码"></a>3.源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;int&gt; singleNumber(vector&lt;int&gt;&amp; nums) &#123;</div><div class="line">        vector&lt;int&gt; res(2, 0);</div><div class="line">        int num = 0, index = 0;</div><div class="line">        for (int n : nums)</div><div class="line">            num ^= n;</div><div class="line"> </div><div class="line">        while ((num &amp; 1) == 0) &#123;</div><div class="line">            num &gt;&gt;= 1;</div><div class="line">            index++;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        for (int n : nums) &#123;</div><div class="line">            if ((n &gt;&gt; index) &amp; 1)</div><div class="line">                res[0] ^= n;</div><div class="line">            else</div><div class="line">                res[1] ^= n;</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -471,6 +391,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+        </div>
+      
 
       
       
@@ -480,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/20/signal/" rel="next" title="信号">
-                <i class="fa fa-chevron-left"></i> 信号
+              <a href="/2018/03/13/leetcode137/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -489,6 +415,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/15/2pcAnd3pc/" rel="prev" title="两阶段和三阶段提交协议的理解">
+                两阶段和三阶段提交协议的理解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -660,7 +590,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-sys-signal"><span class="nav-number">1.</span> <span class="nav-text">1.sys_signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-sys-sigaction"><span class="nav-number">2.</span> <span class="nav-text">2.sys_sigaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-do-signal函数修改用户栈的过程："><span class="nav-number">3.</span> <span class="nav-text">3.do_signal函数修改用户栈的过程：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目描述"><span class="nav-number">1.</span> <span class="nav-text">1. 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-思路"><span class="nav-number">2.</span> <span class="nav-text">2.思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-源代码"><span class="nav-number">3.</span> <span class="nav-text">3.源代码</span></a></li></ol></div>
             
 
           </div>
@@ -815,9 +745,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/05/25/signal1/';
-          this.page.identifier = '2018/05/25/signal1/';
-          this.page.title = 'Linux 0.12内核中signal的实现';
+          this.page.url = 'http://yoursite.com/2018/03/15/leetcode260/';
+          this.page.identifier = '2018/03/15/leetcode260/';
+          this.page.title = '';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
