@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.">
+<meta name="description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.  2. lseekoff_t lseek(int fd, off_t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="unbuffered IO">
 <meta property="og:url" content="http://yoursite.com/2018/04/01/uio/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.">
+<meta property="og:description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.  2. lseekoff_t lseek(int fd, off_t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-01T03:23:44.000Z">
+<meta property="og:updated_time" content="2018-06-01T03:41:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="unbuffered IO">
-<meta name="twitter:description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.">
+<meta name="twitter:description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.  2. lseekoff_t lseek(int fd, off_t">
 
 
 
@@ -368,7 +368,11 @@
       
 
       
-        <h2 id="1-unbuffered-IO"><a href="#1-unbuffered-IO" class="headerlink" title="1. unbuffered IO"></a>1. unbuffered IO</h2><p>与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。<br>对于内核而言，所有打开的文件都通过文件描述符引用。<br>按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。<br>分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO. </p>
+        <h3 id="1-unbuffered-IO"><a href="#1-unbuffered-IO" class="headerlink" title="1. unbuffered IO"></a>1. unbuffered IO</h3><p>与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。<br>对于内核而言，所有打开的文件都通过文件描述符引用。<br>按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。<br>分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO. </p>
+<h3 id="2-lseek"><a href="#2-lseek" class="headerlink" title="2. lseek"></a>2. lseek</h3><p><code>off_t lseek(int fd, off_t offset, int whence)</code><br>返回值： 成功返回新的文件偏移量，失败返回-1    </p>
+<blockquote>
+<p>参数offset的解释依赖于参数whence的值:<br>SEEK_SET， 将文件偏移量设置为距文件开始出offset个字节<br>SEEK_CUR, 将文件偏移量设置为当前值加offset, offset可正可负<br>SEEK_END, 将文件便宜来那个设置为文件长度加offset, offset同样可正可负   </p>
+</blockquote>
 
       
     </div>
@@ -577,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-unbuffered-IO"><span class="nav-number">1.</span> <span class="nav-text">1. unbuffered IO</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-unbuffered-IO"><span class="nav-number">1.</span> <span class="nav-text">1. unbuffered IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-lseek"><span class="nav-number">2.</span> <span class="nav-text">2. lseek</span></a></li></ol></div>
             
 
           </div>
