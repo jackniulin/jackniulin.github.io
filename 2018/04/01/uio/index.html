@@ -103,10 +103,13 @@
 <meta property="og:site_name" content="Lin Niu">
 <meta property="og:description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.  2. lseekoff_t lseek(int fd, off_t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-01T04:07:55.000Z">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/2.png">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png">
+<meta property="og:updated_time" content="2018-06-01T07:17:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="unbuffered IO">
 <meta name="twitter:description" content="1. unbuffered IO与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。对于内核而言，所有打开的文件都通过文件描述符引用。按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO.  2. lseekoff_t lseek(int fd, off_t">
+<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/2.png">
 
 
 
@@ -370,17 +373,19 @@
       
         <h3 id="1-unbuffered-IO"><a href="#1-unbuffered-IO" class="headerlink" title="1. unbuffered IO"></a>1. unbuffered IO</h3><p>与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。<br>对于内核而言，所有打开的文件都通过文件描述符引用。<br>按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。<br>分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO. </p>
 <h3 id="2-lseek"><a href="#2-lseek" class="headerlink" title="2. lseek"></a>2. lseek</h3><p><code>off_t lseek(int fd, off_t offset, int whence)</code><br>返回值： 成功返回新的文件偏移量，失败返回-1    </p>
+<p>tips: 此操作只修改文件表项中当前文件偏移量，不作任何IO处理</p>
+<p>参数offset的解释依赖于参数whence的值:   </p>
 <blockquote>
-<p>参数offset的解释依赖于参数whence的值:<br>SEEK_SET， 将文件偏移量设置为距文件开始出offset个字节<br>SEEK_CUR, 将文件偏移量设置为当前值加offset, offset可正可负<br>SEEK_END, 将文件便宜来那个设置为文件长度加offset, offset同样可正可负   </p>
+<p>SEEK_SET， 将文件偏移量设置为距文件开始出offset个字节<br>SEEK_CUR, 将文件偏移量设置为当前值加offset, offset可正可负<br>SEEK_END, 将文件便宜来那个设置为文件长度加offset, offset同样可正可负   </p>
 </blockquote>
 <p>lseek用于创建空洞文件的实例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">char buf1[] = &quot;abcdefghij&quot;;</div><div class="line">char buf2[] = &quot;ABCDEFGHIJ&quot;;</div><div class="line"></div><div class="line">int</div><div class="line">main(void)</div><div class="line">&#123;</div><div class="line">    int fd;</div><div class="line"></div><div class="line">    if ((fd = creat(&quot;/root/apue/file.hole&quot;, FILE_MODE)) &lt; 0)</div><div class="line">        err_sys(&quot; create error&quot;);</div><div class="line">    if (write(fd, buf1, 10) != 10)</div><div class="line">        err_sys(&quot;buf1 write error&quot;);</div><div class="line">	 //偏移量为10</div><div class="line">    if (lseek(fd, 16384, SEEK_SET) == -1)</div><div class="line">        err_sys(&quot;lseek error&quot;);</div><div class="line">    //偏移量为16384</div><div class="line">    if (write(fd, buf2, 10) != 10)</div><div class="line">        err_sys(&quot;buf2 write error&quot;);</div><div class="line">	 //偏移量为16394</div><div class="line">    exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
-<p>运行结果：<br>[root@centos apue]# ls -l file.hole<br>-rw-r–r–. 1 root root 16394 Apr  1 01:25 file.hole<br>[root@centos apue]# od -c file.hole<br>0000000   a   b   c   d   e   f   g   h   i   j  \0  \0  \0  \0  \0  \0<br>0000020  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0           </p>
-<ul>
-<li>0040000   A   B   C   D   E   F   G   H   I   J<br>0040012</li>
-</ul>
+<p>运行结果：<br>[root@centos apue]# ls -l file.hole<br>-rw-r–r–. 1 root root 16394 Apr  1 01:25 file.hole   </p>
 </blockquote>
+<h3 id="3-内核表示打开文件的结构"><a href="#3-内核表示打开文件的结构" class="headerlink" title="3.内核表示打开文件的结构"></a>3.内核表示打开文件的结构</h3><p>1.每个进程在进程表中都有一个记录项， 记录项中包含一张打开文件描述符表，这里在Linux0.12中应该是对应的: struct file * filp[NR_OPEN];<br>2.内核为所有打开文件维持一张打开文件表<br>3.每个打开文件都有一个v节点结构，这里注意，linux中没有v节点，而是使用通用的i节点  </p>
+<p>unix打开文件的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/2.png" alt=""></p>
+<p>下图是0.12内核中进程打开文件使用的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png" alt="">  </p>
 
       
     </div>
@@ -589,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-unbuffered-IO"><span class="nav-number">1.</span> <span class="nav-text">1. unbuffered IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-lseek"><span class="nav-number">2.</span> <span class="nav-text">2. lseek</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-unbuffered-IO"><span class="nav-number">1.</span> <span class="nav-text">1. unbuffered IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-lseek"><span class="nav-number">2.</span> <span class="nav-text">2. lseek</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-内核表示打开文件的结构"><span class="nav-number">3.</span> <span class="nav-text">3.内核表示打开文件的结构</span></a></li></ol></div>
             
 
           </div>
