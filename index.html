@@ -1295,7 +1295,7 @@
 </blockquote>
 <h3 id="3-内核表示打开文件的结构"><a href="#3-内核表示打开文件的结构" class="headerlink" title="3.内核表示打开文件的结构"></a>3.内核表示打开文件的结构</h3><p>1.每个进程在进程表中都有一个记录项， 记录项中包含一张打开文件描述符表，这里在Linux0.12中应该是对应的: struct file * filp[NR_OPEN];<br>2.内核为所有打开文件维持一张打开文件表<br>3.每个打开文件都有一个v节点结构，这里注意，linux中没有v节点，而是使用通用的i节点  </p>
 <p>unix打开文件的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/2.png" alt=""></p>
-<p>下图是0.12内核中进程打开文件使用的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/43D00015-AC14-45DD-B1C7-1B6067B59DF1.png" alt="">  </p>
+<p>下图是0.12内核中进程打开文件使用的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180601150803.png" alt="">   </p>
 
           
         
