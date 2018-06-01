@@ -271,6 +271,27 @@
   </entry>
   
   <entry>
+    <title>unbuffered IO</title>
+    <link href="http://yoursite.com/2018/04/01/uio/"/>
+    <id>http://yoursite.com/2018/04/01/uio/</id>
+    <published>2018-03-31T16:00:00.000Z</published>
+    <updated>2018-06-01T03:23:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-unbuffered-IO"><a href="#1-unbuffered-IO" class="headerlink" title="1. unbuffered IO"></a>1. unbuffered IO</h2><p>与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。<br>对于内核而言，所有打开的文件都通过文件描述符引用。<br>按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。<br>分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO. </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-unbuffered-IO&quot;&gt;&lt;a href=&quot;#1-unbuffered-IO&quot; class=&quot;headerlink&quot; title=&quot;1. unbuffered IO&quot;&gt;&lt;/a&gt;1. unbuffered IO&lt;/h2&gt;&lt;p&gt;与标准IO对应，不带缓冲指的是r
+    
+    </summary>
+    
+      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Leetcode 807.保持城市天际线</title>
     <link href="http://yoursite.com/2018/03/25/leetcode807/"/>
     <id>http://yoursite.com/2018/03/25/leetcode807/</id>
