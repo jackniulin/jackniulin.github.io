@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1.题目描述 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 示例:     输入: nums = [1,2,3]输出:[  [3],  [1],  [2],  [1,2,3],  [1,3],  [2,3],  [1,2],  []]  2.思路空集是一个子集。每次拿出现有集合中的一个子集，插入当前元素  开始：[]i = 0， [1">
+<meta name="description" content="1.题目描述123456789101112131415161718给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。说明：解集不能包含重复的子集。示例:    输入: nums = [1,2,3]输出:   [     [3],     [1],     [2],     [1,2,3],     [1,3],     [2,3],     [1,2],     []">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode 78. 子集">
 <meta property="og:url" content="http://yoursite.com/2018/03/17/leetcode78/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1.题目描述 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 示例:     输入: nums = [1,2,3]输出:[  [3],  [1],  [2],  [1,2,3],  [1,3],  [2,3],  [1,2],  []]  2.思路空集是一个子集。每次拿出现有集合中的一个子集，插入当前元素  开始：[]i = 0， [1">
+<meta property="og:description" content="1.题目描述123456789101112131415161718给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。说明：解集不能包含重复的子集。示例:    输入: nums = [1,2,3]输出:   [     [3],     [1],     [2],     [1,2,3],     [1,3],     [2,3],     [1,2],     []">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-04T04:09:18.000Z">
+<meta property="og:updated_time" content="2018-06-04T08:14:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode 78. 子集">
-<meta name="twitter:description" content="1.题目描述 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 示例:     输入: nums = [1,2,3]输出:[  [3],  [1],  [2],  [1,2,3],  [1,3],  [2,3],  [1,2],  []]  2.思路空集是一个子集。每次拿出现有集合中的一个子集，插入当前元素  开始：[]i = 0， [1">
+<meta name="twitter:description" content="1.题目描述123456789101112131415161718给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。说明：解集不能包含重复的子集。示例:    输入: nums = [1,2,3]输出:   [     [3],     [1],     [2],     [1,2,3],     [1,3],     [2,3],     [1,2],     []">
 
 
 
@@ -271,7 +271,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/17/leetcode78/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="好好活着。">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar1.jpg">
     </span>
@@ -368,12 +368,7 @@
       
 
       
-        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><blockquote>
-<p>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</p>
-<p>说明：解集不能包含重复的子集。</p>
-<p>示例:    </p>
-<p>输入: nums = [1,2,3]<br>输出:<br>[<br>  [3],<br>  [1],<br>  [2],<br>  [1,2,3],<br>  [1,3],<br>  [2,3],<br>  [1,2],<br>  []<br>]</p>
-</blockquote>
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。</div><div class="line"></div><div class="line">说明：解集不能包含重复的子集。</div><div class="line"></div><div class="line">示例:    </div><div class="line"></div><div class="line">输入: nums = [1,2,3]</div><div class="line">输出:   </div><div class="line">[   </div><div class="line">  [3],   </div><div class="line">  [1],   </div><div class="line">  [2],   </div><div class="line">  [1,2,3],   </div><div class="line">  [1,3],   </div><div class="line">  [2,3],   </div><div class="line">  [1,2],   </div><div class="line">  []   </div><div class="line">]</div></pre></td></tr></table></figure>
 <h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>空集是一个子集。每次拿出现有集合中的一个子集，插入当前元素</p>
 <blockquote>
 <p>开始：[]<br>i = 0， [1], res = [[],[1]]<br>i = 1, [2], [1, 2], res = [[], [1], [2], [1, 2]]<br>i = 2, [3], [1, 3], [2, 3], [1, 2, 3], res = [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]   </p>
@@ -504,8 +499,8 @@ public:
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar1.jpg"
-               alt="John Doe" />
-          <p class="site-author-name" itemprop="name">John Doe</p>
+               alt="好好活着。" />
+          <p class="site-author-name" itemprop="name">好好活着。</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
           
@@ -631,7 +626,7 @@ public:
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">好好活着。</span>
 </div>
 
 
