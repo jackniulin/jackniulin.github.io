@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-04T12:24:37.000Z</updated>
+  <updated>2018-06-04T14:22:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于dup和dup2的理解</title>
+    <link href="http://yoursite.com/2018/06/04/dup/"/>
+    <id>http://yoursite.com/2018/06/04/dup/</id>
+    <published>2018-06-04T13:49:23.000Z</published>
+    <updated>2018-06-04T14:22:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-dup和dup2"><a href="#1-dup和dup2" class="headerlink" title="1.dup和dup2"></a>1.dup和dup2</h2><p>都用于复制现有的文件描述符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int dup(int fd);     </div><div class="line">int dup2(int fd, int fd2);</div><div class="line">```   </div><div class="line">区别：   </div><div class="line">dup返回的是当前可用文件描述符中的最小值。    </div><div class="line">dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被清除，这样进程在调用exec时fd2时是打开状态。   </div><div class="line">返回的新文件描述符与fd共享同一个文件表项。   </div><div class="line"></div><div class="line">## 2.源代码分析</div></pre></td></tr></table></figure></p>
+<p>static int dupfd(unsigned int fd, unsigned int arg)<br>{<br>    //文件句柄的值不能超过一个程序最多打开文件数，保证当前句柄的文件结构非空<br>    if (fd &gt;= NR_OPEN || !current-&gt;filp[fd])<br>        return -EBADF;<br>    if (arg &gt;= NR_OPEN)<br>        return -EINVAL;<br>    while (arg &lt; NR_OPEN)<br>        if (current-&gt;filp[arg])<br>            arg++;<br>        else<br>            break;<br>    if (arg &gt;= NR_OPEN)<br>        return -EMFILE;<br>    //清除执行时关闭标志，即在运行exec时不会关闭dup创建的句柄。<br>    current-&gt;close_on_exec &amp;= ~(1&lt;<arg); 指向同一个文件结构，文件引用计数+1="" (current-="">filp[arg] = current-&gt;filp[fd])-&gt;f_count++;<br>    return arg;<br>}<br>int sys_dup2(unsigned int oldfd, unsigned int newfd)<br>{<br>    //关闭文件系统调用<br>    sys_close(newfd);<br>    return dupfd(oldfd,newfd);<br>}<br>sysclose:<br>int sys_close(unsigned int fd)<br>{<br>    struct file * filp;</arg);></p>
+<pre><code>if (fd &gt;= NR_OPEN)
+    return -EINVAL;
+current-&gt;close_on_exec &amp;= ~(1&lt;&lt;fd);
+if (!(filp = current-&gt;filp[fd]))
+    return -EINVAL;
+current-&gt;filp[fd] = NULL;
+//关闭之前引用计数为1说明内核出错
+if (filp-&gt;f_count == 0)
+    panic(&quot;Close: file count is 0&quot;);
+//-1之后还不为0说明有其他进程正在使用该文件
+if (--filp-&gt;f_count)
+    return (0);
+//否则释放文件的i节点结构
+iput(filp-&gt;f_inode);
+return (0);
+</code></pre><p>}<br>```</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-dup和dup2&quot;&gt;&lt;a href=&quot;#1-dup和dup2&quot; class=&quot;headerlink&quot; title=&quot;1.dup和dup2&quot;&gt;&lt;/a&gt;1.dup和dup2&lt;/h2&gt;&lt;p&gt;都用于复制现有的文件描述符。&lt;br&gt;&lt;figure class=&quot;highl
+    
+    </summary>
+    
+      <category term="kernel" scheme="http://yoursite.com/categories/kernel/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Leetcode 131. 分割回文串</title>
@@ -693,64 +731,6 @@ public:
     
       <category term="剑指offer" scheme="http://yoursite.com/categories/%E5%89%91%E6%8C%87offer/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>mdtest元数据测试</title>
-    <link href="http://yoursite.com/2017/09/11/mdtest/"/>
-    <id>http://yoursite.com/2017/09/11/mdtest/</id>
-    <published>2017-09-11T13:32:34.000Z</published>
-    <updated>2018-05-30T07:45:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><p>环境为SUSE11<br><code>CLT1:~ # zypper in openmpi openmpi-devel</code><br>报错：    </p>
-<blockquote>
-<p>Error building the cache:<br>[|] Repository type can’t be determined.<br>Warning: Disabling repository ‘nonoss’ because of the above error.<br>Error building the cache:<br>[|] Repository type can’t be determined.<br>Warning: Disabling repository ‘update’ because of the above error.<br>Failed to mount dvd:///?devices=/dev/sr1 on /var/adm/mount/AP_0x00000001: Mounting media failed (mount: no medium found on /dev/sr1)    </p>
-</blockquote>
-<p>解决：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest.png" alt=""></p>
-<p><code>CLT1:~ # zypper mr --disable 1</code>    </p>
-<blockquote>
-<p>Repository ‘SUSE-Linux-Enterprise-Server-11-SP1_11.1.1-1.152’ has been successfully disabled. </p>
-</blockquote>
-<p><code>CLT1:~ # zypper mr --disable 2</code>    </p>
-<blockquote>
-<p>Repository ‘SUSE-Linux-Enterprise-Software-Development-Kit-11-SP1_11.1.1-1.57’ has been successfully disabled.</p>
-</blockquote>
-<p><code>CLT1:~ # zypper mr --disable 4</code>    </p>
-<blockquote>
-<p>Repository ‘nonoss’ has been successfully disabled.</p>
-</blockquote>
-<p><code>CLT1:~ # zypper mr --disable 5</code>    </p>
-<blockquote>
-<p>Repository ‘update’ has been successfully disabled.</p>
-</blockquote>
-<p><strong>下载</strong><br><a href="https://jaist.dl.sourceforge.net/project/mdtest/mdtest%20latest/mdtest-1.9.3/mdtest-1.9.3.tgz" target="_blank" rel="external">mdtest</a><br>需要修改Makefile文件：    </p>
-<blockquote>
-<p>mdtest: mdtest.c<br>    mpicc -Wall -D $(OS) $(LARGE_FILE) $(MDTEST_FLAGS) -g -o mdtest mdtest.c -lm</p>
-</blockquote>
-<p><code>make mdtest</code></p>
-<p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/mdtest1.png" alt=""></p>
-<h2 id="2-配置"><a href="#2-配置" class="headerlink" title="2.配置"></a>2.配置</h2><p>把openmpi和mdtest环境变量导出来<br><code>CLT1:~ # cat ./.bashrc</code>    </p>
-<blockquote>
-<p>export PATH=$PATH:/usr/lib64/mpi/gcc/openmpi/bin<br>export PATH=$PATH:/root/mdtest</p>
-</blockquote>
-<p>mdtest -h 看下选项，README里有几个例子。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-安装&quot;&gt;&lt;a href=&quot;#1-安装&quot; class=&quot;headerlink&quot; title=&quot;1.安装&quot;&gt;&lt;/a&gt;1.安装&lt;/h2&gt;&lt;p&gt;环境为SUSE11&lt;br&gt;&lt;code&gt;CLT1:~ # zypper in openmpi openmpi-devel&lt;/c
-    
-    </summary>
-    
-      <category term="Test" scheme="http://yoursite.com/categories/Test/"/>
-    
-    
-      <category term="test" scheme="http://yoursite.com/tags/test/"/>
-    
-      <category term="metadata" scheme="http://yoursite.com/tags/metadata/"/>
-    
-      <category term="mdtest" scheme="http://yoursite.com/tags/mdtest/"/>
     
   </entry>
   

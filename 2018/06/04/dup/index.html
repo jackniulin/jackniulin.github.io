@@ -96,13 +96,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lin Niu">
-<meta property="og:url" content="http://yoursite.com/categories/leetcode/index.html">
+<meta name="description" content="1.dup和dup2都用于复制现有的文件描述符。123456789int dup(int fd);     int dup2(int fd, int fd2);```   区别：   dup返回的是当前可用文件描述符中的最小值。    dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于dup和dup2的理解">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/dup/index.html">
 <meta property="og:site_name" content="Lin Niu">
+<meta property="og:description" content="1.dup和dup2都用于复制现有的文件描述符。123456789int dup(int fd);     int dup2(int fd, int fd2);```   区别：   dup返回的是当前可用文件描述符中的最小值。    dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-04T14:22:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lin Niu">
+<meta name="twitter:title" content="关于dup和dup2的理解">
+<meta name="twitter:description" content="1.dup和dup2都用于复制现有的文件描述符。123456789int dup(int fd);     int dup2(int fd, int fd2);```   区别：   dup返回的是当前可用文件描述符中的最小值。    dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被">
 
 
 
@@ -131,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/leetcode/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/dup/"/>
 
 
 
 
 
-  <title>分类: leetcode | Lin Niu</title>
+  <title>关于dup和dup2的理解 | Lin Niu</title>
   
 
 
@@ -156,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -250,307 +254,191 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>leetcode<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/dup/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/30/leetcode131/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 131. 分割回文串</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">关于dup和dup2的理解</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-30T00:00:00+08:00"
-              content="2018-05-30" >
-          05-30
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T21:49:23+08:00">
+                2018-06-04
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kernel/" itemprop="url" rel="index">
+                    <span itemprop="name">kernel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/04/dup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/04/dup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/02/leetcode338/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 338. Bit位计数</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-02T00:00:00+08:00"
-              content="2018-05-02" >
-          05-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/23/leetcode814/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 814. 二叉树剪枝</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-23T00:00:00+08:00"
-              content="2018-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/25/leetcode807/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 807.保持城市天际线</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-25T00:00:00+08:00"
-              content="2018-03-25" >
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/22/leetcode826/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 826. Most Profit Assigning Work</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-22T00:00:00+08:00"
-              content="2018-03-22" >
-          03-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/21/leetcode94/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 94. 二叉树的中序遍历</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-21T00:00:00+08:00"
-              content="2018-03-21" >
-          03-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/17/leetcode78/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 78. 子集</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-17T00:00:00+08:00"
-              content="2018-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/15/leetcode260/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 260. 只出现一次的数字 III</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-15T00:00:00+08:00"
-              content="2018-03-15" >
-          03-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/13/leetcode137/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 137. 只出现一次的数字 II</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-13T00:00:00+08:00"
-              content="2018-03-13" >
-          03-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/11/leetcode136/" itemprop="url">
-              
-                <span itemprop="name">Leetcode 136. 只出现一次的数字</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-11T00:00:00+08:00"
-              content="2018-03-11" >
-          03-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="1-dup和dup2"><a href="#1-dup和dup2" class="headerlink" title="1.dup和dup2"></a>1.dup和dup2</h2><p>都用于复制现有的文件描述符。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">int dup(int fd);     </div><div class="line">int dup2(int fd, int fd2);</div><div class="line">```   </div><div class="line">区别：   </div><div class="line">dup返回的是当前可用文件描述符中的最小值。    </div><div class="line">dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被清除，这样进程在调用exec时fd2时是打开状态。   </div><div class="line">返回的新文件描述符与fd共享同一个文件表项。   </div><div class="line"></div><div class="line">## 2.源代码分析</div></pre></td></tr></table></figure></p>
+<p>static int dupfd(unsigned int fd, unsigned int arg)<br>{<br>    //文件句柄的值不能超过一个程序最多打开文件数，保证当前句柄的文件结构非空<br>    if (fd &gt;= NR_OPEN || !current-&gt;filp[fd])<br>        return -EBADF;<br>    if (arg &gt;= NR_OPEN)<br>        return -EINVAL;<br>    while (arg &lt; NR_OPEN)<br>        if (current-&gt;filp[arg])<br>            arg++;<br>        else<br>            break;<br>    if (arg &gt;= NR_OPEN)<br>        return -EMFILE;<br>    //清除执行时关闭标志，即在运行exec时不会关闭dup创建的句柄。<br>    current-&gt;close_on_exec &amp;= ~(1&lt;<arg); 指向同一个文件结构，文件引用计数+1="" (current-="">filp[arg] = current-&gt;filp[fd])-&gt;f_count++;<br>    return arg;<br>}<br>int sys_dup2(unsigned int oldfd, unsigned int newfd)<br>{<br>    //关闭文件系统调用<br>    sys_close(newfd);<br>    return dupfd(oldfd,newfd);<br>}<br>sysclose:<br>int sys_close(unsigned int fd)<br>{<br>    struct file * filp;</arg);></p>
+<pre><code>if (fd &gt;= NR_OPEN)
+    return -EINVAL;
+current-&gt;close_on_exec &amp;= ~(1&lt;&lt;fd);
+if (!(filp = current-&gt;filp[fd]))
+    return -EINVAL;
+current-&gt;filp[fd] = NULL;
+//关闭之前引用计数为1说明内核出错
+if (filp-&gt;f_count == 0)
+    panic(&quot;Close: file count is 0&quot;);
+//-1之后还不为0说明有其他进程正在使用该文件
+if (--filp-&gt;f_count)
+    return (0);
+//否则释放文件的i节点结构
+iput(filp-&gt;f_inode);
+return (0);
+</code></pre><p>}<br>```</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/leetcode131/" rel="next" title="Leetcode 131. 分割回文串">
+                <i class="fa fa-chevron-left"></i> Leetcode 131. 分割回文串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -558,6 +446,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -578,8 +477,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar1.jpg"
@@ -672,6 +580,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-dup和dup2"><span class="nav-number">1.</span> <span class="nav-text">1.dup和dup2</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -797,10 +721,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
@@ -818,6 +742,18 @@
       <script id="dsq-count-scr" src="https://jackniulin-com.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/06/04/dup/';
+          this.page.identifier = '2018/06/04/dup/';
+          this.page.title = '关于dup和dup2的理解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jackniulin-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
