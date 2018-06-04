@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/03/17/leetcode78/</loc>
-    <lastmod>2018-06-04T04:09:18.000Z</lastmod>
+    <loc>http://yoursite.com/2018/03/21/leetcode94/</loc>
+    <lastmod>2018-06-04T08:06:32.000Z</lastmod>
     <data>
         <display>
-        <title>Leetcode 78. 子集</title>
-        <pubTime>2018-03-16T16:00:00.000Z</pubTime>
+        <title>Leetcode 94. 二叉树的中序遍历</title>
+        <pubTime>2018-03-20T16:00:00.000Z</pubTime>
         
          
            
@@ -23,11 +23,31 @@
     
   <url>
     <loc>http://yoursite.com/2018/04/23/leetcode814/</loc>
-    <lastmod>2018-06-04T03:40:25.000Z</lastmod>
+    <lastmod>2018-06-04T08:02:58.000Z</lastmod>
     <data>
         <display>
         <title>Leetcode 814. 二叉树剪枝</title>
         <pubTime>2018-04-22T16:00:00.000Z</pubTime>
+        
+        <tag>后序遍历</tag>
+         
+         
+           
+             
+              <breadCrumb title="leetcode" url="http://yoursite.com/categories/leetcode/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/17/leetcode78/</loc>
+    <lastmod>2018-06-04T04:09:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Leetcode 78. 子集</title>
+        <pubTime>2018-03-16T16:00:00.000Z</pubTime>
         
          
            

@@ -206,7 +206,7 @@
     <link href="http://yoursite.com/2018/04/23/leetcode814/"/>
     <id>http://yoursite.com/2018/04/23/leetcode814/</id>
     <published>2018-04-22T16:00:00.000Z</published>
-    <updated>2018-06-04T03:40:25.000Z</updated>
+    <updated>2018-06-04T08:02:58.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><blockquote>
 <p>给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。</p>
@@ -230,6 +230,8 @@
     
       <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
     
+    
+      <category term="后序遍历" scheme="http://yoursite.com/tags/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/"/>
     
   </entry>
   
@@ -418,6 +420,28 @@
     
       &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1.题目描述&quot;&gt;&lt;/a&gt;1.题目描述&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;We have jobs: difficulty[i] is the diffic
+    
+    </summary>
+    
+      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode 94. 二叉树的中序遍历</title>
+    <link href="http://yoursite.com/2018/03/21/leetcode94/"/>
+    <id>http://yoursite.com/2018/03/21/leetcode94/</id>
+    <published>2018-03-20T16:00:00.000Z</published>
+    <updated>2018-06-04T08:06:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">给定一个二叉树，返回它的中序遍历。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: [1,null,2,3]</div><div class="line">   1</div><div class="line">    \</div><div class="line">     2</div><div class="line">    /</div><div class="line">   3</div><div class="line"></div><div class="line">输出: [1,3,2]</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>典型的中序遍历代码</p>
+<h2 id="3-源码"><a href="#3-源码" class="headerlink" title="3.源码"></a>3.源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123;</div><div class="line">        vector&lt;int&gt; res;</div><div class="line">        helper(root, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void helper(TreeNode* root, vector&lt;int&gt;&amp; res) &#123;</div><div class="line">        if (root == nullptr)</div><div class="line">            return;</div><div class="line">        if (root-&gt;left)</div><div class="line">            helper(root-&gt;left, res);</div><div class="line">        res.push_back(root-&gt;val);</div><div class="line">        if (root-&gt;right)</div><div class="line">            helper(root-&gt;right, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1.题目描述&quot;&gt;&lt;/a&gt;1.题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
     
     </summary>
     
@@ -771,31 +795,6 @@ public:
       <category term="filebench" scheme="http://yoursite.com/tags/filebench/"/>
     
       <category term="metadata" scheme="http://yoursite.com/tags/metadata/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CLion中的apue编译问题</title>
-    <link href="http://yoursite.com/2017/08/22/apue_h/"/>
-    <id>http://yoursite.com/2017/08/22/apue_h/</id>
-    <published>2017-08-22T03:59:53.000Z</published>
-    <updated>2018-04-08T10:26:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。<br>网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。&lt;br&gt;网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：&lt;br&gt;&lt;img src=
-    
-    </summary>
-    
-      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
-    
-    
-      <category term="apue" scheme="http://yoursite.com/tags/apue/"/>
-    
-      <category term="CLion" scheme="http://yoursite.com/tags/CLion/"/>
     
   </entry>
   
