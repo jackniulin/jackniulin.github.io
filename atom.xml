@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-30T08:08:26.000Z</updated>
+  <updated>2018-06-04T12:24:37.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Leetcode 131. 分割回文串</title>
+    <link href="http://yoursite.com/2018/05/30/leetcode131/"/>
+    <id>http://yoursite.com/2018/05/30/leetcode131/</id>
+    <published>2018-05-29T16:00:00.000Z</published>
+    <updated>2018-06-04T12:24:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。</div><div class="line"></div><div class="line">返回 s 所有可能的分割方案。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: &quot;aab&quot;</div><div class="line">输出:</div><div class="line">[</div><div class="line">  [&quot;aa&quot;,&quot;b&quot;],</div><div class="line">  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>dfs一个函数，另外需要一个判断子串是否是回文串。难点在于dfs函数for循环参数的设置。</p>
+<h2 id="3-源码"><a href="#3-源码" class="headerlink" title="3.源码"></a>3.源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;vector&lt;string&gt;&gt; partition(string s) &#123;</div><div class="line">        vector&lt;vector&lt;string&gt;&gt; res;</div><div class="line">        vector&lt;string&gt; out;</div><div class="line">        dfs(s, out, 0, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    void dfs(string s, vector&lt;string&gt;&amp; out, int start, vector&lt;vector&lt;string&gt;&gt;&amp; res) &#123;</div><div class="line">        if (start == s.size()) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        for (int i = start; i &lt; s.size(); i++) &#123;</div><div class="line">            if (judge(s, start, i)) &#123;</div><div class="line">                out.push_back(s.substr(start, i - start + 1));</div><div class="line">                dfs(s, out, i + 1, res);</div><div class="line">                out.pop_back();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    bool judge(string s, int start, int end) &#123;</div><div class="line">        while (start &lt; end) &#123;</div><div class="line">            if (s[start] != s[end])</div><div class="line">                return false;</div><div class="line">            start++;</div><div class="line">            end--;</div><div class="line">        &#125;</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1.题目描述&quot;&gt;&lt;/a&gt;1.题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
+    
+    </summary>
+    
+      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Linux 0.12内核中signal的实现</title>
@@ -728,65 +751,6 @@ public:
       <category term="metadata" scheme="http://yoursite.com/tags/metadata/"/>
     
       <category term="mdtest" scheme="http://yoursite.com/tags/mdtest/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>filebench测试</title>
-    <link href="http://yoursite.com/2017/08/29/filebench/"/>
-    <id>http://yoursite.com/2017/08/29/filebench/</id>
-    <published>2017-08-29T03:38:29.000Z</published>
-    <updated>2018-04-08T10:27:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-filebench下载"><a href="#1-filebench下载" class="headerlink" title="1.filebench下载"></a>1.filebench下载</h2><p>客户端安装：<a href="https://github.com/zfsonlinux/filebench" target="_blank" rel="external">filebench</a>       </p>
-<p>系统:SUSE Linux Enterprise Server 11 SP1  (x86_64)       </p>
-<blockquote>
-<p>Filebench is a file system and storage benchmark that can generate a large<br>variety of workloads. Unlike typical benchmarks it is extremely flexible and<br>allows to specify application’s I/O behavior using its extensive Workload Model<br>Language (WML).       </p>
-</blockquote>
-<h2 id="2-用户自定义工作负载"><a href="#2-用户自定义工作负载" class="headerlink" title="2.用户自定义工作负载"></a>2.用户自定义工作负载</h2><p>示例：<br>一个负载包含2个进程，其中每个进程又含有三个线程。    </p>
-<pre><code>01  define fileset name=&quot;testF&quot;,entries=10000,filesize=16k,prealloc,path=&quot;/tmp&quot;
-02
-03  define process name=&quot;readerP&quot;,instances=2 {
-04    thread name=&quot;readerT&quot;,instances=3 {
-05      flowop openfile name=&quot;openOP&quot;,filesetname=&quot;testF&quot;
-06      flowop readwholefile name=&quot;readOP&quot;,filesetname=&quot;testF&quot;
-07      flowop closefile name=&quot;closeOP&quot;
-08    }
-09  }
-10
-11  run 60
-</code></pre><p>第1行定义了一个fileset, 它位于/tmp，这个set有10,000个项，每个项大小为16k。</p>
-<blockquote>
-<p>Filebench is instructed to<br>precreate all files in the fileset before executing the actual workload.    </p>
-</blockquote>
-<p>3-4行定义了两个同样的进程，每个包含三个相同的线程。    </p>
-<blockquote>
-<p>Every thread in Filebench repeats flowops (operations)<br>defined in it in a loop.    </p>
-</blockquote>
-<p>5-7行描述了flowops:    </p>
-<blockquote>
-<p>open a file in “testF” fileset, read the file  completely, and close<br>it.    </p>
-</blockquote>
-<p>最后一行指定运行这个负载的时间为60s。    </p>
-<blockquote>
-<p>Assuming that the personality is saved in ‘readfiles.f’ file, one can then<br>generate corresponding workload by running ‘filebench -f readfiles.f’ command.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-filebench下载&quot;&gt;&lt;a href=&quot;#1-filebench下载&quot; class=&quot;headerlink&quot; title=&quot;1.filebench下载&quot;&gt;&lt;/a&gt;1.filebench下载&lt;/h2&gt;&lt;p&gt;客户端安装：&lt;a href=&quot;https://git
-    
-    </summary>
-    
-      <category term="Test" scheme="http://yoursite.com/categories/Test/"/>
-    
-    
-      <category term="test" scheme="http://yoursite.com/tags/test/"/>
-    
-      <category term="filebench" scheme="http://yoursite.com/tags/filebench/"/>
-    
-      <category term="metadata" scheme="http://yoursite.com/tags/metadata/"/>
     
   </entry>
   

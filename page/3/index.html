@@ -266,6 +266,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/filebench/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/29/filebench/" itemprop="url">filebench测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T11:38:29+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index">
+                    <span itemprop="name">Test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/29/filebench/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/29/filebench/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-filebench下载"><a href="#1-filebench下载" class="headerlink" title="1.filebench下载"></a>1.filebench下载</h2><p>客户端安装：<a href="https://github.com/zfsonlinux/filebench" target="_blank" rel="external">filebench</a>       </p>
+<p>系统:SUSE Linux Enterprise Server 11 SP1  (x86_64)       </p>
+<blockquote>
+<p>Filebench is a file system and storage benchmark that can generate a large<br>variety of workloads. Unlike typical benchmarks it is extremely flexible and<br>allows to specify application’s I/O behavior using its extensive Workload Model<br>Language (WML).       </p>
+</blockquote>
+<h2 id="2-用户自定义工作负载"><a href="#2-用户自定义工作负载" class="headerlink" title="2.用户自定义工作负载"></a>2.用户自定义工作负载</h2><p>示例：<br>一个负载包含2个进程，其中每个进程又含有三个线程。    </p>
+<pre><code>01  define fileset name=&quot;testF&quot;,entries=10000,filesize=16k,prealloc,path=&quot;/tmp&quot;
+02
+03  define process name=&quot;readerP&quot;,instances=2 {
+04    thread name=&quot;readerT&quot;,instances=3 {
+05      flowop openfile name=&quot;openOP&quot;,filesetname=&quot;testF&quot;
+06      flowop readwholefile name=&quot;readOP&quot;,filesetname=&quot;testF&quot;
+07      flowop closefile name=&quot;closeOP&quot;
+08    }
+09  }
+10
+11  run 60
+</code></pre><p>第1行定义了一个fileset, 它位于/tmp，这个set有10,000个项，每个项大小为16k。</p>
+<blockquote>
+<p>Filebench is instructed to<br>precreate all files in the fileset before executing the actual workload.    </p>
+</blockquote>
+<p>3-4行定义了两个同样的进程，每个包含三个相同的线程。    </p>
+<blockquote>
+<p>Every thread in Filebench repeats flowops (operations)<br>defined in it in a loop.    </p>
+</blockquote>
+<p>5-7行描述了flowops:    </p>
+<blockquote>
+<p>open a file in “testF” fileset, read the file  completely, and close<br>it.    </p>
+</blockquote>
+<p>最后一行指定运行这个负载的时间为60s。    </p>
+<blockquote>
+<p>Assuming that the personality is saved in ‘readfiles.f’ file, one can then<br>generate corresponding workload by running ‘filebench -f readfiles.f’ command.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue_h/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -773,7 +958,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
