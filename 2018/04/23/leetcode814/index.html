@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="apue,CLion," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -96,20 +96,17 @@
 
 
 
-<meta name="description" content="刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：">
-<meta name="keywords" content="apue,CLion">
+<meta name="description" content="1. 题目描述 给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。 返回移除了所有不包含 1 的子树的原二叉树。 ( 节点 X 的子树为 X 本身，以及所有 X 的后代。)   示例1:输入: [1,null,0,0,1]输出: [1,null,0,null,1]     示例2:输入: [1,0,1,0,0,0,1]输出: [1,null,1,null,1]    示例3">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CLion中的apue编译问题">
-<meta property="og:url" content="http://yoursite.com/2017/08/22/apue_h/index.html">
+<meta property="og:title" content="Leetcode 814. 二叉树剪枝">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/leetcode814/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：">
+<meta property="og:description" content="1. 题目描述 给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。 返回移除了所有不包含 1 的子树的原二叉树。 ( 节点 X 的子树为 X 本身，以及所有 X 的后代。)   示例1:输入: [1,null,0,0,1]输出: [1,null,0,null,1]     示例2:输入: [1,0,1,0,0,0,1]输出: [1,null,1,null,1]    示例3">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png">
-<meta property="og:updated_time" content="2018-04-08T10:26:27.000Z">
+<meta property="og:updated_time" content="2018-06-04T03:40:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CLion中的apue编译问题">
-<meta name="twitter:description" content="刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：">
-<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png">
+<meta name="twitter:title" content="Leetcode 814. 二叉树剪枝">
+<meta name="twitter:description" content="1. 题目描述 给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。 返回移除了所有不包含 1 的子树的原二叉树。 ( 节点 X 的子树为 X 本身，以及所有 X 的后代。)   示例1:输入: [1,null,0,0,1]输出: [1,null,0,null,1]     示例2:输入: [1,0,1,0,0,0,1]输出: [1,null,1,null,1]    示例3">
 
 
 
@@ -138,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/22/apue_h/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/23/leetcode814/"/>
 
 
 
 
 
-  <title>CLion中的apue编译问题 | Lin Niu</title>
+  <title>Leetcode 814. 二叉树剪枝 | Lin Niu</title>
   
 
 
@@ -271,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/apue_h/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/leetcode814/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -288,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CLion中的apue编译问题</h1>
+          <h1 class="post-title" itemprop="name headline">Leetcode 814. 二叉树剪枝</h1>
         
 
         <div class="post-meta">
@@ -300,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T11:59:53+08:00">
-                2017-08-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-23T00:00:00+08:00">
+                2018-04-23
               </time>
             
 
@@ -323,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apue/" itemprop="url" rel="index">
-                    <span itemprop="name">apue</span>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
                   </a>
                 </span>
 
@@ -341,9 +338,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/22/apue_h/#comments" itemprop="discussionUrl">
+                <a href="/2018/04/23/leetcode814/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/22/apue_h/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/04/23/leetcode814/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,7 +368,17 @@
       
 
       
-        <p>刚开始接触CLion, 编译apue里的文件时候出了问题，还是说”apue.h”找不到，err_sys这些没有。<br>网上有的写的东西简直是误人子弟，其实很简单，之前的操作已经把apue.h放到了/usr/include/目录下，我们要做的就是：<br><img src="http://ous5r4na6.bkt.clouddn.com/static/images/apueh.png" alt=""></p>
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><blockquote>
+<p>给定二叉树根结点 root ，此外树的每个结点的值要么是 0，要么是 1。</p>
+<p>返回移除了所有不包含 1 的子树的原二叉树。</p>
+<p>( 节点 X 的子树为 X 本身，以及所有 X 的后代。)  </p>
+<p>示例1:<br>输入: [1,null,0,0,1]<br>输出: [1,null,0,null,1]    </p>
+<p>示例2:<br>输入: [1,0,1,0,0,0,1]<br>输出: [1,null,1,null,1]   </p>
+<p>示例3:<br>输入: [1,1,0,1,1,0,1,0]<br>输出: [1,1,0,1,1,null,1]</p>
+<p>说明:<br>给定的二叉树最多有 100 个节点。<br>每个节点的值只会为 0 或 1 。</p>
+</blockquote>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>后序遍历，判断是否满足剪枝的三个条件</p>
+<h2 id="3-源代码"><a href="#3-源代码" class="headerlink" title="3.源代码"></a>3.源代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    TreeNode* pruneTree(TreeNode* root) &#123;</div><div class="line">        if (root == nullptr)</div><div class="line">            return nullptr;</div><div class="line">        root-&gt;left = pruneTree(root-&gt;left);</div><div class="line">        root-&gt;right = pruneTree(root-&gt;right);</div><div class="line">        if (root-&gt;val == 0 &amp;&amp; root-&gt;left == nullptr &amp;&amp; root-&gt;right == nullptr)</div><div class="line">            return nullptr;</div><div class="line">        return root;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -387,14 +394,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/apue/" rel="tag"># apue</a>
-          
-            <a href="/tags/CLion/" rel="tag"># CLion</a>
-          
-        </div>
-      
 
       
       
@@ -404,8 +403,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/22/apue_hole/" rel="next" title="apue_hole遇到的坑">
-                <i class="fa fa-chevron-left"></i> apue_hole遇到的坑
+              <a href="/2018/04/18/pthread1/" rel="next" title="线程（1）： 线程和线程标识">
+                <i class="fa fa-chevron-left"></i> 线程（1）： 线程和线程标识
               </a>
             
           </div>
@@ -414,8 +413,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/29/filebench/" rel="prev" title="filebench测试">
-                filebench测试 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/02/leetcode338/" rel="prev" title="Leetcode 338. Bit位计数">
+                Leetcode 338. Bit位计数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -475,8 +474,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar1.jpg"
@@ -569,6 +577,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目描述"><span class="nav-number">1.</span> <span class="nav-text">1. 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-思路"><span class="nav-number">2.</span> <span class="nav-text">2.思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-源代码"><span class="nav-number">3.</span> <span class="nav-text">3.源代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -718,9 +742,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/08/22/apue_h/';
-          this.page.identifier = '2017/08/22/apue_h/';
-          this.page.title = 'CLion中的apue编译问题';
+          this.page.url = 'http://yoursite.com/2018/04/23/leetcode814/';
+          this.page.identifier = '2018/04/23/leetcode814/';
+          this.page.title = 'Leetcode 814. 二叉树剪枝';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
