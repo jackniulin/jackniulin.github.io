@@ -96,17 +96,13 @@
 
 
 
-<meta name="description" content="1.僵死进程是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的资源等。 2.两次fork避免zombie1234567891011121314151617181920int main(void) &amp;#123;    pid_t pid;    printf(&amp;quot;parent id=%ld\n&amp;quot;, (long)getpid(">
-<meta property="og:type" content="article">
-<meta property="og:title" content="避免zombie process">
-<meta property="og:url" content="http://yoursite.com/2018/04/13/twofork/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lin Niu">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1.僵死进程是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的资源等。 2.两次fork避免zombie1234567891011121314151617181920int main(void) &amp;#123;    pid_t pid;    printf(&amp;quot;parent id=%ld\n&amp;quot;, (long)getpid(">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-13T09:46:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="避免zombie process">
-<meta name="twitter:description" content="1.僵死进程是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的资源等。 2.两次fork避免zombie1234567891011121314151617181920int main(void) &amp;#123;    pid_t pid;    printf(&amp;quot;parent id=%ld\n&amp;quot;, (long)getpid(">
+<meta name="twitter:title" content="Lin Niu">
 
 
 
@@ -135,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/13/twofork/"/>
+  <link rel="canonical" href="http://yoursite.com/page/4/"/>
 
 
 
 
 
-  <title>避免zombie process | Lin Niu</title>
+  <title>Lin Niu</title>
   
 
 
@@ -160,7 +156,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,9 +251,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -268,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/twofork/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/13/sed/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="好好活着。">
@@ -285,7 +283,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">避免zombie process</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/13/sed/" itemprop="url">sed用法</a></h1>
         
 
         <div class="post-meta">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T17:21:52+08:00">
-                2018-04-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T15:26:01+08:00">
+                2017-08-13
               </time>
             
 
@@ -320,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apue/" itemprop="url" rel="index">
-                    <span itemprop="name">apue</span>
+                  <a href="/categories/shell/" itemprop="url" rel="index">
+                    <span itemprop="name">shell</span>
                   </a>
                 </span>
 
@@ -338,9 +338,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/13/twofork/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/13/sed/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/04/13/twofork/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/13/sed/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,13 +368,15 @@
       
 
       
-        <h2 id="1-僵死进程"><a href="#1-僵死进程" class="headerlink" title="1.僵死进程"></a>1.僵死进程</h2><p>是指一个已经终止，但是其父进程尚未对其进行善后处理的进程，这个处理包括获取终止子进程的有关信息，释放它占用的资源等。</p>
-<h2 id="2-两次fork避免zombie"><a href="#2-两次fork避免zombie" class="headerlink" title="2.两次fork避免zombie"></a>2.两次fork避免zombie</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">int main(void) &#123;</div><div class="line">    pid_t pid;</div><div class="line">    printf(&quot;parent id=%ld\n&quot;, (long)getpid());</div><div class="line">    if ((pid = fork()) &lt; 0)</div><div class="line">        err_sys(&quot;fork error&quot;);</div><div class="line">    else if (pid == 0) &#123;</div><div class="line">        if ((pid = fork()) &lt; 0)</div><div class="line">            err_sys(&quot;fork error&quot;);</div><div class="line">        else if (pid &gt; 0) </div><div class="line">            exit(0); //first child die</div><div class="line">        sleep(2);  </div><div class="line">        printf(&quot;second child, parent pid=%ld\n&quot;, (long)getppid());</div><div class="line">        exit(0);</div><div class="line">    &#125;</div><div class="line">    if (waitpid(pid, NULL ,0) != pid)</div><div class="line">        err_sys(&quot;waitpid error&quot;);</div><div class="line">    else</div><div class="line">        printf(&quot;first child pid=%d\n&quot;, pid);</div><div class="line">    exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>运行结果：<br>[root@centos apue]# ./a.out<br>parent id=3483<br>first child pid=3484<br>[root@centos apue]# second child, parent pid=1</p>
+        
+          
+            <h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><blockquote>
+<p>sed is a stream editor. A stream editor is used to perform basic text transformations on an input stream (a file or input from a pipeline). While in some ways similar to an editor which permits scripted edits (such as ed), sed works by making only one pass over the input(s), and is consequently more efficient. But it is sed’s ability to filter text in a pipeline which particularly distinguishes it from other types of editors.    </p>
 </blockquote>
-<p>这里，第二个子进程最终由init进程（pid=1）收养， 那么它会变成一个僵死进程吗？<br>apue中给出的解释： 对于init，任何时候只要有一个子进程终止，它就会调用一个wait函数取得这个子进程的终止状态，这样就防止系统中塞满僵死进程。<br>一个init子进程可能是init直接产生的子进程，还有一种，就是如上，父进程终止，由init接管的子进程。</p>
+<h2 id="1-删除指定行"><a href="#1-删除指定行" class="headerlink" title="1. 删除指定行"></a>1. 删除指定行</h2><p><strong>实例:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">line=$(cat /etc/exports | grep -n /bwfs/fs2 | grep -v &apos;#&apos; | awk &apos;BEGIN &#123;FS=&quot;:&quot;&#125; &#123;print $1&#125;&apos;)               </div><div class="line">if [ &quot;$line&quot; != &quot;0&quot; ]; then      </div><div class="line">    sed -i &apos;/fs2/d&apos; /etc/exports    </div><div class="line">fi</div></pre></td></tr></table></figure></p>
 
+          
+        
       
     </div>
     
@@ -391,32 +393,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/04/08/fmemopen/" rel="next" title="冲洗内存流和追加写null字节策略">
-                <i class="fa fa-chevron-left"></i> 冲洗内存流和追加写null字节策略
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/18/pthread1/" rel="prev" title="线程（1）： 线程和线程标识">
-                线程（1）： 线程和线程标识 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -426,11 +408,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 
 
           </div>
@@ -438,17 +423,6 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -469,17 +443,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar1.jpg"
@@ -572,22 +537,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-僵死进程"><span class="nav-number">1.</span> <span class="nav-text">1.僵死进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-两次fork避免zombie"><span class="nav-number">2.</span> <span class="nav-text">2.两次fork避免zombie</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -713,10 +662,10 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
@@ -734,18 +683,6 @@
       <script id="dsq-count-scr" src="https://jackniulin-com.disqus.com/count.js" async></script>
     
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/04/13/twofork/';
-          this.page.identifier = '2018/04/13/twofork/';
-          this.page.title = '避免zombie process';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://jackniulin-com.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
     
 
   
