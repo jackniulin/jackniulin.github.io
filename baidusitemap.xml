@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/05/27/leetcode77/</loc>
+    <lastmod>2018-06-05T10:00:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Leetcode 77. 组合</title>
+        <pubTime>2018-05-26T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="dfs, leetcode" url="http://yoursite.com/categories/dfs-leetcode/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/01/leetcode22/</loc>
+    <lastmod>2018-06-05T09:47:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Leetcode 22. 括号生成</title>
+        <pubTime>2018-05-31T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="dfs, leetcode" url="http://yoursite.com/categories/dfs-leetcode/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/05/31/leetcode39/</loc>
     <lastmod>2018-06-05T09:02:05.000Z</lastmod>
     <data>
