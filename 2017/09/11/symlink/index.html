@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lin Niu" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="1.硬链接一张图说明硬链接：不需要创建额外的i节点， 指向同一个节点。硬链接的限制：硬链接通常要求链接和文件位于同一文件系统中。只有超级用户才能创建指向目录的硬链接。     int link(const cahr existingoath, const char newpath)该函数创建一个指向现有文件链接int unlink(const char* pathname)删除一个现有的目录项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="symlink and hardlink">
+<meta property="og:url" content="http://yoursite.com/2017/09/11/symlink/index.html">
+<meta property="og:site_name" content="Lin Niu">
+<meta property="og:description" content="1.硬链接一张图说明硬链接：不需要创建额外的i节点， 指向同一个节点。硬链接的限制：硬链接通常要求链接和文件位于同一文件系统中。只有超级用户才能创建指向目录的硬链接。     int link(const cahr existingoath, const char newpath)该函数创建一个指向现有文件链接int unlink(const char* pathname)删除一个现有的目录项">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/B40ED80A-E430-45E5-8DF3-19AF9DDF74ED.png">
+<meta property="og:updated_time" content="2018-06-05T08:09:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="symlink and hardlink">
+<meta name="twitter:description" content="1.硬链接一张图说明硬链接：不需要创建额外的i节点， 指向同一个节点。硬链接的限制：硬链接通常要求链接和文件位于同一文件系统中。只有超级用户才能创建指向目录的硬链接。     int link(const cahr existingoath, const char newpath)该函数创建一个指向现有文件链接int unlink(const char* pathname)删除一个现有的目录项">
+<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/B40ED80A-E430-45E5-8DF3-19AF9DDF74ED.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/11/symlink/"/>
+
+
+
+
+
+  <title>symlink and hardlink | Lin Niu</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lin Niu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/symlink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">symlink and hardlink</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T00:00:00+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kernel/" itemprop="url" rel="index">
+                    <span itemprop="name">kernel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/11/symlink/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/11/symlink/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-硬链接"><a href="#1-硬链接" class="headerlink" title="1.硬链接"></a>1.硬链接</h2><p>一张图说明硬链接：<br><img src="http://ous5r4na6.bkt.clouddn.com/B40ED80A-E430-45E5-8DF3-19AF9DDF74ED.png" alt=""><br>不需要创建额外的i节点， 指向同一个节点。<br><strong>硬链接的限制：</strong><br>硬链接通常要求链接和文件位于同一文件系统中。<br>只有超级用户才能创建指向目录的硬链接。   </p>
+<blockquote>
+<p>int link(const cahr<em> existingoath, const char</em> newpath)<br>该函数创建一个指向现有文件链接<br>int unlink(const char* pathname)<br>删除一个现有的目录项</p>
+</blockquote>
+<h3 id="源代码分析："><a href="#源代码分析：" class="headerlink" title="源代码分析："></a>源代码分析：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">int sys_link(const char * oldname, const char * newname)</div><div class="line">&#123;</div><div class="line">	struct dir_entry * de;</div><div class="line">	struct m_inode * oldinode, * dir;</div><div class="line">	struct buffer_head * bh;</div><div class="line">	const char * basename;</div><div class="line">	int namelen;</div><div class="line">	//通过文件名找到oldinode</div><div class="line">	oldinode=namei(oldname);</div><div class="line">	if (!oldinode)</div><div class="line">		return -ENOENT;</div><div class="line">	//oldinode不应该是一个目录</div><div class="line">	if (S_ISDIR(oldinode-&gt;i_mode)) &#123;</div><div class="line">		iput(oldinode);</div><div class="line">		return -EPERM;</div><div class="line">	&#125;</div><div class="line">	//找到将存放新目录项的目录，并保存这个新目录项的namelen和basename</div><div class="line">	dir = dir_namei(newname,&amp;namelen,&amp;basename, NULL);</div><div class="line">	if (!dir) &#123;</div><div class="line">		iput(oldinode);</div><div class="line">		return -EACCES;</div><div class="line">	&#125;</div><div class="line">	if (!namelen) &#123;</div><div class="line">		iput(oldinode);</div><div class="line">		iput(dir);</div><div class="line">		return -EPERM;</div><div class="line">	&#125;</div><div class="line">	//新的目录项所处的目录和oldinode不应该跨设备</div><div class="line">	if (dir-&gt;i_dev != oldinode-&gt;i_dev) &#123;</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -EXDEV;</div><div class="line">	&#125;</div><div class="line">	//确定当前用户对dir有写权限</div><div class="line">	if (!permission(dir,MAY_WRITE)) &#123;</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -EACCES;</div><div class="line">	&#125;</div><div class="line">	//find_entry的作用：finds an entry in the specified directory with the wanted name. It returns the cache buffer in which the entry was found, and the entry itself (as a parameter - res_dir).</div><div class="line">	bh = find_entry(&amp;dir,basename,namelen,&amp;de);</div><div class="line">	//如果在dir下找到了basename的目录项，失败</div><div class="line">	if (bh) &#123;</div><div class="line">		brelse(bh);</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -EEXIST;</div><div class="line">	&#125;</div><div class="line">	//将表示basename的目录项添加到dir的目录表中</div><div class="line">	bh = add_entry(dir,basename,namelen,&amp;de);</div><div class="line">	if (!bh) &#123;</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	//de指向的节点为oldinode</div><div class="line">	de-&gt;inode = oldinode-&gt;i_num;</div><div class="line">	//缓冲区脏标记位置位</div><div class="line">	bh-&gt;b_dirt = 1;</div><div class="line">	brelse(bh);</div><div class="line">	iput(dir);</div><div class="line">	//引用计数+1</div><div class="line">	oldinode-&gt;i_nlinks++;</div><div class="line">	oldinode-&gt;i_ctime = CURRENT_TIME;</div><div class="line">	oldinode-&gt;i_dirt = 1;</div><div class="line">	iput(oldinode);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-创建符号链接"><a href="#2-创建符号链接" class="headerlink" title="2.创建符号链接"></a>2.创建符号链接</h2><blockquote>
+<p>int symlink(const char<em> actualpath, const char</em> sympath)</p>
+</blockquote>
+<p>创建symlink并不要求actualpath实际存在，actualpath和sympath可以位于不同的文件系统中。<br>下面创建符号链接的代码，和上面创建硬链接的代码比较，可以看出两者实际操作方式的差异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">int sys_symlink(const char * oldname, const char * newname)</div><div class="line">&#123;</div><div class="line">	struct dir_entry * de;</div><div class="line">	struct m_inode * dir, * inode;</div><div class="line">	struct buffer_head * bh, * name_block;</div><div class="line">	const char * basename;</div><div class="line">	int namelen, i;</div><div class="line">	char c;</div><div class="line">	</div><div class="line">	dir = dir_namei(newname,&amp;namelen,&amp;basename, NULL);</div><div class="line">	if (!dir)</div><div class="line">		return -EACCES;</div><div class="line">	if (!namelen) &#123;</div><div class="line">		iput(dir);</div><div class="line">		return -EPERM;</div><div class="line">	&#125;</div><div class="line">	if (!permission(dir,MAY_WRITE)) &#123;</div><div class="line">		iput(dir);</div><div class="line">		return -EACCES;</div><div class="line">	&#125;</div><div class="line">	//符号链接会创建新的inode</div><div class="line">	if (!(inode = new_inode(dir-&gt;i_dev))) &#123;</div><div class="line">		iput(dir);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	inode-&gt;i_mode = S_IFLNK | (0777 &amp; ~current-&gt;umask);</div><div class="line">	inode-&gt;i_dirt = 1;</div><div class="line">	//为这个新创建的inode分配一块数据块</div><div class="line">	if (!(inode-&gt;i_zone[0]=new_block(inode-&gt;i_dev))) &#123;</div><div class="line">		iput(dir);</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	inode-&gt;i_dirt = 1;</div><div class="line">	//把上面分配的数据块读到缓冲区中</div><div class="line">	if (!(name_block=bread(inode-&gt;i_dev,inode-&gt;i_zone[0]))) &#123;</div><div class="line">		iput(dir);</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		return -ERROR;</div><div class="line">	&#125;</div><div class="line">	i = 0;</div><div class="line">	//设置缓冲区的内容，其实就是把oldname放到缓冲区中</div><div class="line">	while (i &lt; 1023 &amp;&amp; (c=get_fs_byte(oldname++)))</div><div class="line">		name_block-&gt;b_data[i++] = c;</div><div class="line">	name_block-&gt;b_data[i] = 0;</div><div class="line">	name_block-&gt;b_dirt = 1;</div><div class="line">	brelse(name_block);</div><div class="line">	//设置inode的大小，就是字节数</div><div class="line">	inode-&gt;i_size = i;</div><div class="line">	inode-&gt;i_dirt = 1;</div><div class="line">	//和sys_link相同，在dir的目录表中找个空闲位置存放这个新创建的符号链接</div><div class="line">	bh = find_entry(&amp;dir,basename,namelen,&amp;de);</div><div class="line">	if (bh) &#123;</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		brelse(bh);</div><div class="line">		iput(dir);</div><div class="line">		return -EEXIST;</div><div class="line">	&#125;</div><div class="line">	bh = add_entry(dir,basename,namelen,&amp;de);</div><div class="line">	if (!bh) &#123;</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		iput(dir);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	//这里也体现了与sys_link的不同</div><div class="line">	de-&gt;inode = inode-&gt;i_num;</div><div class="line">	bh-&gt;b_dirt = 1;</div><div class="line">	brelse(bh);</div><div class="line">	iput(dir);</div><div class="line">	iput(inode);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/29/filebench/" rel="next" title="filebench测试">
+                <i class="fa fa-chevron-left"></i> filebench测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/11/mdtest/" rel="prev" title="mdtest元数据测试">
+                mdtest元数据测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar1.jpg"
+               alt="好好活着。" />
+          <p class="site-author-name" itemprop="name">好好活着。</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jackniulin" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      github
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5319995161/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-硬链接"><span class="nav-number">1.</span> <span class="nav-text">1.硬链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码分析："><span class="nav-number">1.1.</span> <span class="nav-text">源代码分析：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-创建符号链接"><span class="nav-number">2.</span> <span class="nav-text">2.创建符号链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!--
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">好好活着。</span>
+</div>
+
+
+<div class="powered-by">
+   Jack 
+</div>
+
+<div class="theme-info">
+  博客
+</div>
+
+  -->
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jackniulin-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/09/11/symlink/';
+          this.page.identifier = '2017/09/11/symlink/';
+          this.page.title = 'symlink and hardlink';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jackniulin-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

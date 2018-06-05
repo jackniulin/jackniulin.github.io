@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/09/11/symlink/</loc>
+    
+    <lastmod>2018-06-05T08:09:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/06/04/dup/</loc>
     
     <lastmod>2018-06-04T14:25:45.000Z</lastmod>

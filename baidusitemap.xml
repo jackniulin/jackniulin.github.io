@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/09/11/symlink/</loc>
+    <lastmod>2018-06-05T08:09:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>symlink and hardlink</title>
+        <pubTime>2017-09-10T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="kernel" url="http://yoursite.com/categories/kernel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/06/04/dup/</loc>
     <lastmod>2018-06-04T14:25:45.000Z</lastmod>
     <data>
