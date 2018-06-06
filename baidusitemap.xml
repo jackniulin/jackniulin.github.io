@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/08/fmemopen/</loc>
+    <lastmod>2018-06-06T03:27:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>冲洗内存流和追加写null字节策略</title>
+        <pubTime>2018-04-08T11:43:42.000Z</pubTime>
+        
+        <tag>apue</tag>
+         
+        <tag>IO</tag>
+         
+         
+           
+             
+              <breadCrumb title="apue" url="http://yoursite.com/categories/apue/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/06/01/leetcode22/</loc>
     <lastmod>2018-06-05T15:21:50.000Z</lastmod>
     <data>
@@ -421,28 +443,6 @@
         <title>避免zombie process</title>
         <pubTime>2018-04-13T09:21:52.000Z</pubTime>
         
-         
-           
-             
-              <breadCrumb title="apue" url="http://yoursite.com/categories/apue/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/08/fmemopen/</loc>
-    <lastmod>2018-04-10T08:55:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>冲洗内存流和追加写null字节策略</title>
-        <pubTime>2018-04-08T11:43:42.000Z</pubTime>
-        
-        <tag>apue</tag>
-         
-        <tag>IO</tag>
-         
          
            
              
