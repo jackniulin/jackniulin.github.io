@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/11/15/leetcode106/</loc>
+    <lastmod>2018-06-07T06:41:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>Leecode 106. Construct Binary Tree from Inorder and Postorder Traversal</title>
+        <pubTime>2017-11-14T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="leetcode" url="http://yoursite.com/categories/leetcode/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/04/08/fmemopen/</loc>
-    <lastmod>2018-06-06T03:27:24.000Z</lastmod>
+    <lastmod>2018-06-06T03:50:37.000Z</lastmod>
     <data>
         <display>
         <title>冲洗内存流和追加写null字节策略</title>
