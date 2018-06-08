@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/19/pthread2/</loc>
+    <lastmod>2018-06-08T07:38:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>线程同步</title>
+        <pubTime>2018-04-18T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="pthread" url="http://yoursite.com/categories/pthread/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/08/13/sed/</loc>
     <lastmod>2018-06-07T13:47:32.000Z</lastmod>
     <data>
