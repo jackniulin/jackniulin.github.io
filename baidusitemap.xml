@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://yoursite.com/2018/04/19/pthread2/</loc>
-    <lastmod>2018-06-08T07:38:24.000Z</lastmod>
+    <lastmod>2018-06-08T07:41:11.000Z</lastmod>
     <data>
         <display>
         <title>线程同步</title>
@@ -15,6 +15,24 @@
            
              
               <breadCrumb title="pthread" url="http://yoursite.com/categories/pthread/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/08/dup/</loc>
+    <lastmod>2018-06-08T07:41:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>dup和dup2的理解</title>
+        <pubTime>2018-06-08T07:41:03.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="kernel" url="http://yoursite.com/categories/kernel/"/>
           
         </display>
     </data>
@@ -171,24 +189,6 @@
            
              
               <breadCrumb title="leetcode, dfs" url="http://yoursite.com/categories/leetcode-dfs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/06/04/dup/</loc>
-    <lastmod>2018-06-07T13:45:34.000Z</lastmod>
-    <data>
-        <display>
-        <title>关于dup和dup2的理解</title>
-        <pubTime>2018-06-04T13:49:23.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="kernel" url="http://yoursite.com/categories/kernel/"/>
           
         </display>
     </data>
