@@ -48,7 +48,7 @@
     <link href="http://yoursite.com/2018/06/08/leetcode479/"/>
     <id>http://yoursite.com/2018/06/08/leetcode479/</id>
     <published>2018-06-07T16:00:00.000Z</published>
-    <updated>2018-06-08T13:52:45.000Z</updated>
+    <updated>2018-06-08T13:53:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">你需要找到由两个 n 位数的乘积组成的最大回文数。</div><div class="line"></div><div class="line">由于结果会很大，你只需返回最大回文数 mod 1337得到的结果。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: 2</div><div class="line"></div><div class="line">输出: 987</div><div class="line"></div><div class="line">解释: 99 x 91 = 9009, 9009 % 1337 = 987</div><div class="line"></div><div class="line">说明:</div><div class="line"></div><div class="line">n 的取值范围为 [1,8]。</div></pre></td></tr></table></figure>
 <h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>这道题在leetcode上划的是easy, 很尴尬，我不会做。参考了论坛上大佬的代码。拿题中的例子来说，2位数，最大为pow(10, 2) - 1 = 99, 最小为pow(10, 1) = 10. 题中要求获得最大回文数，那就从最大的开始，构建回文串。第一个回文串为9999. 从max开始，依次遍历，只要存在num % j == 0, 就返回这个回文串%1337.</p>
@@ -338,6 +338,28 @@
     </summary>
     
       <category term="apue, signal" scheme="http://yoursite.com/categories/apue-signal/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Leecode204. Count Primes</title>
+    <link href="http://yoursite.com/2018/05/16/leetcode204/"/>
+    <id>http://yoursite.com/2018/05/16/leetcode204/</id>
+    <published>2018-05-15T16:00:00.000Z</published>
+    <updated>2018-06-08T14:53:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">统计所有小于非负整数 n 的质数的数量。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: 10</div><div class="line">输出: 4</div><div class="line">解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>统计小于n的质数，不包括n. 1不是质数，vec[0] = false. 从2（index = 1）开始，标记它的倍数，记为false. 要注意最外边for循环里变量的设置。最后剩下的都是质数。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int countPrimes(int n) &#123;</div><div class="line">        int res = 0;</div><div class="line">        vector&lt;bool&gt; vec(n - 1, true);</div><div class="line">        vec[0] = false;</div><div class="line">        int range = sqrt(n);</div><div class="line">        for (int i = 2; i &lt;= range; i++) &#123;</div><div class="line">            if (vec[i - 1]) &#123;</div><div class="line">                for (int j = pow(i, 2); j &lt; n; j += i)</div><div class="line">                    vec[j - 1] = false;  </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; n - 1; i++)</div><div class="line">            if (vec[i])</div><div class="line">                res++;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+    
+    </summary>
+    
+      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
     
     
   </entry>
@@ -646,28 +668,6 @@
     </summary>
     
       <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>分布式事务的提交</title>
-    <link href="http://yoursite.com/2018/03/19/committransaction/"/>
-    <id>http://yoursite.com/2018/03/19/committransaction/</id>
-    <published>2018-03-19T09:31:48.000Z</published>
-    <updated>2018-06-07T13:46:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="分布式事务的提交"><a href="#分布式事务的提交" class="headerlink" title="分布式事务的提交"></a>分布式事务的提交</h2><p>分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交对应若干个分布式事务记录的持久化，称之为分布式事务的提交。</p>
-<p>在文件系统的挂载过程中，在exfs_fill_super过程中，为jbd2本地日志系统的提交注册了一个钩子函数exfs_commit_callback，用于处理单词本地事务的提交所引发的若干个分布式事务的提交的<strong>后处理</strong>（确认消息的发送）  </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;分布式事务的提交&quot;&gt;&lt;a href=&quot;#分布式事务的提交&quot; class=&quot;headerlink&quot; title=&quot;分布式事务的提交&quot;&gt;&lt;/a&gt;分布式事务的提交&lt;/h2&gt;&lt;p&gt;分布式日志在本地实现为一个文件，分布式事务就是文件当中的一个记录，在系统中一次本地事务的提交
-    
-    </summary>
-    
-      <category term="分布式" scheme="http://yoursite.com/categories/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
     
   </entry>
