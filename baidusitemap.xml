@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/04/19/pthread2/</loc>
+    <lastmod>2018-06-10T13:08:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>线程同步</title>
+        <pubTime>2018-04-18T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="pthread" url="http://yoursite.com/categories/pthread/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/05/16/leetcode204/</loc>
     <lastmod>2018-06-08T14:53:28.000Z</lastmod>
     <data>
@@ -33,24 +51,6 @@
            
              
               <breadCrumb title="leetcode" url="http://yoursite.com/categories/leetcode/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/04/19/pthread2/</loc>
-    <lastmod>2018-06-08T09:15:09.000Z</lastmod>
-    <data>
-        <display>
-        <title>线程同步</title>
-        <pubTime>2018-04-18T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="pthread" url="http://yoursite.com/categories/pthread/"/>
           
         </display>
     </data>
