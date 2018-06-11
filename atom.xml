@@ -115,6 +115,28 @@
   </entry>
   
   <entry>
+    <title>fork内核源代码分析</title>
+    <link href="http://yoursite.com/2018/06/01/fork/"/>
+    <id>http://yoursite.com/2018/06/01/fork/</id>
+    <published>2018-05-31T16:00:00.000Z</published>
+    <updated>2018-06-11T15:22:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-verify-area-kernel-fork-c"><a href="#1-verify-area-kernel-fork-c" class="headerlink" title="1. verify_area(kernel/fork.c)"></a>1. verify_area(kernel/fork.c)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">参数addr为逻辑地址, size为原长度</div><div class="line">void verify_area(void * addr,int size)</div><div class="line">&#123;</div><div class="line">	unsigned long start;</div><div class="line"></div><div class="line">	start = (unsigned long) addr;</div><div class="line">	//start &amp; 0xfff计算原起始位置在其所处的页面的偏移量   </div><div class="line">	//加上原长度size就是调整之后的size，原理如下图</div><div class="line">	size += start &amp; 0xfff;</div><div class="line">	//把start调整到页面边界值</div><div class="line">	start &amp;= 0xfffff000;</div><div class="line">	//加上进程数据段在线性空间中的起始基址，start就是整个线性地址空间中的位置</div><div class="line">	start += get_base(current-&gt;ldt[2]);</div><div class="line">	while (size&gt;0) &#123;</div><div class="line">		size -= 4096;</div><div class="line">		//每次验证一个4k页面的大小</div><div class="line">		write_verify(start);</div><div class="line">		start += 4096;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">write_verify(mm/memory.c)分析：</div><div class="line">void write_verify(unsigned long address)</div><div class="line">&#123;</div><div class="line">	unsigned long page;</div><div class="line">	//目录项号=address&gt;&gt;22, 每个目录项占4字节，页目录表从物理地址0开始   </div><div class="line">	//所以实际的目录项指针=address&gt;&gt;20，&amp;0xffc屏蔽页表项索引的内容    </div><div class="line">	//之后取页目录项的内容，判断页目录项对应的页表是否存在，不存在就返回    </div><div class="line">	if (!( (page = *((unsigned long *) ((address&gt;&gt;20) &amp; 0xffc)) )&amp;1))</div><div class="line">		return;</div><div class="line">	//取页表地址   </div><div class="line">	page &amp;= 0xfffff000;</div><div class="line">	//这里用页表地址+页表项偏移值，取页表项指针</div><div class="line">	page += ((address&gt;&gt;10) &amp; 0xffc);</div><div class="line">	//判断是否满足：页面存在且该页面不可写</div><div class="line">	if ((3 &amp; *(unsigned long *) page) == 1)  /* non-writeable, present */</div><div class="line">		un_wp_page((unsigned long *) page);</div><div class="line">	return;</div><div class="line">&#125;</div><div class="line">un_wp_page(mm/memory.c)分析：</div><div class="line">//参数为页表项指针</div><div class="line">void un_wp_page(unsigned long * table_entry)</div><div class="line">&#123;</div><div class="line">	unsigned long old_page,new_page;</div><div class="line">	//取old_page的页框地址</div><div class="line">	old_page = 0xfffff000 &amp; *table_entry;</div><div class="line">	//页框地址在主存中且该页面被引用次数为1（没有共享）   </div><div class="line">	//如果该内存页面只被一个进程使用并且不是内核中的进程！</div><div class="line">	if (old_page &gt;= LOW_MEM &amp;&amp; mem_map[MAP_NR(old_page)]==1) &#123;</div><div class="line">		//设置可写标志，不需要重新申请新的页面</div><div class="line">		*table_entry |= 2;</div><div class="line">		invalidate();</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	//否则需要申请新的页面，取消页面共享</div><div class="line">	if (!(new_page=get_free_page()))</div><div class="line">		oom();</div><div class="line">	//将原页面的引用次数-1</div><div class="line">	if (old_page &gt;= LOW_MEM)</div><div class="line">		mem_map[MAP_NR(old_page)]--;</div><div class="line">	//将原页面内容写到新的页面上</div><div class="line">	copy_page(old_page,new_page);</div><div class="line">	*table_entry = new_page | 7;</div><div class="line">	invalidate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ous5r4na6.bkt.clouddn.com/fork1.png" alt=""><br><img src="http://ous5r4na6.bkt.clouddn.com/fork2.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-verify-area-kernel-fork-c&quot;&gt;&lt;a href=&quot;#1-verify-area-kernel-fork-c&quot; class=&quot;headerlink&quot; title=&quot;1. verify_area(kernel/fork.c)&quot;&gt;&lt;/a&gt;1. 
+    
+    </summary>
+    
+      <category term="fork" scheme="http://yoursite.com/categories/fork/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Leetcode 39. 组合总和</title>
     <link href="http://yoursite.com/2018/05/31/leetcode39/"/>
     <id>http://yoursite.com/2018/05/31/leetcode39/</id>
@@ -644,28 +666,6 @@
     
       &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;We have jobs: difficulty[i] is the diff
-    
-    </summary>
-    
-      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Leetcode 94. 二叉树的中序遍历</title>
-    <link href="http://yoursite.com/2018/03/21/leetcode94/"/>
-    <id>http://yoursite.com/2018/03/21/leetcode94/</id>
-    <published>2018-03-20T16:00:00.000Z</published>
-    <updated>2018-06-07T13:44:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">给定一个二叉树，返回它的中序遍历。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: [1,null,2,3]</div><div class="line">   1</div><div class="line">    \</div><div class="line">     2</div><div class="line">    /</div><div class="line">   3</div><div class="line"></div><div class="line">输出: [1,3,2]</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>典型的中序遍历代码</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;int&gt; inorderTraversal(TreeNode* root) &#123;</div><div class="line">        vector&lt;int&gt; res;</div><div class="line">        helper(root, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void helper(TreeNode* root, vector&lt;int&gt;&amp; res) &#123;</div><div class="line">        if (root == nullptr)</div><div class="line">            return;</div><div class="line">        if (root-&gt;left)</div><div class="line">            helper(root-&gt;left, res);</div><div class="line">        res.push_back(root-&gt;val);</div><div class="line">        if (root-&gt;right)</div><div class="line">            helper(root-&gt;right, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
     
     </summary>
     

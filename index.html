@@ -891,6 +891,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/fork/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/fork/" itemprop="url">fork内核源代码分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/fork/" itemprop="url" rel="index">
+                    <span itemprop="name">fork</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/01/fork/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/01/fork/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-verify-area-kernel-fork-c"><a href="#1-verify-area-kernel-fork-c" class="headerlink" title="1. verify_area(kernel/fork.c)"></a>1. verify_area(kernel/fork.c)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">参数addr为逻辑地址, size为原长度</div><div class="line">void verify_area(void * addr,int size)</div><div class="line">&#123;</div><div class="line">	unsigned long start;</div><div class="line"></div><div class="line">	start = (unsigned long) addr;</div><div class="line">	//start &amp; 0xfff计算原起始位置在其所处的页面的偏移量   </div><div class="line">	//加上原长度size就是调整之后的size，原理如下图</div><div class="line">	size += start &amp; 0xfff;</div><div class="line">	//把start调整到页面边界值</div><div class="line">	start &amp;= 0xfffff000;</div><div class="line">	//加上进程数据段在线性空间中的起始基址，start就是整个线性地址空间中的位置</div><div class="line">	start += get_base(current-&gt;ldt[2]);</div><div class="line">	while (size&gt;0) &#123;</div><div class="line">		size -= 4096;</div><div class="line">		//每次验证一个4k页面的大小</div><div class="line">		write_verify(start);</div><div class="line">		start += 4096;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">write_verify(mm/memory.c)分析：</div><div class="line">void write_verify(unsigned long address)</div><div class="line">&#123;</div><div class="line">	unsigned long page;</div><div class="line">	//目录项号=address&gt;&gt;22, 每个目录项占4字节，页目录表从物理地址0开始   </div><div class="line">	//所以实际的目录项指针=address&gt;&gt;20，&amp;0xffc屏蔽页表项索引的内容    </div><div class="line">	//之后取页目录项的内容，判断页目录项对应的页表是否存在，不存在就返回    </div><div class="line">	if (!( (page = *((unsigned long *) ((address&gt;&gt;20) &amp; 0xffc)) )&amp;1))</div><div class="line">		return;</div><div class="line">	//取页表地址   </div><div class="line">	page &amp;= 0xfffff000;</div><div class="line">	//这里用页表地址+页表项偏移值，取页表项指针</div><div class="line">	page += ((address&gt;&gt;10) &amp; 0xffc);</div><div class="line">	//判断是否满足：页面存在且该页面不可写</div><div class="line">	if ((3 &amp; *(unsigned long *) page) == 1)  /* non-writeable, present */</div><div class="line">		un_wp_page((unsigned long *) page);</div><div class="line">	return;</div><div class="line">&#125;</div><div class="line">un_wp_page(mm/memory.c)分析：</div><div class="line">//参数为页表项指针</div><div class="line">void un_wp_page(unsigned long * table_entry)</div><div class="line">&#123;</div><div class="line">	unsigned long old_page,new_page;</div><div class="line">	//取old_page的页框地址</div><div class="line">	old_page = 0xfffff000 &amp; *table_entry;</div><div class="line">	//页框地址在主存中且该页面被引用次数为1（没有共享）   </div><div class="line">	//如果该内存页面只被一个进程使用并且不是内核中的进程！</div><div class="line">	if (old_page &gt;= LOW_MEM &amp;&amp; mem_map[MAP_NR(old_page)]==1) &#123;</div><div class="line">		//设置可写标志，不需要重新申请新的页面</div><div class="line">		*table_entry |= 2;</div><div class="line">		invalidate();</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	//否则需要申请新的页面，取消页面共享</div><div class="line">	if (!(new_page=get_free_page()))</div><div class="line">		oom();</div><div class="line">	//将原页面的引用次数-1</div><div class="line">	if (old_page &gt;= LOW_MEM)</div><div class="line">		mem_map[MAP_NR(old_page)]--;</div><div class="line">	//将原页面内容写到新的页面上</div><div class="line">	copy_page(old_page,new_page);</div><div class="line">	*table_entry = new_page | 7;</div><div class="line">	invalidate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ous5r4na6.bkt.clouddn.com/fork1.png" alt=""><br><img src="http://ous5r4na6.bkt.clouddn.com/fork2.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/leetcode39/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1766,160 +1920,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/leetcode204/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/leetcode204/" itemprop="url">Leecode204. Count Primes</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T00:00:00+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/16/leetcode204/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/16/leetcode204/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">统计所有小于非负整数 n 的质数的数量。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: 10</div><div class="line">输出: 4</div><div class="line">解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>统计小于n的质数，不包括n. 1不是质数，vec[0] = false. 从2（index = 1）开始，标记它的倍数，记为false. 要注意最外边for循环里变量的设置。最后剩下的都是质数。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int countPrimes(int n) &#123;</div><div class="line">        int res = 0;</div><div class="line">        vector&lt;bool&gt; vec(n - 1, true);</div><div class="line">        vec[0] = false;</div><div class="line">        int range = sqrt(n);</div><div class="line">        for (int i = 2; i &lt;= range; i++) &#123;</div><div class="line">            if (vec[i - 1]) &#123;</div><div class="line">                for (int j = pow(i, 2); j &lt; n; j += i)</div><div class="line">                    vec[j - 1] = false;  </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int i = 0; i &lt; n - 1; i++)</div><div class="line">            if (vec[i])</div><div class="line">                res++;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1970,7 +1970,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1981,7 +1981,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

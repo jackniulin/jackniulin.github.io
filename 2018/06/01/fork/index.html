@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="协议," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -96,20 +96,20 @@
 
 
 
-<meta name="description" content="1. 2pc说明第一阶段(请求提交阶段)1.协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。2.参与者节点执行询问发起为止的所有事务操作，并将undo和redo信息写进日志3.各参与者节点响应协调者节点发起的询问。第二阶段(提交执行阶段)成功：当协调者节点从所有参与者节点获得的相应消息都为”同意”时：1.协调者节点向所有参与者节点发出”正式提交”的请求。2.与者节">
-<meta name="keywords" content="协议">
+<meta name="description" content="1. verify_area(kernel/fork.c)12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364参数addr为逻辑地址, size为原长度void verify_area(void * addr,in">
 <meta property="og:type" content="article">
-<meta property="og:title" content="两阶段和三阶段提交协议的理解">
-<meta property="og:url" content="http://yoursite.com/2018/03/15/2pcAnd3pc/index.html">
+<meta property="og:title" content="fork内核源代码分析">
+<meta property="og:url" content="http://yoursite.com/2018/06/01/fork/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 2pc说明第一阶段(请求提交阶段)1.协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。2.参与者节点执行询问发起为止的所有事务操作，并将undo和redo信息写进日志3.各参与者节点响应协调者节点发起的询问。第二阶段(提交执行阶段)成功：当协调者节点从所有参与者节点获得的相应消息都为”同意”时：1.协调者节点向所有参与者节点发出”正式提交”的请求。2.与者节">
+<meta property="og:description" content="1. verify_area(kernel/fork.c)12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364参数addr为逻辑地址, size为原长度void verify_area(void * addr,in">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/3pc.png">
-<meta property="og:updated_time" content="2018-04-08T10:26:15.000Z">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/fork1.png">
+<meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/fork2.png">
+<meta property="og:updated_time" content="2018-06-11T15:22:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="两阶段和三阶段提交协议的理解">
-<meta name="twitter:description" content="1. 2pc说明第一阶段(请求提交阶段)1.协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。2.参与者节点执行询问发起为止的所有事务操作，并将undo和redo信息写进日志3.各参与者节点响应协调者节点发起的询问。第二阶段(提交执行阶段)成功：当协调者节点从所有参与者节点获得的相应消息都为”同意”时：1.协调者节点向所有参与者节点发出”正式提交”的请求。2.与者节">
-<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/static/images/3pc.png">
+<meta name="twitter:title" content="fork内核源代码分析">
+<meta name="twitter:description" content="1. verify_area(kernel/fork.c)12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364参数addr为逻辑地址, size为原长度void verify_area(void * addr,in">
+<meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/fork1.png">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/15/2pcAnd3pc/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/01/fork/"/>
 
 
 
 
 
-  <title>两阶段和三阶段提交协议的理解 | Lin Niu</title>
+  <title>fork内核源代码分析 | Lin Niu</title>
   
 
 
@@ -271,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/15/2pcAnd3pc/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/fork/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="好好活着。">
@@ -288,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">两阶段和三阶段提交协议的理解</h1>
+          <h1 class="post-title" itemprop="name headline">fork内核源代码分析</h1>
         
 
         <div class="post-meta">
@@ -300,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T12:09:16+08:00">
-                2018-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
+                2018-06-01
               </time>
             
 
@@ -323,8 +323,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分布式/" itemprop="url" rel="index">
-                    <span itemprop="name">分布式</span>
+                  <a href="/categories/fork/" itemprop="url" rel="index">
+                    <span itemprop="name">fork</span>
                   </a>
                 </span>
 
@@ -341,9 +341,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/03/15/2pcAnd3pc/#comments" itemprop="discussionUrl">
+                <a href="/2018/06/01/fork/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/03/15/2pcAnd3pc/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/06/01/fork/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,13 +371,8 @@
       
 
       
-        <h2 id="1-2pc说明"><a href="#1-2pc说明" class="headerlink" title="1. 2pc说明"></a>1. 2pc说明</h2><p><strong>第一阶段(请求提交阶段)</strong><br>1.协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。<br>2.参与者节点执行询问发起为止的所有事务操作，并将undo和redo信息写进日志<br>3.各参与者节点响应协调者节点发起的询问。<br><strong>第二阶段(提交执行阶段)</strong><br>成功：<br>当协调者节点从所有参与者节点获得的相应消息都为”同意”时：<br>1.协调者节点向所有参与者节点发出”正式提交”的请求。<br>2.与者节点正式完成操作，并释放在整个事务期间内占用的资源。<br>3.参与者节点向协调者节点发送”完成”消息。<br>4.协调者节点收到所有参与者节点反馈的”完成”消息后，完成事务。<br>失败：<br>如果任一参与者节点在第一阶段返回的响应消息为”终止”，或者 协调者节点在第一阶段的询问超时之前无法获取所有参与者节点的响应消息时：<br>1.协调者节点向所有参与者节点发出”回滚操作”的请求。<br>2.参与者节点利用之前写入的Undo信息执行回滚，并释放在整个事务期间内占用的资源。<br>3.参与者节点向协调者节点发送”回滚完成”消息。<br>4.协调者节点收到所有参与者节点反馈的”回滚完成”消息后，取消事务。<br><strong>缺点</strong><br>很明显，容易陷入阻塞状态，占用资源得不到释放；另外，第二阶段如果协调者向参与者发出提交操作，而参与者此时崩溃，协调者无法获取参与者的响应信息。</p>
-<h2 id="2-3pc说明"><a href="#2-3pc说明" class="headerlink" title="2. 3pc说明"></a>2. 3pc说明</h2><p><img src="http://ous5r4na6.bkt.clouddn.com/static/images/3pc.png" alt="">  </p>
-<p>下面这段是网上看到的，解释3pc为什么相对于2pc会减少阻塞：</p>
-<blockquote>
-<p>在doCommit阶段，如果参与者无法及时接收到来自协调者的doCommit或者rebort请求时，会在等待超时之后，会继续进行事务的提交。（其实这个应该是基于概率来决定的，当进入第三阶段时，说明参与者在第二阶段已经收到了PreCommit请求，那么协调者产生PreCommit请求的前提条件是他在第二阶段开始之前，收到所有参与者的CanCommit响应都是Yes。（一旦参与者收到了PreCommit，意味他知道大家其实都同意修改了）所以，一句话概括就是，当进入第三阶段时，由于网络超时等原因，虽然参与者没有收到commit或者abort响应，但是他有理由相信：成功提交的几率很大） </p>
-</blockquote>
-<p>特殊情况：如果协调者发送了abort而某个参与者没有收到，超时之后执行commit，其他的参与者接收abort之后执行回滚，这种情况下参与者之间存在数据不一致的问题。</p>
+        <h3 id="1-verify-area-kernel-fork-c"><a href="#1-verify-area-kernel-fork-c" class="headerlink" title="1. verify_area(kernel/fork.c)"></a>1. verify_area(kernel/fork.c)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">参数addr为逻辑地址, size为原长度</div><div class="line">void verify_area(void * addr,int size)</div><div class="line">&#123;</div><div class="line">	unsigned long start;</div><div class="line"></div><div class="line">	start = (unsigned long) addr;</div><div class="line">	//start &amp; 0xfff计算原起始位置在其所处的页面的偏移量   </div><div class="line">	//加上原长度size就是调整之后的size，原理如下图</div><div class="line">	size += start &amp; 0xfff;</div><div class="line">	//把start调整到页面边界值</div><div class="line">	start &amp;= 0xfffff000;</div><div class="line">	//加上进程数据段在线性空间中的起始基址，start就是整个线性地址空间中的位置</div><div class="line">	start += get_base(current-&gt;ldt[2]);</div><div class="line">	while (size&gt;0) &#123;</div><div class="line">		size -= 4096;</div><div class="line">		//每次验证一个4k页面的大小</div><div class="line">		write_verify(start);</div><div class="line">		start += 4096;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">write_verify(mm/memory.c)分析：</div><div class="line">void write_verify(unsigned long address)</div><div class="line">&#123;</div><div class="line">	unsigned long page;</div><div class="line">	//目录项号=address&gt;&gt;22, 每个目录项占4字节，页目录表从物理地址0开始   </div><div class="line">	//所以实际的目录项指针=address&gt;&gt;20，&amp;0xffc屏蔽页表项索引的内容    </div><div class="line">	//之后取页目录项的内容，判断页目录项对应的页表是否存在，不存在就返回    </div><div class="line">	if (!( (page = *((unsigned long *) ((address&gt;&gt;20) &amp; 0xffc)) )&amp;1))</div><div class="line">		return;</div><div class="line">	//取页表地址   </div><div class="line">	page &amp;= 0xfffff000;</div><div class="line">	//这里用页表地址+页表项偏移值，取页表项指针</div><div class="line">	page += ((address&gt;&gt;10) &amp; 0xffc);</div><div class="line">	//判断是否满足：页面存在且该页面不可写</div><div class="line">	if ((3 &amp; *(unsigned long *) page) == 1)  /* non-writeable, present */</div><div class="line">		un_wp_page((unsigned long *) page);</div><div class="line">	return;</div><div class="line">&#125;</div><div class="line">un_wp_page(mm/memory.c)分析：</div><div class="line">//参数为页表项指针</div><div class="line">void un_wp_page(unsigned long * table_entry)</div><div class="line">&#123;</div><div class="line">	unsigned long old_page,new_page;</div><div class="line">	//取old_page的页框地址</div><div class="line">	old_page = 0xfffff000 &amp; *table_entry;</div><div class="line">	//页框地址在主存中且该页面被引用次数为1（没有共享）   </div><div class="line">	//如果该内存页面只被一个进程使用并且不是内核中的进程！</div><div class="line">	if (old_page &gt;= LOW_MEM &amp;&amp; mem_map[MAP_NR(old_page)]==1) &#123;</div><div class="line">		//设置可写标志，不需要重新申请新的页面</div><div class="line">		*table_entry |= 2;</div><div class="line">		invalidate();</div><div class="line">		return;</div><div class="line">	&#125;</div><div class="line">	//否则需要申请新的页面，取消页面共享</div><div class="line">	if (!(new_page=get_free_page()))</div><div class="line">		oom();</div><div class="line">	//将原页面的引用次数-1</div><div class="line">	if (old_page &gt;= LOW_MEM)</div><div class="line">		mem_map[MAP_NR(old_page)]--;</div><div class="line">	//将原页面内容写到新的页面上</div><div class="line">	copy_page(old_page,new_page);</div><div class="line">	*table_entry = new_page | 7;</div><div class="line">	invalidate();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://ous5r4na6.bkt.clouddn.com/fork1.png" alt=""><br><img src="http://ous5r4na6.bkt.clouddn.com/fork2.png" alt=""></p>
 
       
     </div>
@@ -393,12 +388,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/协议/" rel="tag"># 协议</a>
-          
-        </div>
-      
 
       
       
@@ -408,8 +397,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/15/leetcode260/" rel="next" title="Leetcode 260. 只出现一次的数字 III">
-                <i class="fa fa-chevron-left"></i> Leetcode 260. 只出现一次的数字 III
+              <a href="/2018/05/31/leetcode39/" rel="next" title="Leetcode 39. 组合总和">
+                <i class="fa fa-chevron-left"></i> Leetcode 39. 组合总和
               </a>
             
           </div>
@@ -418,8 +407,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/17/leetcode78/" rel="prev" title="Leetcode 78. 子集">
-                Leetcode 78. 子集 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/01/leetcode22/" rel="prev" title="Leetcode 22. 括号生成">
+                Leetcode 22. 括号生成 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2pc说明"><span class="nav-number">1.</span> <span class="nav-text">1. 2pc说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3pc说明"><span class="nav-number">2.</span> <span class="nav-text">2. 3pc说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-verify-area-kernel-fork-c"><span class="nav-number">1.</span> <span class="nav-text">1. verify_area(kernel/fork.c)</span></a></li></ol></div>
             
 
           </div>
@@ -747,9 +736,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/03/15/2pcAnd3pc/';
-          this.page.identifier = '2018/03/15/2pcAnd3pc/';
-          this.page.title = '两阶段和三阶段提交协议的理解';
+          this.page.url = 'http://yoursite.com/2018/06/01/fork/';
+          this.page.identifier = '2018/06/01/fork/';
+          this.page.title = 'fork内核源代码分析';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
