@@ -38,6 +38,37 @@
   </entry>
   
   <entry>
+    <title>从内核源码看如何设置陷阱门</title>
+    <link href="http://yoursite.com/2018/06/13/trapgate/"/>
+    <id>http://yoursite.com/2018/06/13/trapgate/</id>
+    <published>2018-06-12T16:00:00.000Z</published>
+    <updated>2018-06-13T12:44:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>以trap_init函数中set_trap_gate(0,&amp;divide_error)为例分析设置一个陷阱门的过程。</p>
+<h3 id="1-trap-init"><a href="#1-trap-init" class="headerlink" title="1. trap_init()"></a>1. trap_init()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">void trap_init(void)</div><div class="line">&#123;</div><div class="line">	int i;</div><div class="line">	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   </div><div class="line">	set_trap_gate(0,&amp;divide_error);</div><div class="line">	set_trap_gate(1,&amp;debug);</div><div class="line">	set_trap_gate(2,&amp;nmi);</div><div class="line">	/*</div><div class="line">	...</div><div class="line">	*/</div><div class="line">&#125;</div><div class="line">```  </div><div class="line"></div><div class="line">### 2. set\_trap_gate()</div></pre></td></tr></table></figure>
+<p>&amp;idt[n]是中断号n在idt表中的偏移地址，中断描述符的类型为15，特权级为0</p>
+<p>#define set_trap_gate(n,addr) \<br>    _set_gate(&amp;idt[n],15,0,addr)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 3. \_set_gate()</div></pre></td></tr></table></figure></p>
+<p>#define _set_gate(gate_addr,type,dpl,addr) \<br><strong>asm</strong> (“movw %%dx,%%ax\n\t” \<br>    “movw %0,%%dx\n\t” \<br>    “movl %%eax,%1\n\t” \<br>    “movl %%edx,%2” \<br>    : \<br>    : “i” ((short) (0x8000+(dpl&lt;&lt;13)+(type&lt;&lt;8))), \<br>    “o” (<em>((char </em>) (gate_addr))), \<br>    “o” (<em>(4+(char </em>) (gate_addr))), \<br>    “d” ((char *) (addr)),”a” (0x00080000))<br>```<br>看这段代码可以对着这张图：<br><img src="http://ous5r4na6.bkt.clouddn.com/trapgate.png" alt=""></p>
+<p>下面逐行分析设置的过程：    </p>
+<ol>
+<li>movw %%dx,%%ax<br>从输入的内容看，edx存放的是中断处理程序偏移地址，这里取该偏移地址的低16位放到eax的低16位，eax原来存放的内容：0x00080000， 0x0008是内核代码段的选择符。执行后，eax存放的就是陷阱门低4字节的内容(含义如上图)   </li>
+<li>movw %0,%%dx<br>%0存放的是4，5字节(从0开始)的内容，组成edx低2字节的内容.edx中原来存放的是中断处理程序的偏移地址，高2字节加前面的低2字节的内容组成陷阱门高4字节的内容。<br>后面的movl %%eax,%1； movl %%edx,%2； 就是根据前2步的结果填充gate_addr处的内容。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。&lt;/p&gt;
+&lt;h3 id=&quot;1-trap-init&quot;&gt;&lt;a href=&quot;#1-trap-init&quot; class=&quot;headerlink&quot; title=&quot;
+    
+    </summary>
+    
+      <category term="kernel" scheme="http://yoursite.com/categories/kernel/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>dup和dup2的理解</title>
     <link href="http://yoursite.com/2018/06/08/dup/"/>
     <id>http://yoursite.com/2018/06/08/dup/</id>
@@ -135,29 +166,6 @@
   </entry>
   
   <entry>
-    <title>Leetcode 22. 括号生成</title>
-    <link href="http://yoursite.com/2018/06/01/leetcode22/"/>
-    <id>http://yoursite.com/2018/06/01/leetcode22/</id>
-    <published>2018-05-31T16:00:00.000Z</published>
-    <updated>2018-06-07T13:42:01.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
-    
-    </summary>
-    
-      <category term="dfs, leetcode" scheme="http://yoursite.com/categories/dfs-leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>fork内核源代码分析</title>
     <link href="http://yoursite.com/2018/06/01/fork/"/>
     <id>http://yoursite.com/2018/06/01/fork/</id>
@@ -176,6 +184,29 @@
     </summary>
     
       <category term="fork" scheme="http://yoursite.com/categories/fork/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode 22. 括号生成</title>
+    <link href="http://yoursite.com/2018/06/01/leetcode22/"/>
+    <id>http://yoursite.com/2018/06/01/leetcode22/</id>
+    <published>2018-05-31T16:00:00.000Z</published>
+    <updated>2018-06-07T13:42:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+    
+    </summary>
+    
+      <category term="dfs, leetcode" scheme="http://yoursite.com/categories/dfs-leetcode/"/>
     
     
   </entry>
@@ -618,41 +649,6 @@
       <category term="apue" scheme="http://yoursite.com/tags/apue/"/>
     
       <category term="IO" scheme="http://yoursite.com/tags/IO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>unbuffered IO</title>
-    <link href="http://yoursite.com/2018/04/01/uio/"/>
-    <id>http://yoursite.com/2018/04/01/uio/</id>
-    <published>2018-03-31T16:00:00.000Z</published>
-    <updated>2018-06-01T07:24:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="1-unbuffered-IO"><a href="#1-unbuffered-IO" class="headerlink" title="1. unbuffered IO"></a>1. unbuffered IO</h3><p>与标准IO对应，不带缓冲指的是read和write都调用内核的系统调用。<br>对于内核而言，所有打开的文件都通过文件描述符引用。<br>按照惯例， 文件描述符0与标准输入关联，1与标准输出关联，2与标准错误关联。<br>分别被定义为STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO. </p>
-<h3 id="2-lseek"><a href="#2-lseek" class="headerlink" title="2. lseek"></a>2. lseek</h3><p><code>off_t lseek(int fd, off_t offset, int whence)</code><br>返回值： 成功返回新的文件偏移量，失败返回-1    </p>
-<p>tips: 此操作只修改文件表项中当前文件偏移量，不作任何IO处理</p>
-<p>参数offset的解释依赖于参数whence的值:   </p>
-<blockquote>
-<p>SEEK_SET， 将文件偏移量设置为距文件开始出offset个字节<br>SEEK_CUR, 将文件偏移量设置为当前值加offset, offset可正可负<br>SEEK_END, 将文件便宜来那个设置为文件长度加offset, offset同样可正可负   </p>
-</blockquote>
-<p>lseek用于创建空洞文件的实例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">char buf1[] = &quot;abcdefghij&quot;;</div><div class="line">char buf2[] = &quot;ABCDEFGHIJ&quot;;</div><div class="line"></div><div class="line">int</div><div class="line">main(void)</div><div class="line">&#123;</div><div class="line">    int fd;</div><div class="line"></div><div class="line">    if ((fd = creat(&quot;/root/apue/file.hole&quot;, FILE_MODE)) &lt; 0)</div><div class="line">        err_sys(&quot; create error&quot;);</div><div class="line">    if (write(fd, buf1, 10) != 10)</div><div class="line">        err_sys(&quot;buf1 write error&quot;);</div><div class="line">	 //偏移量为10</div><div class="line">    if (lseek(fd, 16384, SEEK_SET) == -1)</div><div class="line">        err_sys(&quot;lseek error&quot;);</div><div class="line">    //偏移量为16384</div><div class="line">    if (write(fd, buf2, 10) != 10)</div><div class="line">        err_sys(&quot;buf2 write error&quot;);</div><div class="line">	 //偏移量为16394</div><div class="line">    exit(0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>运行结果：<br>[root@centos apue]# ls -l file.hole<br>-rw-r–r–. 1 root root 16394 Apr  1 01:25 file.hole   </p>
-</blockquote>
-<h3 id="3-内核表示打开文件的结构"><a href="#3-内核表示打开文件的结构" class="headerlink" title="3.内核表示打开文件的结构"></a>3.内核表示打开文件的结构</h3><p>1.每个进程在进程表中都有一个记录项， 记录项中包含一张打开文件描述符表，这里在Linux0.12中应该是对应的: struct file * filp[NR_OPEN];<br>2.内核为所有打开文件维持一张打开文件表<br>3.每个打开文件都有一个v节点结构，这里注意，linux中没有v节点，而是使用通用的i节点  </p>
-<p>unix打开文件的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/2.png" alt=""></p>
-<p>下图是0.12内核中进程打开文件使用的内核数据结构：<br><img src="http://ous5r4na6.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180601150803.png" alt="">   </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;1-unbuffered-IO&quot;&gt;&lt;a href=&quot;#1-unbuffered-IO&quot; class=&quot;headerlink&quot; title=&quot;1. unbuffered IO&quot;&gt;&lt;/a&gt;1. unbuffered IO&lt;/h3&gt;&lt;p&gt;与标准IO对应，不带缓冲指的是r
-    
-    </summary>
-    
-      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
-    
     
   </entry>
   
