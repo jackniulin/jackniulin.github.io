@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。看这段代码可以参考这张图： ##1. trap_init()12345678void trap_init(void)&amp;#123;	int i;	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   	set_trap_gate(0,&amp;amp;divide_error)">
+<meta name="description" content="以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。看这段代码可以参考这张图： 1. trap_init()123456789void trap_init(void)&amp;#123;	int i;	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   	set_trap_gate(0,&amp;amp;divide_error);">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从内核源码看如何设置陷阱门">
 <meta property="og:url" content="http://yoursite.com/2018/06/13/trapgate/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。看这段代码可以参考这张图： ##1. trap_init()12345678void trap_init(void)&amp;#123;	int i;	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   	set_trap_gate(0,&amp;amp;divide_error)">
+<meta property="og:description" content="以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。看这段代码可以参考这张图： 1. trap_init()123456789void trap_init(void)&amp;#123;	int i;	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   	set_trap_gate(0,&amp;amp;divide_error);">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ous5r4na6.bkt.clouddn.com/trapgate.png">
-<meta property="og:updated_time" content="2018-06-13T13:05:41.000Z">
+<meta property="og:updated_time" content="2018-06-13T13:08:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从内核源码看如何设置陷阱门">
-<meta name="twitter:description" content="以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。看这段代码可以参考这张图： ##1. trap_init()12345678void trap_init(void)&amp;#123;	int i;	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   	set_trap_gate(0,&amp;amp;divide_error)">
+<meta name="twitter:description" content="以trap_init函数中set_trap_gate(0,&amp;amp;divide_error)为例分析设置一个陷阱门的过程。看这段代码可以参考这张图： 1. trap_init()123456789void trap_init(void)&amp;#123;	int i;	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   	set_trap_gate(0,&amp;amp;divide_error);">
 <meta name="twitter:image" content="http://ous5r4na6.bkt.clouddn.com/trapgate.png">
 
 
@@ -371,7 +371,7 @@
 
       
         <p>以trap_init函数中set_trap_gate(0,&amp;divide_error)为例分析设置一个陷阱门的过程。<br>看这段代码可以参考这张图：<br><img src="http://ous5r4na6.bkt.clouddn.com/trapgate.png" alt=""></p>
-<p>##1. trap_init()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">void trap_init(void)</div><div class="line">&#123;</div><div class="line">	int i;</div><div class="line">	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   </div><div class="line">	set_trap_gate(0,&amp;divide_error);</div><div class="line">	set_trap_gate(1,&amp;debug);</div><div class="line">	set_trap_gate(2,&amp;nmi);   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="1-trap-init"><a href="#1-trap-init" class="headerlink" title="1. trap_init()"></a>1. trap_init()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">void trap_init(void)</div><div class="line">&#123;</div><div class="line">	int i;</div><div class="line">	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   </div><div class="line">	set_trap_gate(0,&amp;divide_error);</div><div class="line">	set_trap_gate(1,&amp;debug);</div><div class="line">	set_trap_gate(2,&amp;nmi);</div><div class="line">	/*...*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-set-trap-gate"><a href="#2-set-trap-gate" class="headerlink" title="2. set_trap_gate()"></a>2. set_trap_gate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;idt[n]是中断号n在idt表中的偏移地址，中断描述符的类型为15，特权级为0</div><div class="line">#define set_trap_gate(n,addr) </div><div class="line">	_set_gate(&amp;idt[n],15,0,addr)</div></pre></td></tr></table></figure>
 <h2 id="3-set-gate"><a href="#3-set-gate" class="headerlink" title="3. _set_gate()"></a>3. _set_gate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#define _set_gate(gate_addr,type,dpl,addr) </div><div class="line">__asm__ (&quot;movw %%dx,%%ax\n\t&quot; </div><div class="line">	&quot;movw %0,%%dx\n\t&quot; </div><div class="line">	&quot;movl %%eax,%1\n\t&quot; </div><div class="line">	&quot;movl %%edx,%2&quot; </div><div class="line">	: </div><div class="line">	: &quot;i&quot; ((short) (0x8000+(dpl&lt;&lt;13)+(type&lt;&lt;8))), </div><div class="line">	&quot;o&quot; (*((char *) (gate_addr))), </div><div class="line">	&quot;o&quot; (*(4+(char *) (gate_addr))), </div><div class="line">	&quot;d&quot; ((char *) (addr)),&quot;a&quot; (0x00080000))</div></pre></td></tr></table></figure>
 <p>下面逐行分析设置的过程：    </p>
@@ -587,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-set-trap-gate"><span class="nav-number">1.</span> <span class="nav-text">2. set_trap_gate()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-set-gate"><span class="nav-number">2.</span> <span class="nav-text">3. _set_gate()</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-trap-init"><span class="nav-number">1.</span> <span class="nav-text">1. trap_init()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-set-trap-gate"><span class="nav-number">2.</span> <span class="nav-text">2. set_trap_gate()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-set-gate"><span class="nav-number">3.</span> <span class="nav-text">3. _set_gate()</span></a></li></ol></div>
             
 
           </div>
