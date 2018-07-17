@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-17T03:53:19.000Z</updated>
+  <updated>2018-06-13T09:11:43.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,20 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/07/17/quicksort/"/>
-    <id>http://yoursite.com/2018/07/17/quicksort/</id>
-    <published>2018-07-17T03:53:19.000Z</published>
-    <updated>2018-07-17T03:53:19.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Leetcode443. String Compression</title>
@@ -178,29 +164,6 @@
   </entry>
   
   <entry>
-    <title>Leetcode 22. 括号生成</title>
-    <link href="http://yoursite.com/2018/06/01/leetcode22/"/>
-    <id>http://yoursite.com/2018/06/01/leetcode22/</id>
-    <published>2018-05-31T16:00:00.000Z</published>
-    <updated>2018-06-07T13:42:01.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
-    
-    </summary>
-    
-      <category term="dfs, leetcode" scheme="http://yoursite.com/categories/dfs-leetcode/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>fork内核源代码分析</title>
     <link href="http://yoursite.com/2018/06/01/fork/"/>
     <id>http://yoursite.com/2018/06/01/fork/</id>
@@ -219,6 +182,29 @@
     </summary>
     
       <category term="fork" scheme="http://yoursite.com/categories/fork/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Leetcode 22. 括号生成</title>
+    <link href="http://yoursite.com/2018/06/01/leetcode22/"/>
+    <id>http://yoursite.com/2018/06/01/leetcode22/</id>
+    <published>2018-05-31T16:00:00.000Z</published>
+    <updated>2018-06-07T13:42:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-题目描述&quot;&gt;&lt;a href=&quot;#1-题目描述&quot; class=&quot;headerlink&quot; title=&quot;1. 题目描述&quot;&gt;&lt;/a&gt;1. 题目描述&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;g
+    
+    </summary>
+    
+      <category term="dfs, leetcode" scheme="http://yoursite.com/categories/dfs-leetcode/"/>
     
     
   </entry>
@@ -614,6 +600,53 @@
     
       <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>冲洗内存流和追加写null字节策略</title>
+    <link href="http://yoursite.com/2018/04/08/fmemopen/"/>
+    <id>http://yoursite.com/2018/04/08/fmemopen/</id>
+    <published>2018-04-08T11:43:42.000Z</published>
+    <updated>2018-06-06T03:50:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-内存流"><a href="#1-内存流" class="headerlink" title="1.内存流"></a>1.内存流</h2><p>FILE <em>fmemopen(void </em>restrict buf, size_t size, const char *restrict type);<br>返回值： 成功返回流指针，错误返回NULL</p>
+<h2 id="2-示例"><a href="#2-示例" class="headerlink" title="2.示例"></a>2.示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int main() &#123;</div><div class="line">    FILE *fp;</div><div class="line">    char buf[BSZ];</div><div class="line"></div><div class="line">    memset(buf, &apos;a&apos;, BSZ - 2);</div><div class="line">    buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">    buf[BSZ-1] = &apos;X&apos;;</div><div class="line">    </div><div class="line">	 //&quot;w+&quot;:把文件截断至0，为读和写打开</div><div class="line">    if ((fp = fmemopen(buf, BSZ, &quot;w+&quot;)) == NULL)</div><div class="line">        err_sys(&quot;fmemopen failed\n&quot;);</div><div class="line">    //1</div><div class="line">    //2</div><div class="line">    //3</div><div class="line">    //4    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>任何时候需要增加流缓冲中数据量以及调用fclose,fflush, fseek, fseeko以及fsetpos时会在当前位置写入一个null字节</strong>    </p>
+<h3 id="1-offset-0"><a href="#1-offset-0" class="headerlink" title="(1).offset=0"></a>(1).offset=0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">printf(&quot;initial buffer contents: %s\n&quot;, buf);</div><div class="line">fprintf(fp, &quot;hello, world&quot;);  //hello, world写入指定流</div><div class="line">printf(&quot;before flush: %s\n&quot;, buf);</div><div class="line">fflush(fp);</div><div class="line">printf(&quot;after fflush: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12    </p>
+</blockquote>
+<p>hello, world共12个字符，此时offset=12, 偏移12处的内容为null(上面加深部分有提：调用fflush会在当前位置写入一个null字节)</p>
+<h3 id="2-offset-12"><a href="#2-offset-12" class="headerlink" title="(2).offset=12"></a>(2).offset=12</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;b&apos;, BSZ - 2);</div><div class="line">buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">buf[BSZ-1] = &apos;X&apos;;</div><div class="line">fprintf(fp, &quot;hello, world&quot;);</div><div class="line">fseek(fp, 0, SEEK_CUR);</div><div class="line">printf(&quot;after fseek SEEK_CUR: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24</p>
+</blockquote>
+<p>前12个被b填充，从offset=12开始填充hello, world字符串。同时，seek设置SEEK_CUR, offset=24.</p>
+<h3 id="3-offset-24"><a href="#3-offset-24" class="headerlink" title="(3).offset=24"></a>(3).offset=24</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;c&apos;, BSZ - 2);</div><div class="line">buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">buf[BSZ-1] = &apos;X&apos;;</div><div class="line">fprintf(fp, &quot;hello, world&quot;);</div><div class="line">fseek(fp, 0, SEEK_SET);</div><div class="line">printf(&quot;after fseek SEEK_SET: %s\n&quot;, buf);</div><div class="line">printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24<br>after fseek SEEK_SET: cccccccccccccccccccccccchello, world<br>length of string in buf = 36  </p>
+</blockquote>
+<p>seek设置SEEK_SET之后，偏移值设置为缓冲区开始位置，即offset=0  </p>
+<h3 id="4-offset-0"><a href="#4-offset-0" class="headerlink" title="(4).offset=0"></a>(4).offset=0</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">memset(buf, &apos;d&apos;, BSZ - 2);</div><div class="line">   buf[BSZ-2] = &apos;\0&apos;;</div><div class="line">   buf[BSZ-1] = &apos;X&apos;;</div><div class="line">   fprintf(fp, &quot;hello, world&quot;);</div><div class="line">   </div><div class="line">   fclose(fp);</div><div class="line">   printf(&quot;after close: %s\n&quot;, buf);</div><div class="line">   printf(&quot;length of string in buf = %ld\n&quot;, (long)strlen(buf));</div></pre></td></tr></table></figure>
+<blockquote>
+<p>运行结果：<br>[root@centos apue]# ./a.out<br>initial buffer contents:<br>before flushed:<br>after fflush: hello, world<br>length of string in buf = 12<br>after fseek SEEK_CUR: bbbbbbbbbbbbhello, world<br>length of string in buf = 24<br>after fseek SEEK_SET: cccccccccccccccccccccccchello, world<br>length of string in buf = 36<br>after close: hello, worlddddddddddddddddddddddddddddddddddd<br>length of string in buf = 46    </p>
+</blockquote>
+<p>这里调用了fclose，前面提到本应追加null字节，但是这里没有，为什么呢？？？    </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-内存流&quot;&gt;&lt;a href=&quot;#1-内存流&quot; class=&quot;headerlink&quot; title=&quot;1.内存流&quot;&gt;&lt;/a&gt;1.内存流&lt;/h2&gt;&lt;p&gt;FILE &lt;em&gt;fmemopen(void &lt;/em&gt;restrict buf, size_t size, con
+    
+    </summary>
+    
+      <category term="apue" scheme="http://yoursite.com/categories/apue/"/>
+    
+    
+      <category term="apue" scheme="http://yoursite.com/tags/apue/"/>
+    
+      <category term="IO" scheme="http://yoursite.com/tags/IO/"/>
     
   </entry>
   
