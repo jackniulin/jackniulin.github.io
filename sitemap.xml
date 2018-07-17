@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/08/29/filebench/</loc>
+    
+    <lastmod>2018-07-17T04:12:41.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/07/17/quicksort/</loc>
+    
+    <lastmod>2018-07-17T03:53:19.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/06/13/trapgate/</loc>
     
     <lastmod>2018-06-13T13:08:18.000Z</lastmod>
@@ -82,13 +96,6 @@
     <loc>http://yoursite.com/2018/03/19/committransaction/</loc>
     
     <lastmod>2018-06-07T13:46:41.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/08/29/filebench/</loc>
-    
-    <lastmod>2018-06-07T13:46:27.000Z</lastmod>
     
   </url>
   

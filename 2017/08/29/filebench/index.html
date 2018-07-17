@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Lin Niu">
 <meta property="og:description" content="1. filebench下载客户端安装：filebench        系统:SUSE Linux Enterprise Server 11 SP1  (x86_64)         Filebench is a file system and storage benchmark that can generate a largevariety of workloads. Unlike typ">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-07T13:46:27.000Z">
+<meta property="og:updated_time" content="2018-07-17T04:12:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="filebench测试">
 <meta name="twitter:description" content="1. filebench下载客户端安装：filebench        系统:SUSE Linux Enterprise Server 11 SP1  (x86_64)         Filebench is a file system and storage benchmark that can generate a largevariety of workloads. Unlike typ">
@@ -374,7 +374,11 @@
 <blockquote>
 <p>Filebench is a file system and storage benchmark that can generate a large<br>variety of workloads. Unlike typical benchmarks it is extremely flexible and<br>allows to specify application’s I/O behavior using its extensive Workload Model<br>Language (WML).       </p>
 </blockquote>
-<h2 id="2-用户自定义工作负载"><a href="#2-用户自定义工作负载" class="headerlink" title="2. 用户自定义工作负载"></a>2. 用户自定义工作负载</h2><p>示例：<br>一个负载包含2个进程，其中每个进程又含有三个线程。    </p>
+<h2 id="2-用户自定义工作负载"><a href="#2-用户自定义工作负载" class="headerlink" title="2. 用户自定义工作负载"></a>2. 用户自定义工作负载</h2><p>filebench自带了一些workload，在/filebench/workloads中<br><strong>使用：</strong>     </p>
+<blockquote>
+<p>[root@localhost workloads]# filebench<br>Filebench Version 1.4.9.1<br> 1996: 0.000: Allocated 170MB of shared memory<br>filebench&gt; load fileserver<br> 1996: 81.152: File-server Version 3.0 personality successfully loaded<br> 1996: 81.152: Usage: set $dir=\<dir><br> 1996: 81.152:        set $meanfilesize=<size>     defaults to 131072<br> 1996: 81.152:        set $nfiles=<value>      defaults to 100<br> 1996: 81.152:        set $nthreads=<value>    defaults to 1<br> 1996: 81.152:        set $meanappendsize=<value>  defaults to 16384<br> 1996: 81.152:        set $iosize=<size>  defaults to 1048576<br> 1996: 81.152:        set $meandirwidth=<size> defaults to 20<br> 1996: 81.152:        run runtime (e.g. run 60)</size></size></value></value></value></size></dir></p>
+</blockquote>
+<p>示例：<br>一个负载包含2个进程，其中每个进程又含有三个线程。    </p>
 <pre><code>01  define fileset name=&quot;testF&quot;,entries=10000,filesize=16k,prealloc,path=&quot;/tmp&quot;
 02
 03  define process name=&quot;readerP&quot;,instances=2 {
@@ -532,7 +536,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
