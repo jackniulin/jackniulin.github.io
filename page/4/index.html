@@ -1038,6 +1038,137 @@ public:
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/17/balance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/17/balance/" itemprop="url">判断是否为二叉平衡树C++</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-17T00:00:00+08:00">
+                2017-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/17/balance/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/11/17/balance/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-想法"><a href="#1-想法" class="headerlink" title="1.想法"></a>1.想法</h2><p>平衡树的要求: 任何一个节点左右子树的高度差不超过1<br>首先递归地判断根节点左右子树是否平衡，之后分别进入左右子树，再以当前节点为根，重复上述判断。</p>
+<h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">struct TreeNode &#123;</div><div class="line">	int val;</div><div class="line">	TreeNode* left;</div><div class="line">	TreeNode* right;</div><div class="line">	TreeNode(int x): val(x), left(nullptr), right(nullptr)&#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	bool isBalanced(TreeNode* root) &#123;</div><div class="line">		if (!root)</div><div class="line">			return true;</div><div class="line">		int ldep = depth(root-&gt;left);</div><div class="line">		int rdep = depth(root-&gt;right);</div><div class="line">		if (abs(ldep - rdep) &gt; 1)</div><div class="line">			return false;</div><div class="line">		return isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right);</div><div class="line">	&#125;</div><div class="line">	int depth(TreeNode* root) &#123;</div><div class="line">		if (!root)</div><div class="line">			return 0;</div><div class="line">		int ldep = depth(root-&gt;left);</div><div class="line">		int rdep = depth(root-&gt;right);</div><div class="line">		return ldep &gt;= rdep ? ldep + 1: rdep + 1;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/16/leetcode109/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1658,168 +1789,6 @@ public:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/11/symlink/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/11/symlink/" itemprop="url">symlink and hardlink</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T00:00:00+08:00">
-                2017-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kernel/" itemprop="url" rel="index">
-                    <span itemprop="name">kernel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/11/symlink/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/11/symlink/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-硬链接"><a href="#1-硬链接" class="headerlink" title="1.硬链接"></a>1.硬链接</h2><p>一张图说明硬链接：<br><img src="http://ous5r4na6.bkt.clouddn.com/B40ED80A-E430-45E5-8DF3-19AF9DDF74ED.png" alt=""><br>不需要创建额外的i节点， 指向同一个节点。<br><strong>硬链接的限制：</strong><br>硬链接通常要求链接和文件位于同一文件系统中。<br>只有超级用户才能创建指向目录的硬链接。   </p>
-<blockquote>
-<p>int link(const char* existingpath, const char* newpath)<br>该函数创建一个指向现有文件链接<br>int unlink(const char* pathname)<br>删除一个现有的目录项</p>
-</blockquote>
-<h3 id="源代码分析："><a href="#源代码分析：" class="headerlink" title="源代码分析："></a>源代码分析：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">int sys_link(const char * oldname, const char * newname)</div><div class="line">&#123;</div><div class="line">	struct dir_entry * de;</div><div class="line">	struct m_inode * oldinode, * dir;</div><div class="line">	struct buffer_head * bh;</div><div class="line">	const char * basename;</div><div class="line">	int namelen;</div><div class="line">	//通过文件名找到oldinode</div><div class="line">	oldinode=namei(oldname);</div><div class="line">	if (!oldinode)</div><div class="line">		return -ENOENT;</div><div class="line">	//oldinode不应该是一个目录</div><div class="line">	if (S_ISDIR(oldinode-&gt;i_mode)) &#123;</div><div class="line">		iput(oldinode);</div><div class="line">		return -EPERM;</div><div class="line">	&#125;</div><div class="line">	//找到将存放新目录项的目录，并保存这个新目录项的namelen和basename</div><div class="line">	dir = dir_namei(newname,&amp;namelen,&amp;basename, NULL);</div><div class="line">	if (!dir) &#123;</div><div class="line">		iput(oldinode);</div><div class="line">		return -EACCES;</div><div class="line">	&#125;</div><div class="line">	if (!namelen) &#123;</div><div class="line">		iput(oldinode);</div><div class="line">		iput(dir);</div><div class="line">		return -EPERM;</div><div class="line">	&#125;</div><div class="line">	//新的目录项所处的目录和oldinode不应该跨设备</div><div class="line">	if (dir-&gt;i_dev != oldinode-&gt;i_dev) &#123;</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -EXDEV;</div><div class="line">	&#125;</div><div class="line">	//确定当前用户对dir有写权限</div><div class="line">	if (!permission(dir,MAY_WRITE)) &#123;</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -EACCES;</div><div class="line">	&#125;</div><div class="line">	//find_entry的作用：finds an entry in the specified directory with the wanted name. It returns the cache buffer in which the entry was found, and the entry itself (as a parameter - res_dir).</div><div class="line">	bh = find_entry(&amp;dir,basename,namelen,&amp;de);</div><div class="line">	//如果在dir下找到了basename的目录项，失败</div><div class="line">	if (bh) &#123;</div><div class="line">		brelse(bh);</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -EEXIST;</div><div class="line">	&#125;</div><div class="line">	//将表示basename的目录项添加到dir的目录表中</div><div class="line">	bh = add_entry(dir,basename,namelen,&amp;de);</div><div class="line">	if (!bh) &#123;</div><div class="line">		iput(dir);</div><div class="line">		iput(oldinode);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	//de指向的节点为oldinode</div><div class="line">	de-&gt;inode = oldinode-&gt;i_num;</div><div class="line">	//缓冲区脏标记位置位</div><div class="line">	bh-&gt;b_dirt = 1;</div><div class="line">	brelse(bh);</div><div class="line">	iput(dir);</div><div class="line">	//引用计数+1</div><div class="line">	oldinode-&gt;i_nlinks++;</div><div class="line">	oldinode-&gt;i_ctime = CURRENT_TIME;</div><div class="line">	oldinode-&gt;i_dirt = 1;</div><div class="line">	iput(oldinode);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-创建符号链接"><a href="#2-创建符号链接" class="headerlink" title="2.创建符号链接"></a>2.创建符号链接</h2><blockquote>
-<p>int symlink(const char* actualpath, const char* sympath)</p>
-</blockquote>
-<p>创建symlink并不要求actualpath实际存在，actualpath和sympath可以位于不同的文件系统中。<br>下面创建符号链接的代码，和上面创建硬链接的代码比较，可以看出两者实际操作方式的差异</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">int sys_symlink(const char * oldname, const char * newname)</div><div class="line">&#123;</div><div class="line">	struct dir_entry * de;</div><div class="line">	struct m_inode * dir, * inode;</div><div class="line">	struct buffer_head * bh, * name_block;</div><div class="line">	const char * basename;</div><div class="line">	int namelen, i;</div><div class="line">	char c;</div><div class="line">	</div><div class="line">	dir = dir_namei(newname,&amp;namelen,&amp;basename, NULL);</div><div class="line">	if (!dir)</div><div class="line">		return -EACCES;</div><div class="line">	if (!namelen) &#123;</div><div class="line">		iput(dir);</div><div class="line">		return -EPERM;</div><div class="line">	&#125;</div><div class="line">	if (!permission(dir,MAY_WRITE)) &#123;</div><div class="line">		iput(dir);</div><div class="line">		return -EACCES;</div><div class="line">	&#125;</div><div class="line">	//符号链接会创建新的inode</div><div class="line">	if (!(inode = new_inode(dir-&gt;i_dev))) &#123;</div><div class="line">		iput(dir);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	inode-&gt;i_mode = S_IFLNK | (0777 &amp; ~current-&gt;umask);</div><div class="line">	inode-&gt;i_dirt = 1;</div><div class="line">	//为这个新创建的inode分配一块数据块</div><div class="line">	if (!(inode-&gt;i_zone[0]=new_block(inode-&gt;i_dev))) &#123;</div><div class="line">		iput(dir);</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	inode-&gt;i_dirt = 1;</div><div class="line">	//把上面分配的数据块读到缓冲区中</div><div class="line">	if (!(name_block=bread(inode-&gt;i_dev,inode-&gt;i_zone[0]))) &#123;</div><div class="line">		iput(dir);</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		return -ERROR;</div><div class="line">	&#125;</div><div class="line">	i = 0;</div><div class="line">	//设置缓冲区的内容，其实就是把oldname放到缓冲区中</div><div class="line">	while (i &lt; 1023 &amp;&amp; (c=get_fs_byte(oldname++)))</div><div class="line">		name_block-&gt;b_data[i++] = c;</div><div class="line">	name_block-&gt;b_data[i] = 0;</div><div class="line">	name_block-&gt;b_dirt = 1;</div><div class="line">	brelse(name_block);</div><div class="line">	//设置inode的大小，就是字节数</div><div class="line">	inode-&gt;i_size = i;</div><div class="line">	inode-&gt;i_dirt = 1;</div><div class="line">	//和sys_link相同，在dir的目录表中找个空闲位置存放这个新创建的符号链接</div><div class="line">	bh = find_entry(&amp;dir,basename,namelen,&amp;de);</div><div class="line">	if (bh) &#123;</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		brelse(bh);</div><div class="line">		iput(dir);</div><div class="line">		return -EEXIST;</div><div class="line">	&#125;</div><div class="line">	bh = add_entry(dir,basename,namelen,&amp;de);</div><div class="line">	if (!bh) &#123;</div><div class="line">		inode-&gt;i_nlinks--;</div><div class="line">		iput(inode);</div><div class="line">		iput(dir);</div><div class="line">		return -ENOSPC;</div><div class="line">	&#125;</div><div class="line">	//这里也体现了与sys_link的不同</div><div class="line">	de-&gt;inode = inode-&gt;i_num;</div><div class="line">	bh-&gt;b_dirt = 1;</div><div class="line">	brelse(bh);</div><div class="line">	iput(dir);</div><div class="line">	iput(inode);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1870,7 +1839,7 @@ public:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
