@@ -266,6 +266,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/10/binarytree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/10/binarytree/" itemprop="url">二叉树的翻转和对称二叉树的C++实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T00:00:00+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/10/binarytree/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/09/10/binarytree/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-二叉树的翻转-镜像"><a href="#1-二叉树的翻转-镜像" class="headerlink" title="1. 二叉树的翻转(镜像)"></a>1. 二叉树的翻转(镜像)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">struct TreeNode &#123;</div><div class="line">	int val;</div><div class="line">	TreeNode* left;</div><div class="line">	TreeNode* right;</div><div class="line">	TreeNode(int x):</div><div class="line">		val(x), left(nullptr), right(nullptr) &#123;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	void mirror(TreeNode* root) &#123;</div><div class="line">		if (!root)</div><div class="line">			return;</div><div class="line">		if (!root-&gt;left &amp;&amp; !root-&gt;right)</div><div class="line">			return;</div><div class="line">		TreeNode* tmp = root-&gt;left;</div><div class="line">		root-&gt;left = root-&gt;right;</div><div class="line">		root-&gt;right = root-&gt;left;</div><div class="line"></div><div class="line">		mirror(root-&gt;left);</div><div class="line">		mirrot(root-&gt;right);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="2-对称二叉树"><a href="#2-对称二叉树" class="headerlink" title="2. 对称二叉树"></a>2. 对称二叉树</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">struct TreeNode &#123;</div><div class="line">	int val;</div><div class="line">	TreeNode* left;</div><div class="line">	TreeNode* right;</div><div class="line">	TreeNode(int x): val(x), left(nullptr), right(nullptr)&#123;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">	bool isSymmetrical(TreeNode* root) &#123;</div><div class="line">		if (!root)</div><div class="line">			return true;</div><div class="line">		bool res = helper(root-&gt;left, root-&gt;right);</div><div class="line">		return res;</div><div class="line">	&#125;</div><div class="line">	bool helper(TreeNode* leftNode, TreeNode* rightNode) &#123;</div><div class="line">		if (!leftNode &amp;&amp; !rightNode)</div><div class="line">			return true;</div><div class="line">		if ((leftNode &amp;&amp; !rightNode) || (!leftNode &amp;&amp; rightNode))</div><div class="line">			return false;</div><div class="line">		if (leftNode-&gt;val != rightNode-&gt;val)</div><div class="line">			return false;</div><div class="line">		return helper(leftNode-&gt;left, rightNode-&gt;right) &amp;&amp; helper(leftNode-&gt;right, rightNode-&gt;left);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/filebench/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -962,7 +1116,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
