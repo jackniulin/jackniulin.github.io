@@ -266,160 +266,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/leetcode443/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/13/leetcode443/" itemprop="url">Leetcode443. String Compression</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
-                2018-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/13/leetcode443/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/13/leetcode443/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">Given an array of characters, compress it in-place.</div><div class="line"></div><div class="line">The length after compression must always be smaller than or equal to the original array.</div><div class="line"></div><div class="line">Every element of the array should be a character (not int) of length 1.</div><div class="line"></div><div class="line">After you are done modifying the input array in-place, return the new length of the array.</div><div class="line"></div><div class="line"></div><div class="line">Follow up:</div><div class="line">Could you solve it using only O(1) extra space?</div><div class="line"></div><div class="line"></div><div class="line">Example 1:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">&quot;aa&quot; is replaced by &quot;a2&quot;. &quot;bb&quot; is replaced by &quot;b2&quot;. &quot;ccc&quot; is replaced by &quot;c3&quot;.</div><div class="line">Example 2:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 1, and the first 1 characters of the input array should be: [&quot;a&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Nothing is replaced.</div><div class="line">Example 3:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 4, and the first 4 characters of the input array should be: [&quot;a&quot;,&quot;b&quot;,&quot;1&quot;,&quot;2&quot;].</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Since the character &quot;a&quot; does not repeat, it is not compressed. &quot;bbbbbbbbbbbb&quot; is replaced by &quot;b12&quot;.</div><div class="line">Notice each digit has it&apos;s own entry in the array.</div><div class="line">Note:</div><div class="line">All characters have an ASCII value in [35, 126].</div><div class="line">1 &lt;= len(chars) &lt;= 1000.</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>连续出现次数为1的只显示字符，大于1的要在字符之后显示该字符出现的次数，当字符连续出现的次数大于9时，要把这个计数值分割成单个的数字字符。<br>第一次写的代码没有考虑到题中要求的in-place原地算法，提交在leetcode上有热心网友给我提出了意见，之后修改为in-place. 大体的做法就是把i拿出来自己控制，这应该是一个技巧。count在这里起的作用：每次遍历的字符它连续出现的次数，每遍历完一次以后把count重置为0。<br>第二版的代码添加了两个类似于索引作用的index和size.index用来索引每次要处理的字符，size是为了in-place，它记录了本次应该写入的位置。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">//第一版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i]) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            if (count == 1) &#123; </div><div class="line">                vec.push_back(tmp);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                vec.push_back(to_string(count)[0]);    </div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                for (int j = 0; j &lt; to_string(count).size(); j++)</div><div class="line">                    vec.push_back(to_string(count)[j]);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        chars = vec;</div><div class="line">        return vec.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">//第二版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        int index = 0, size = 0;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i] &amp;&amp; i &lt; chars.size()) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            index = i - count;</div><div class="line">            chars[size] = chars[index];</div><div class="line">            if (count == 1) &#123; </div><div class="line">                count = 0;</div><div class="line">                size++;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                chars[size + 1] = to_string(count)[0];</div><div class="line">                size += 2;</div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                for (int j = 1; j &lt;= to_string(count).size(); j++)</div><div class="line">                    chars[size + j] = to_string(count)[j - 1];</div><div class="line">                size = size + 1 + to_string(count).size();</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int k = chars.size() - size; k &gt; 0; k--)</div><div class="line">            chars.pop_back();</div><div class="line">        return size;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/trapgate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -534,6 +380,160 @@
 <li>movw %0,%%dx<br>%0存放的是4，5字节(从0开始)的内容，组成edx低2字节的内容.edx中原来存放的是中断处理程序的偏移地址，高2字节加前面的低2字节的内容组成陷阱门高4字节的内容。<br>后面的movl %%eax,%1； movl %%edx,%2； 就是根据前2步的结果填充gate_addr处的内容。</li>
 </ol>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/leetcode443/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/leetcode443/" itemprop="url">Leetcode443. String Compression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/13/leetcode443/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/13/leetcode443/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">Given an array of characters, compress it in-place.</div><div class="line"></div><div class="line">The length after compression must always be smaller than or equal to the original array.</div><div class="line"></div><div class="line">Every element of the array should be a character (not int) of length 1.</div><div class="line"></div><div class="line">After you are done modifying the input array in-place, return the new length of the array.</div><div class="line"></div><div class="line"></div><div class="line">Follow up:</div><div class="line">Could you solve it using only O(1) extra space?</div><div class="line"></div><div class="line"></div><div class="line">Example 1:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">&quot;aa&quot; is replaced by &quot;a2&quot;. &quot;bb&quot; is replaced by &quot;b2&quot;. &quot;ccc&quot; is replaced by &quot;c3&quot;.</div><div class="line">Example 2:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 1, and the first 1 characters of the input array should be: [&quot;a&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Nothing is replaced.</div><div class="line">Example 3:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 4, and the first 4 characters of the input array should be: [&quot;a&quot;,&quot;b&quot;,&quot;1&quot;,&quot;2&quot;].</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Since the character &quot;a&quot; does not repeat, it is not compressed. &quot;bbbbbbbbbbbb&quot; is replaced by &quot;b12&quot;.</div><div class="line">Notice each digit has it&apos;s own entry in the array.</div><div class="line">Note:</div><div class="line">All characters have an ASCII value in [35, 126].</div><div class="line">1 &lt;= len(chars) &lt;= 1000.</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>连续出现次数为1的只显示字符，大于1的要在字符之后显示该字符出现的次数，当字符连续出现的次数大于9时，要把这个计数值分割成单个的数字字符。<br>第一次写的代码没有考虑到题中要求的in-place原地算法，提交在leetcode上有热心网友给我提出了意见，之后修改为in-place. 大体的做法就是把i拿出来自己控制，这应该是一个技巧。count在这里起的作用：每次遍历的字符它连续出现的次数，每遍历完一次以后把count重置为0。<br>第二版的代码添加了两个类似于索引作用的index和size.index用来索引每次要处理的字符，size是为了in-place，它记录了本次应该写入的位置。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">//第一版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i]) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            if (count == 1) &#123; </div><div class="line">                vec.push_back(tmp);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                vec.push_back(to_string(count)[0]);    </div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                for (int j = 0; j &lt; to_string(count).size(); j++)</div><div class="line">                    vec.push_back(to_string(count)[j]);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        chars = vec;</div><div class="line">        return vec.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">//第二版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        int index = 0, size = 0;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i] &amp;&amp; i &lt; chars.size()) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            index = i - count;</div><div class="line">            chars[size] = chars[index];</div><div class="line">            if (count == 1) &#123; </div><div class="line">                count = 0;</div><div class="line">                size++;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                chars[size + 1] = to_string(count)[0];</div><div class="line">                size += 2;</div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                for (int j = 1; j &lt;= to_string(count).size(); j++)</div><div class="line">                    chars[size + j] = to_string(count)[j - 1];</div><div class="line">                size = size + 1 + to_string(count).size();</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int k = chars.size() - size; k &gt; 0; k--)</div><div class="line">            chars.pop_back();</div><div class="line">        return size;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
           
         
       
@@ -1184,161 +1184,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/leetcode22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/01/leetcode22/" itemprop="url">Leetcode 22. 括号生成</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
-                2018-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/dfs-leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">dfs, leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/01/leetcode22/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/01/leetcode22/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/fork/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1447,6 +1292,161 @@
 <p><img src="http://ous5r4na6.bkt.clouddn.com/fork1.png" alt=""><br><img src="http://ous5r4na6.bkt.clouddn.com/fork2.png" alt=""></p>
 <h3 id="2-copy-mem-kernel-fork-c"><a href="#2-copy-mem-kernel-fork-c" class="headerlink" title="2.copy_mem(kernel/fork.c)"></a>2.copy_mem(kernel/fork.c)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line">int copy_mem(int nr,struct task_struct * p)</div><div class="line">&#123;</div><div class="line">	unsigned long old_data_base,new_data_base,data_limit;</div><div class="line">	unsigned long old_code_base,new_code_base,code_limit;</div><div class="line">	//分别取代码段限长和数据段限长</div><div class="line">	code_limit=get_limit(0x0f);</div><div class="line">	data_limit=get_limit(0x17);</div><div class="line">	old_code_base = get_base(current-&gt;ldt[1]);</div><div class="line">	old_data_base = get_base(current-&gt;ldt[2]);</div><div class="line">	//比较代码段和数据段基地址</div><div class="line">	if (old_data_base != old_code_base)</div><div class="line">		panic(&quot;We don&apos;t support separate I&amp;D&quot;);</div><div class="line">	if (data_limit &lt; code_limit)</div><div class="line">		panic(&quot;Bad data_limit&quot;);</div><div class="line">	//设置新进程在线性地址空间中的基地址</div><div class="line">	new_data_base = new_code_base = nr * TASK_SIZE;</div><div class="line">	p-&gt;start_code = new_code_base;</div><div class="line">	set_base(p-&gt;ldt[1],new_code_base);</div><div class="line">	set_base(p-&gt;ldt[2],new_data_base);</div><div class="line">	//复制父进程的页目录表项和页表项</div><div class="line">	if (copy_page_tables(old_data_base,new_data_base,data_limit)) &#123;</div><div class="line">		free_page_tables(new_data_base,data_limit);</div><div class="line">		return -ENOMEM;</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line">copy_page_tables(mm/memory.c)分析:</div><div class="line">int copy_page_tables(unsigned long from,unsigned long to,long size)</div><div class="line">&#123;</div><div class="line">	unsigned long * from_page_table;</div><div class="line">	unsigned long * to_page_table;</div><div class="line">	unsigned long this_page;</div><div class="line">	unsigned long * from_dir, * to_dir;</div><div class="line">	unsigned long new_page;</div><div class="line">	unsigned long nr;</div><div class="line">	//判断起始地址和目的地址是否在4Mb边界</div><div class="line">	if ((from&amp;0x3fffff) || (to&amp;0x3fffff))</div><div class="line">		panic(&quot;copy_page_tables called with wrong alignment&quot;);</div><div class="line">	//取源地址和目的地址起始目录项指针</div><div class="line">	from_dir = (unsigned long *) ((from&gt;&gt;20) &amp; 0xffc); /* _pg_dir = 0 */</div><div class="line">	to_dir = (unsigned long *) ((to&gt;&gt;20) &amp; 0xffc);</div><div class="line">	//计算参数size要占用多少页面的内存空间</div><div class="line">	size = ((unsigned) (size+0x3fffff)) &gt;&gt; 22;</div><div class="line">	for( ; size--&gt;0 ; from_dir++,to_dir++) &#123;</div><div class="line">		//判断目录项指定的页表是否存在</div><div class="line">		if (1 &amp; *to_dir)</div><div class="line">			panic(&quot;copy_page_tables: already exist&quot;);</div><div class="line">		if (!(1 &amp; *from_dir))</div><div class="line">			continue;</div><div class="line">		from_page_table = (unsigned long *) (0xfffff000 &amp; *from_dir);</div><div class="line">		if (!(to_page_table = (unsigned long *) get_free_page()))</div><div class="line">			return -1;	/* Out of memory, see freeing */</div><div class="line">		//设置目的目录项的信息，后三位</div><div class="line">		*to_dir = ((unsigned long) to_page_table) | 7;</div><div class="line">		//如果from是从内核空间开始，只复制160项，否则复制完整的1024项</div><div class="line">		nr = (from==0)?0xA0:1024;</div><div class="line">		for ( ; nr-- &gt; 0 ; from_page_table++,to_page_table++) &#123;</div><div class="line">			//取源页表项内容</div><div class="line">			this_page = *from_page_table;</div><div class="line">			if (!this_page)</div><div class="line">				continue;</div><div class="line">			if (!(1 &amp; this_page)) &#123;</div><div class="line">				if (!(new_page = get_free_page()))</div><div class="line">					return -1;</div><div class="line">				read_swap_page(this_page&gt;&gt;1, (char *) new_page);</div><div class="line">				*to_page_table = this_page;</div><div class="line">				*from_page_table = new_page | (PAGE_DIRTY | 7);</div><div class="line">				continue;</div><div class="line">			&#125;</div><div class="line">			//复位页表R/W标志，只读</div><div class="line">			this_page &amp;= ~2;</div><div class="line">			//用源页表项内容填充目的页表项</div><div class="line">			*to_page_table = this_page;</div><div class="line">			//指向的物理内存地址大于LOW_MEM</div><div class="line">			if (this_page &gt; LOW_MEM) &#123;</div><div class="line">				//把源页表项也设为只读</div><div class="line">				*from_page_table = this_page;</div><div class="line">				this_page -= LOW_MEM;</div><div class="line">				this_page &gt;&gt;= 12;</div><div class="line">				//该页面的引用计数+1</div><div class="line">				mem_map[this_page]++;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	invalidate();</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="3-copy-process-kernel-fork-c"><a href="#3-copy-process-kernel-fork-c" class="headerlink" title="3.copy_process(kernel/fork.c)"></a>3.copy_process(kernel/fork.c)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line">int copy_process(int nr,long ebp,long edi,long esi,long gs,long none,</div><div class="line">		long ebx,long ecx,long edx, long orig_eax,</div><div class="line">		long fs,long es,long ds,</div><div class="line">		long eip,long cs,long eflags,long esp,long ss)</div><div class="line">&#123;</div><div class="line">	struct task_struct *p;</div><div class="line">	int i;</div><div class="line">	struct file *f;</div><div class="line">	//为新任务分配内存</div><div class="line">	p = (struct task_struct *) get_free_page();</div><div class="line">	if (!p)</div><div class="line">		return -EAGAIN;</div><div class="line">	//填充指针数组内容</div><div class="line">	task[nr] = p;</div><div class="line">	//把当前任务结构内容复制到新的任务</div><div class="line">	*p = *current;	/* NOTE! this doesn&apos;t copy the supervisor stack */</div><div class="line">	//新任务设置为不可中断，防止调度</div><div class="line">	p-&gt;state = TASK_UNINTERRUPTIBLE;</div><div class="line">	//新任务的进程号</div><div class="line">	p-&gt;pid = last_pid;</div><div class="line">	p-&gt;counter = p-&gt;priority;</div><div class="line">	p-&gt;signal = 0;</div><div class="line">	p-&gt;alarm = 0;</div><div class="line">	p-&gt;leader = 0;		/* process leadership doesn&apos;t inherit */</div><div class="line">	p-&gt;utime = p-&gt;stime = 0;</div><div class="line">	p-&gt;cutime = p-&gt;cstime = 0;</div><div class="line">	p-&gt;start_time = jiffies;</div><div class="line">	p-&gt;tss.back_link = 0;</div><div class="line">	//内核态栈指针指向页面末端</div><div class="line">	p-&gt;tss.esp0 = PAGE_SIZE + (long) p;</div><div class="line">	//设置内核态栈的段选择符</div><div class="line">	p-&gt;tss.ss0 = 0x10;</div><div class="line">	p-&gt;tss.eip = eip;</div><div class="line">	p-&gt;tss.eflags = eflags;</div><div class="line">	p-&gt;tss.eax = 0;</div><div class="line">	p-&gt;tss.ecx = ecx;</div><div class="line">	p-&gt;tss.edx = edx;</div><div class="line">	p-&gt;tss.ebx = ebx;</div><div class="line">	p-&gt;tss.esp = esp;</div><div class="line">	p-&gt;tss.ebp = ebp;</div><div class="line">	p-&gt;tss.esi = esi;</div><div class="line">	p-&gt;tss.edi = edi;</div><div class="line">	p-&gt;tss.es = es &amp; 0xffff;</div><div class="line">	p-&gt;tss.cs = cs &amp; 0xffff;</div><div class="line">	p-&gt;tss.ss = ss &amp; 0xffff;</div><div class="line">	p-&gt;tss.ds = ds &amp; 0xffff;</div><div class="line">	p-&gt;tss.fs = fs &amp; 0xffff;</div><div class="line">	p-&gt;tss.gs = gs &amp; 0xffff;</div><div class="line">	//把GDT中本任务LDT段描述符的选择符保存在本任务的TSS段中</div><div class="line">	p-&gt;tss.ldt = _LDT(nr);</div><div class="line">	p-&gt;tss.trace_bitmap = 0x80000000;</div><div class="line">	if (last_task_used_math == current)</div><div class="line">		__asm__(&quot;clts ; fnsave %0 ; frstor %0&quot;::&quot;m&quot; (p-&gt;tss.i387));</div><div class="line">	//复制进程页表</div><div class="line">	if (copy_mem(nr,p)) &#123;</div><div class="line">		task[nr] = NULL;</div><div class="line">		free_page((long) p);</div><div class="line">		return -EAGAIN;</div><div class="line">	&#125;</div><div class="line">	//如果父进程中有文件是打开的，那么对应打开文件的引用计数+1，因为新进程将与父进程共享这些文件</div><div class="line">	for (i=0; i&lt;NR_OPEN;i++)</div><div class="line">		if (f=p-&gt;filp[i])</div><div class="line">			f-&gt;f_count++;</div><div class="line">	if (current-&gt;pwd)</div><div class="line">		current-&gt;pwd-&gt;i_count++;</div><div class="line">	if (current-&gt;root)</div><div class="line">		current-&gt;root-&gt;i_count++;</div><div class="line">	if (current-&gt;executable)</div><div class="line">		current-&gt;executable-&gt;i_count++;</div><div class="line">	if (current-&gt;library)</div><div class="line">		current-&gt;library-&gt;i_count++;</div><div class="line">	//源码中有一处注释：</div><div class="line">	//Entry into gdt where to find first TSS.    </div><div class="line">	//0-nul, 1-cs, 2-ds, 3-syscall 4-TSS0, 5-LDT0, 6-TSS1 etc ... </div><div class="line">	set_tss_desc(gdt+(nr&lt;&lt;1)+FIRST_TSS_ENTRY,&amp;(p-&gt;tss));</div><div class="line">	set_ldt_desc(gdt+(nr&lt;&lt;1)+FIRST_LDT_ENTRY,&amp;(p-&gt;ldt));</div><div class="line">	p-&gt;p_pptr = current;</div><div class="line">	p-&gt;p_cptr = 0;</div><div class="line">	p-&gt;p_ysptr = 0;</div><div class="line">	p-&gt;p_osptr = current-&gt;p_cptr;</div><div class="line">	if (p-&gt;p_osptr)</div><div class="line">		p-&gt;p_osptr-&gt;p_ysptr = p;</div><div class="line">	current-&gt;p_cptr = p;</div><div class="line">	p-&gt;state = TASK_RUNNING;	/* do this last, just in case */</div><div class="line">	return last_pid;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/leetcode22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/leetcode22/" itemprop="url">Leetcode 22. 括号生成</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/dfs-leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">dfs, leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/01/leetcode22/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/01/leetcode22/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
           
         
       
