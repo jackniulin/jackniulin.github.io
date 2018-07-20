@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. 题目描述123456789101112131415你需要找到由两个 n 位数的乘积组成的最大回文数。由于结果会很大，你只需返回最大回文数 mod 1337得到的结果。示例:输入: 2输出: 987解释: 99 x 91 = 9009, 9009 % 1337 = 987说明:n 的取值范围为 [1,8]。 2. 思路这道题在leetcode上划的是easy, 很尴尬，我不会做。参考了论坛上大">
+<meta name="description" content="1. 了解虚函数虚函数是应该在派生类中重新定义的成员函数，即便是基类中的成员函数调用虚函数，也会调用到派生类中的版本。虚函数也是实现C++多态特性的一部分。 2. 实例12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode479. Largest Palindrome Product">
-<meta property="og:url" content="http://yoursite.com/2018/06/08/leetcode479/index.html">
+<meta property="og:title" content="C++ virtual">
+<meta property="og:url" content="http://yoursite.com/2018/02/17/virtual/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 题目描述123456789101112131415你需要找到由两个 n 位数的乘积组成的最大回文数。由于结果会很大，你只需返回最大回文数 mod 1337得到的结果。示例:输入: 2输出: 987解释: 99 x 91 = 9009, 9009 % 1337 = 987说明:n 的取值范围为 [1,8]。 2. 思路这道题在leetcode上划的是easy, 很尴尬，我不会做。参考了论坛上大">
+<meta property="og:description" content="1. 了解虚函数虚函数是应该在派生类中重新定义的成员函数，即便是基类中的成员函数调用虚函数，也会调用到派生类中的版本。虚函数也是实现C++多态特性的一部分。 2. 实例12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-08T13:53:55.000Z">
+<meta property="og:updated_time" content="2018-07-20T03:40:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode479. Largest Palindrome Product">
-<meta name="twitter:description" content="1. 题目描述123456789101112131415你需要找到由两个 n 位数的乘积组成的最大回文数。由于结果会很大，你只需返回最大回文数 mod 1337得到的结果。示例:输入: 2输出: 987解释: 99 x 91 = 9009, 9009 % 1337 = 987说明:n 的取值范围为 [1,8]。 2. 思路这道题在leetcode上划的是easy, 很尴尬，我不会做。参考了论坛上大">
+<meta name="twitter:title" content="C++ virtual">
+<meta name="twitter:description" content="1. 了解虚函数虚函数是应该在派生类中重新定义的成员函数，即便是基类中的成员函数调用虚函数，也会调用到派生类中的版本。虚函数也是实现C++多态特性的一部分。 2. 实例12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626">
 
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/08/leetcode479/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/17/virtual/"/>
 
 
 
 
 
-  <title>Leetcode479. Largest Palindrome Product | Lin Niu</title>
+  <title>C++ virtual | Lin Niu</title>
   
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/leetcode479/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/17/virtual/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="好好活着。">
@@ -285,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Leetcode479. Largest Palindrome Product</h1>
+          <h1 class="post-title" itemprop="name headline">C++ virtual</h1>
         
 
         <div class="post-meta">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T00:00:00+08:00">
-                2018-06-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-17T00:00:00+08:00">
+                2018-02-17
               </time>
             
 
@@ -308,28 +308,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -338,9 +316,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/08/leetcode479/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/17/virtual/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/08/leetcode479/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/17/virtual/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,9 +346,9 @@
       
 
       
-        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">你需要找到由两个 n 位数的乘积组成的最大回文数。</div><div class="line"></div><div class="line">由于结果会很大，你只需返回最大回文数 mod 1337得到的结果。</div><div class="line"></div><div class="line">示例:</div><div class="line"></div><div class="line">输入: 2</div><div class="line"></div><div class="line">输出: 987</div><div class="line"></div><div class="line">解释: 99 x 91 = 9009, 9009 % 1337 = 987</div><div class="line"></div><div class="line">说明:</div><div class="line"></div><div class="line">n 的取值范围为 [1,8]。</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>这道题在leetcode上划的是easy, 很尴尬，我不会做。参考了论坛上大佬的代码。拿题中的例子来说，2位数，最大为pow(10, 2) - 1 = 99, 最小为pow(10, 1) = 10. 题中要求获得最大回文数，那就从最大的开始，构建回文串。第一个回文串为9999. 从max开始，依次遍历，只要存在num % j == 0, 就返回这个回文串%1337.</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int largestPalindrome(int n) &#123;</div><div class="line">        if (n == 1)</div><div class="line">            return 9;</div><div class="line">        long max = pow(10, n) - 1;</div><div class="line">        long min = pow(10, n - 1);</div><div class="line">        </div><div class="line">        for (long i = max; i &gt;= min; i--) &#123;</div><div class="line">            string tmp = to_string(i);</div><div class="line">            reverse(tmp.begin(), tmp.end());</div><div class="line">            tmp = to_string(i) + tmp;</div><div class="line">            </div><div class="line">            long num = stol(tmp);</div><div class="line">            for (long j = max; pow(j, 2) &gt;= num; j--)</div><div class="line">                if (num % j == 0 )</div><div class="line">                    return num % 1337;</div><div class="line">        &#125;</div><div class="line">        return 0;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+        <h2 id="1-了解虚函数"><a href="#1-了解虚函数" class="headerlink" title="1. 了解虚函数"></a>1. 了解虚函数</h2><p>虚函数是应该在派生类中重新定义的成员函数，即便是基类中的成员函数调用虚函数，也会调用到派生类中的版本。虚函数也是实现C++多态特性的一部分。</p>
+<h2 id="2-实例"><a href="#2-实例" class="headerlink" title="2. 实例"></a>2. 实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"># include &lt;iostream&gt;</div><div class="line"># include &lt;vector&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line">class Animal</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	virtual void eat() const &#123; cout &lt;&lt; &quot;I eat like a generic Animal.&quot; &lt;&lt; endl; &#125;</div><div class="line">	virtual ~Animal() &#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class Wolf : public Animal</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	void eat() const &#123; cout &lt;&lt; &quot;I eat like a wolf!&quot; &lt;&lt; endl; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class Fish : public Animal</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	void eat() const &#123; cout &lt;&lt; &quot;I eat like a fish!&quot; &lt;&lt; endl; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class GoldFish : public Fish</div><div class="line">&#123;</div><div class="line">public:</div><div class="line">	void eat() const &#123; cout &lt;&lt; &quot;I eat like a goldfish!&quot; &lt;&lt; endl; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">class OtherAnimal : public Animal</div><div class="line">&#123;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	std::vector&lt;Animal*&gt; animals;</div><div class="line">	animals.push_back( new Animal() );</div><div class="line">	animals.push_back( new Wolf() );</div><div class="line">	animals.push_back( new Fish() );</div><div class="line">	animals.push_back( new GoldFish() );</div><div class="line">	animals.push_back( new OtherAnimal() );</div><div class="line"></div><div class="line">	for(auto it = animals.begin(); it != animals.end(); ++it) &#123;</div><div class="line">		(*it)-&gt;eat();</div><div class="line">		delete *it;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">class Account &#123;</div><div class="line">public:</div><div class="line">	Account( double d ) &#123;</div><div class="line">		_balance = d;</div><div class="line">	&#125;</div><div class="line">	virtual double GetBalance() &#123;</div><div class="line">		return _balance;</div><div class="line">	&#125;</div><div class="line">	virtual void PrintBalance() &#123;</div><div class="line">		cerr &lt;&lt; &quot;Error. Balance not available for base type.&quot; &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">private:</div><div class="line">	double _balance;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">class CheckingAccount : public Account &#123;</div><div class="line">public:</div><div class="line">	CheckingAccount(double d) : Account(d) &#123;&#125;</div><div class="line">    void PrintBalance() &#123;</div><div class="line">		cout &lt;&lt; &quot;Checking account balance: &quot; &lt;&lt; GetBalance() &lt;&lt; endl;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -394,8 +372,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/07/leetcode143/" rel="next" title="Leecode 143. Reorder List">
-                <i class="fa fa-chevron-left"></i> Leecode 143. Reorder List
+              <a href="/2018/01/15/convert/" rel="next" title="string和char*之间的转换">
+                <i class="fa fa-chevron-left"></i> string和char*之间的转换
               </a>
             
           </div>
@@ -404,8 +382,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/08/dup/" rel="prev" title="dup和dup2的理解">
-                dup和dup2的理解 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/01/searinarray/" rel="prev" title="剑指1_二维数组中的查找">
+                剑指1_二维数组中的查找 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -578,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目描述"><span class="nav-number">1.</span> <span class="nav-text">1. 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-思路"><span class="nav-number">2.</span> <span class="nav-text">2. 思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-代码"><span class="nav-number">3.</span> <span class="nav-text">3. 代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-了解虚函数"><span class="nav-number">1.</span> <span class="nav-text">1. 了解虚函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-实例"><span class="nav-number">2.</span> <span class="nav-text">2. 实例</span></a></li></ol></div>
             
 
           </div>
@@ -733,9 +711,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/06/08/leetcode479/';
-          this.page.identifier = '2018/06/08/leetcode479/';
-          this.page.title = 'Leetcode479. Largest Palindrome Product';
+          this.page.url = 'http://yoursite.com/2018/02/17/virtual/';
+          this.page.identifier = '2018/02/17/virtual/';
+          this.page.title = 'C++ virtual';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
