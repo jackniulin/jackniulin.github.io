@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/07/24/construct/</loc>
+    <lastmod>2018-07-24T09:51:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>C++ 构建对象</title>
+        <pubTime>2018-07-24T09:24:34.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/07/23/ld/</loc>
     <lastmod>2018-07-23T06:41:05.000Z</lastmod>
     <data>
