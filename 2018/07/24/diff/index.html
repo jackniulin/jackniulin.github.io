@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="1. 题目描述12345678910111213141516171819202122232425给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：所有数字（包括 target）都是正整数。解集不能包含重复的组合。 示例 1:输入: candi">
+<meta name="description" content="1.原文(取自Quora) Here is the analogy I use in Linux Kernel Development. Processes are the abstraction of running programs: A binary image, virtualized memory, various kernel resources, an associated secu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode 39. 组合总和">
-<meta property="og:url" content="http://yoursite.com/2018/05/31/leetcode39/index.html">
+<meta property="og:title" content="Robert Love, diff between process and thread">
+<meta property="og:url" content="http://yoursite.com/2018/07/24/diff/index.html">
 <meta property="og:site_name" content="Lin Niu">
-<meta property="og:description" content="1. 题目描述12345678910111213141516171819202122232425给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：所有数字（包括 target）都是正整数。解集不能包含重复的组合。 示例 1:输入: candi">
+<meta property="og:description" content="1.原文(取自Quora) Here is the analogy I use in Linux Kernel Development. Processes are the abstraction of running programs: A binary image, virtualized memory, various kernel resources, an associated secu">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-07T13:42:44.000Z">
+<meta property="og:updated_time" content="2018-07-24T14:55:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Leetcode 39. 组合总和">
-<meta name="twitter:description" content="1. 题目描述12345678910111213141516171819202122232425给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。说明：所有数字（包括 target）都是正整数。解集不能包含重复的组合。 示例 1:输入: candi">
+<meta name="twitter:title" content="Robert Love, diff between process and thread">
+<meta name="twitter:description" content="1.原文(取自Quora) Here is the analogy I use in Linux Kernel Development. Processes are the abstraction of running programs: A binary image, virtualized memory, various kernel resources, an associated secu">
 
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/31/leetcode39/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/24/diff/"/>
 
 
 
 
 
-  <title>Leetcode 39. 组合总和 | Lin Niu</title>
+  <title>Robert Love, diff between process and thread | Lin Niu</title>
   
 
 
@@ -268,7 +268,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/leetcode39/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/diff/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="好好活着。">
@@ -285,7 +285,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Leetcode 39. 组合总和</h1>
+          <h1 class="post-title" itemprop="name headline">Robert Love, diff between process and thread</h1>
         
 
         <div class="post-meta">
@@ -297,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T00:00:00+08:00">
-                2018-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T21:11:33+08:00">
+                2018-07-24
               </time>
             
 
@@ -320,8 +320,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/dfs-leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">dfs, leetcode</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -338,9 +338,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/31/leetcode39/#comments" itemprop="discussionUrl">
+                <a href="/2018/07/24/diff/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/31/leetcode39/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/07/24/diff/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,9 +368,16 @@
       
 
       
-        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</div><div class="line"></div><div class="line">candidates 中的数字可以无限制重复被选取。</div><div class="line"></div><div class="line">说明：</div><div class="line"></div><div class="line">所有数字（包括 target）都是正整数。</div><div class="line">解集不能包含重复的组合。 </div><div class="line">示例 1:</div><div class="line"></div><div class="line">输入: candidates = [2,3,6,7], target = 7,</div><div class="line">所求解集为:</div><div class="line">[</div><div class="line">  [7],</div><div class="line">  [2,2,3]</div><div class="line">]</div><div class="line">示例 2:</div><div class="line"></div><div class="line">输入: candidates = [2,3,5], target = 8,</div><div class="line">所求解集为:</div><div class="line">[</div><div class="line">  [2,2,2,2],</div><div class="line">  [2,3,3],</div><div class="line">  [3,5]</div><div class="line">]</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>dfs, 与<a href="http://jackniulin.com/2018/05/30/leetcode131/" target="_blank" rel="external">131. 分割回文串</a>大体做法相同   </p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;vector&lt;int&gt;&gt; combinationSum(vector&lt;int&gt;&amp; candidates, int target) &#123;</div><div class="line">        vector&lt;vector&lt;int&gt;&gt; res;</div><div class="line">        sort(candidates.begin(), candidates.end());</div><div class="line">        vector&lt;int&gt; out;</div><div class="line">        helper(candidates, out, 0, 0, target, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void helper(vector&lt;int&gt;&amp; candidates, vector&lt;int&gt;&amp; out, int start, int val, int target, vector&lt;vector&lt;int&gt;&gt;&amp; res) &#123;</div><div class="line">        if (val &gt; target)</div><div class="line">            return;</div><div class="line">        if (val == target) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        for (int i = start; i &lt; candidates.size(); i++) &#123;</div><div class="line">            out.push_back(candidates[i]);</div><div class="line">            val += candidates[i];</div><div class="line">            helper(candidates, out, i, val, target, res);</div><div class="line">            out.pop_back();</div><div class="line">            val -= candidates[i];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+        <h2 id="1-原文-取自Quora"><a href="#1-原文-取自Quora" class="headerlink" title="1.原文(取自Quora)"></a>1.原文(取自Quora)</h2><blockquote>
+<p>Here is the analogy I use in Linux Kernel Development. <strong>Processes are the abstraction of running programs</strong>: A binary image, virtualized memory, various kernel resources, an associated security context, and so on. <strong>Threads are the unit of execution in a process:</strong> A virtualized processor, a stack, and program state. Put another way, processes are running binaries and threads are the smallest unit of execution schedulable by an operating system’s process scheduler.</p>
+<p>A process contains one or more threads. In single-threaded processes, the process contains one thread. You can say the thread is the process—there is one thing going on. In multithreaded processes, the process contains more than one thread—there’s more than one thing going on.</p>
+<p>The two primary virtualized abstractions in modern operating systems are virtualized memory and a virtualized processor. Both afford the illusion to running processes that they alone consume the machine’s resources.<br>Virtualized memory gives processes a unique view of memory that seamlessly maps back to physical RAM or on-disk storage (swap space). A virtualized processor lets processes act as if they alone run on a processor, when in fact multiple processes are multitasking across multiple processors.</p>
+<p>Virtualized memory is associated with the process and not the thread. Thus, threads share one memory address space. Conversely, a distinct virtualized processor is associated with each thread. Each thread is an independent schedulable entity.</p>
+<p>What’s the point? We obviously need processes. But why introduce the separate concept of a thread and allow multithreaded processes? There are four primary benefits to multithreading:</p>
+<p><strong>Programming abstraction.</strong> Dividing up work and assigning each division to a unit of execution (a thread) is a natural approach to many problems. Programming patterns that utilize this approach include the reactor, thread-per-connection, and thread pool patterns. Some, however, view threads as an anti-pattern. The inimitable Alan Cox summed this up well with the quote, “threads are for people who can’t program state machines.”<br><strong>Parallelism.</strong> In machines with multiple processors, threads provide an efficient way to achieve true parallelism. As each thread receives its own virtualized processor and is an independently-schedulable entity, multiple threads may run on multiple processors at the same time, improving a system’s throughput. To the extent that threads are used to achieve parallelism—that is, there are no more threads than processors—the “threads are for people who can’t program state machines” quote does not apply.<br><strong>Blocking I/O.</strong> Without threads, blocking I/O halts the whole process. This can be detrimental to both throughput and latency. In a multithreaded process, individual threads may block, waiting on I/O, while other threads make forward progress. Asynchronous &amp; non-blocking I/O are alternative solutions to threads for this issue.<br>Memory savings. Threads provide an efficient way to share memory yet utilize multiple units of execution. In this manner they are an alternative to multiple processes.</p>
+<p>The cost of these benefits of threading are increased complexity in the form of needing to manage concurrency through mechanisms such as mutexes and condition variables. Given the growing trend toward processors sporting multiple cores and systems sporting multiple processors, threading is only going to become a more important tool in system programming.</p>
+</blockquote>
+<h2 id="2-翻译"><a href="#2-翻译" class="headerlink" title="2.翻译"></a>2.翻译</h2><p>这是我在Linux内核开发时用的类比。<strong>进程是运行程序的抽象</strong>：二进制映像，虚拟内存，各种内核资源，an associated security context，等等。<strong>线程是一个进程的运行单位</strong>：虚拟处理器，栈以及程序状态。换句话说，进程是运行的二进制文件，而线程是操作系统进程调度程序的最小调度单位。<br>一个进程包含一个或多个线程，在单线程的进程中，进程只有一个线程，这时候可以把线程当成进程。在多线程的进程中，此时进程包含不止一个线程，即”more than one thing going on”。<br>现代操作系统有两个主要的虚拟抽象概念：虚拟主存和虚拟处理器。这两种抽象都带来了一种假象，什么假象呢?独占机器资源。<br>虚拟主存提供了一个独特的”view of memory”: seamlessly maps back to physical RAM or on-disk storage (swap space). 虚拟机处理器使进程好像就是单独在一个处理器上运行一样, 而事实上，多进程在多处理器上是按多重任务执行的。<br>虚拟主存与进程相关，与线程无关。因此，线程共享一个内存地址空间。相反地，每个虚拟处理器与一个线程相关，每个线程都是独立的调度实体。<br>本质是什么呢?很明显我们需要进程，但是为什么引入了单独的线程的概念，并允许多线程的进程。以下是多线程的四个主要优点:<br><strong>程序抽象</strong>  分割工作，把每个分割的部分分配到一个执行单元（线程），这是处理很多问题的方法。使用了这个方法的编程模式包括：eactor, thread-per-connection, and thread pool patterns. 然而，也有一些把线程当作是反面模式。The inimitable Alan Cox summed this up well with the quote, “threads are for people who can’t program state machines.”<br><strong>并行</strong>  在有多个处理器的机器中，线程提供了一种有效的实现真正并行的方式。每个线程都有它自己的虚拟处理器，而且是一个独立、可调度的实体，多线程可以在同一时间运行在多台处理器上，这提高了系统的吞吐量。<br><strong>阻塞IO</strong> 没有线程的话，阻塞IO会打断整个进程。这对于吞吐量和延时都有坏处。在一个多线程的进程中，单个线程可能会阻塞，等待IO完成。而另外一些线程能够继续执行。异步非阻塞IO也是解决这个问题的一种方式。<br><strong>节省内存</strong> 线程提供了一种有效共享内存，还能利用多个执行单元的方法。</p>
 
       
     </div>
@@ -395,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/30/leetcode131/" rel="next" title="Leetcode 131. 分割回文串">
-                <i class="fa fa-chevron-left"></i> Leetcode 131. 分割回文串
+              <a href="/2018/07/24/construct/" rel="next" title="C++ 构建对象">
+                <i class="fa fa-chevron-left"></i> C++ 构建对象
               </a>
             
           </div>
@@ -404,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/01/fork/" rel="prev" title="fork内核源代码分析">
-                fork内核源代码分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-题目描述"><span class="nav-number">1.</span> <span class="nav-text">1. 题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-思路"><span class="nav-number">2.</span> <span class="nav-text">2. 思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-代码"><span class="nav-number">3.</span> <span class="nav-text">3. 代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-原文-取自Quora"><span class="nav-number">1.</span> <span class="nav-text">1.原文(取自Quora)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-翻译"><span class="nav-number">2.</span> <span class="nav-text">2.翻译</span></a></li></ol></div>
             
 
           </div>
@@ -734,9 +737,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/05/31/leetcode39/';
-          this.page.identifier = '2018/05/31/leetcode39/';
-          this.page.title = 'Leetcode 39. 组合总和';
+          this.page.url = 'http://yoursite.com/2018/07/24/diff/';
+          this.page.identifier = '2018/07/24/diff/';
+          this.page.title = 'Robert Love, diff between process and thread';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://jackniulin-com.disqus.com/embed.js';
