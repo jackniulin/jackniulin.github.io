@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/06/07/tcp/</loc>
+    <lastmod>2018-07-25T07:48:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>tcp创建通路和终结通路</title>
+        <pubTime>2018-06-06T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="tcp/ip" url="http://yoursite.com/categories/tcp-ip/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/06/01/dup/</loc>
+    <lastmod>2018-07-25T07:44:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>dup和dup2的理解</title>
+        <pubTime>2018-05-31T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="kernel" url="http://yoursite.com/categories/kernel/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/02/01/diff/</loc>
     <lastmod>2018-07-25T06:42:49.000Z</lastmod>
     <data>
@@ -313,24 +349,6 @@
            
              
               <breadCrumb title="leetcode" url="http://yoursite.com/categories/leetcode/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/06/08/dup/</loc>
-    <lastmod>2018-06-08T07:41:03.000Z</lastmod>
-    <data>
-        <display>
-        <title>dup和dup2的理解</title>
-        <pubTime>2018-06-08T07:41:03.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="kernel" url="http://yoursite.com/categories/kernel/"/>
           
         </display>
     </data>

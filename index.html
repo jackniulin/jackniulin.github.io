@@ -577,167 +577,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/trapgate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/13/trapgate/" itemprop="url">从内核源码看如何设置陷阱门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
-                2018-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/kernel/" itemprop="url" rel="index">
-                    <span itemprop="name">kernel</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/13/trapgate/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/13/trapgate/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以trap_init函数中set_trap_gate(0,&amp;divide_error)为例分析设置一个陷阱门的过程。<br>看这段代码可以参考这张图：<br><img src="http://ous5r4na6.bkt.clouddn.com/trapgate.png" alt=""></p>
-<h2 id="1-trap-init"><a href="#1-trap-init" class="headerlink" title="1. trap_init()"></a>1. trap_init()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">void trap_init(void)</div><div class="line">&#123;</div><div class="line">	int i;</div><div class="line">	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   </div><div class="line">	set_trap_gate(0,&amp;divide_error);</div><div class="line">	set_trap_gate(1,&amp;debug);</div><div class="line">	set_trap_gate(2,&amp;nmi);</div><div class="line">	/*...*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="2-set-trap-gate"><a href="#2-set-trap-gate" class="headerlink" title="2. set_trap_gate()"></a>2. set_trap_gate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;idt[n]是中断号n在idt表中的偏移地址，中断描述符的类型为15，特权级为0</div><div class="line">#define set_trap_gate(n,addr) </div><div class="line">	_set_gate(&amp;idt[n],15,0,addr)</div></pre></td></tr></table></figure>
-<h2 id="3-set-gate"><a href="#3-set-gate" class="headerlink" title="3. _set_gate()"></a>3. _set_gate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#define _set_gate(gate_addr,type,dpl,addr) </div><div class="line">__asm__ (&quot;movw %%dx,%%ax\n\t&quot; </div><div class="line">	&quot;movw %0,%%dx\n\t&quot; </div><div class="line">	&quot;movl %%eax,%1\n\t&quot; </div><div class="line">	&quot;movl %%edx,%2&quot; </div><div class="line">	: </div><div class="line">	: &quot;i&quot; ((short) (0x8000+(dpl&lt;&lt;13)+(type&lt;&lt;8))), </div><div class="line">	&quot;o&quot; (*((char *) (gate_addr))), </div><div class="line">	&quot;o&quot; (*(4+(char *) (gate_addr))), </div><div class="line">	&quot;d&quot; ((char *) (addr)),&quot;a&quot; (0x00080000))</div></pre></td></tr></table></figure>
-<p>下面逐行分析设置的过程：    </p>
-<ol>
-<li>movw %%dx,%%ax<br>从输入的内容看，edx存放的是中断处理程序偏移地址，这里取该偏移地址的低16位放到eax的低16位，eax原来存放的内容：0x00080000， 0x0008是内核代码段的选择符。执行后，eax存放的就是陷阱门低4字节的内容(含义如上图)   </li>
-<li>movw %0,%%dx<br>%0存放的是4，5字节(从0开始)的内容，组成edx低2字节的内容.edx中原来存放的是中断处理程序的偏移地址，高2字节加前面的低2字节的内容组成陷阱门高4字节的内容。<br>后面的movl %%eax,%1； movl %%edx,%2； 就是根据前2步的结果填充gate_addr处的内容。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/leetcode443/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -892,7 +731,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/dup/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/trapgate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="好好活着。">
@@ -911,7 +750,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/08/dup/" itemprop="url">dup和dup2的理解</a></h1>
+                <a class="post-title-link" href="/2018/06/13/trapgate/" itemprop="url">从内核源码看如何设置陷阱门</a></h1>
         
 
         <div class="post-meta">
@@ -923,8 +762,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-08T15:41:03+08:00">
-                2018-06-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
+                2018-06-13
               </time>
             
 
@@ -964,9 +803,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/06/08/dup/#comments" itemprop="discussionUrl">
+                <a href="/2018/06/13/trapgate/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/08/dup/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/06/13/trapgate/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -996,12 +835,15 @@
       
         
           
-            <h2 id="1-dup和dup2"><a href="#1-dup和dup2" class="headerlink" title="1. dup和dup2"></a>1. dup和dup2</h2><p>都用于复制现有的文件描述符。   </p>
-<blockquote>
-<p>int dup(int fd);<br>int dup2(int fd, int fd2);      </p>
-</blockquote>
-<p>区别：<br>dup返回的是当前可用文件描述符中的最小值。<br>dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被清除，这样进程在调用exec时fd2时是打开状态。<br>返回的新文件描述符与fd共享同一个文件表项。   </p>
-<h2 id="2-源代码分析"><a href="#2-源代码分析" class="headerlink" title="2. 源代码分析"></a>2. 源代码分析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">static int dupfd(unsigned int fd, unsigned int arg)</div><div class="line">&#123;</div><div class="line">	//文件句柄的值不能超过一个程序最多打开文件数，保证当前句柄的文件结构非空</div><div class="line">	if (fd &gt;= NR_OPEN || !current-&gt;filp[fd])</div><div class="line">		return -EBADF;</div><div class="line">	if (arg &gt;= NR_OPEN)</div><div class="line">		return -EINVAL;</div><div class="line">	while (arg &lt; NR_OPEN)</div><div class="line">		if (current-&gt;filp[arg])</div><div class="line">			arg++;</div><div class="line">		else</div><div class="line">			break;</div><div class="line">	if (arg &gt;= NR_OPEN)</div><div class="line">		return -EMFILE;</div><div class="line">	//清除执行时关闭标志，即在运行exec时不会关闭dup创建的句柄。</div><div class="line">	current-&gt;close_on_exec &amp;= ~(1&lt;&lt;arg);</div><div class="line">	//指向同一个文件结构，文件引用计数+1</div><div class="line">	(current-&gt;filp[arg] = current-&gt;filp[fd])-&gt;f_count++;</div><div class="line">	return arg;</div><div class="line">&#125;</div><div class="line">int sys_dup2(unsigned int oldfd, unsigned int newfd)</div><div class="line">&#123;</div><div class="line">	//关闭文件系统调用</div><div class="line">	sys_close(newfd);</div><div class="line">	return dupfd(oldfd,newfd);</div><div class="line">&#125;</div><div class="line">sysclose:</div><div class="line">int sys_close(unsigned int fd)</div><div class="line">&#123;</div><div class="line">	struct file * filp;</div><div class="line"></div><div class="line">	if (fd &gt;= NR_OPEN)</div><div class="line">		return -EINVAL;</div><div class="line">	current-&gt;close_on_exec &amp;= ~(1&lt;&lt;fd);</div><div class="line">	if (!(filp = current-&gt;filp[fd]))</div><div class="line">		return -EINVAL;</div><div class="line">	current-&gt;filp[fd] = NULL;</div><div class="line">	//关闭之前引用计数为1说明内核出错</div><div class="line">	if (filp-&gt;f_count == 0)</div><div class="line">		panic(&quot;Close: file count is 0&quot;);</div><div class="line">	//-1之后还不为0说明有其他进程正在使用该文件</div><div class="line">	if (--filp-&gt;f_count)</div><div class="line">		return (0);</div><div class="line">	//否则释放文件的i节点结构</div><div class="line">	iput(filp-&gt;f_inode);</div><div class="line">	return (0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+            <p>以trap_init函数中set_trap_gate(0,&amp;divide_error)为例分析设置一个陷阱门的过程。<br>看这段代码可以参考这张图：<br><img src="http://ous5r4na6.bkt.clouddn.com/trapgate.png" alt=""></p>
+<h2 id="1-trap-init"><a href="#1-trap-init" class="headerlink" title="1. trap_init()"></a>1. trap_init()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">void trap_init(void)</div><div class="line">&#123;</div><div class="line">	int i;</div><div class="line">	//第一个参数0为中断号，第二个参数为中断程序的偏移地址   </div><div class="line">	set_trap_gate(0,&amp;divide_error);</div><div class="line">	set_trap_gate(1,&amp;debug);</div><div class="line">	set_trap_gate(2,&amp;nmi);</div><div class="line">	/*...*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-set-trap-gate"><a href="#2-set-trap-gate" class="headerlink" title="2. set_trap_gate()"></a>2. set_trap_gate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;idt[n]是中断号n在idt表中的偏移地址，中断描述符的类型为15，特权级为0</div><div class="line">#define set_trap_gate(n,addr) </div><div class="line">	_set_gate(&amp;idt[n],15,0,addr)</div></pre></td></tr></table></figure>
+<h2 id="3-set-gate"><a href="#3-set-gate" class="headerlink" title="3. _set_gate()"></a>3. _set_gate()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#define _set_gate(gate_addr,type,dpl,addr) </div><div class="line">__asm__ (&quot;movw %%dx,%%ax\n\t&quot; </div><div class="line">	&quot;movw %0,%%dx\n\t&quot; </div><div class="line">	&quot;movl %%eax,%1\n\t&quot; </div><div class="line">	&quot;movl %%edx,%2&quot; </div><div class="line">	: </div><div class="line">	: &quot;i&quot; ((short) (0x8000+(dpl&lt;&lt;13)+(type&lt;&lt;8))), </div><div class="line">	&quot;o&quot; (*((char *) (gate_addr))), </div><div class="line">	&quot;o&quot; (*(4+(char *) (gate_addr))), </div><div class="line">	&quot;d&quot; ((char *) (addr)),&quot;a&quot; (0x00080000))</div></pre></td></tr></table></figure>
+<p>下面逐行分析设置的过程：    </p>
+<ol>
+<li>movw %%dx,%%ax<br>从输入的内容看，edx存放的是中断处理程序偏移地址，这里取该偏移地址的低16位放到eax的低16位，eax原来存放的内容：0x00080000， 0x0008是内核代码段的选择符。执行后，eax存放的就是陷阱门低4字节的内容(含义如上图)   </li>
+<li>movw %0,%%dx<br>%0存放的是4，5字节(从0开始)的内容，组成edx低2字节的内容.edx中原来存放的是中断处理程序的偏移地址，高2字节加前面的低2字节的内容组成陷阱门高4字节的内容。<br>后面的movl %%eax,%1； movl %%edx,%2； 就是根据前2步的结果填充gate_addr处的内容。</li>
+</ol>
 
           
         
@@ -1362,6 +1204,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/tcp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/tcp/" itemprop="url">tcp创建通路和终结通路</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T00:00:00+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tcp-ip/" itemprop="url" rel="index">
+                    <span itemprop="name">tcp/ip</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/07/tcp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/07/tcp/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-创建通路（三次握手）"><a href="#1-创建通路（三次握手）" class="headerlink" title="1.创建通路（三次握手）"></a>1.创建通路（三次握手）</h2><p>TCP采用三次握手来创建连接，创建的过程中要做很多参数的初始化，目的是保证按需传输和连接的健壮性。比如seq.<br>1.客户端向服务器发送一个SYN来创建主动打开，客户端把这段连接的seq设置成随机数A<br>2.服务器为一个合法的SYN返回ACK/SYN. SYN的确认号 为A+1，SYN/ACK包 本身包含有一个随机数B<br>3.最后客户端再次发送ACK，当服务器端收到确认之后，连接建立。此时包收到的确认号为A+1，响应号为B+1<br>过程如图:<br><img src="http://ous5r4na6.bkt.clouddn.com/tcp1.png" alt=""></p>
+<h2 id="2-终结通路（四次挥手）"><a href="#2-终结通路（四次挥手）" class="headerlink" title="2.终结通路（四次挥手）"></a>2.终结通路（四次挥手）</h2><p>断开连接的过程，连接的每一次都是独立地被终止。当一个断点要停止它这侧的连接，就向对侧发送FIN, 对侧回复ACK表示确认。因此拆掉一侧的连接需要一对FIN和ACK。<br>首先发出FIN的一侧，如果给对侧的FIN响应了ACK，那么就会超时等待2*MSL时间，然后关闭连接。在这段超时等待时间内，本地的端口不能被新连接使用；避免延时的包的到达与随后的新连接相混淆<br>连接可以工作在TCP半开状态。即一侧关闭了连接，不再发送数据；但另一侧没有关闭连接，仍可以发送数据。已关闭的一侧仍然应接收数据，直至对侧也关闭了连接。<br>过程如图:<br><img src="http://ous5r4na6.bkt.clouddn.com/tcp2.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/asm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1447,161 +1443,6 @@
             <h3 id="1-中断调用没有出错号"><a href="#1-中断调用没有出错号" class="headerlink" title="1. 中断调用没有出错号"></a>1. 中断调用没有出错号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">_divide_error:</div><div class="line">	pushl $_do_divide_error 调用函数地址入栈</div><div class="line">no_error_code:</div><div class="line">	//eax和esp指向的内容互换，即eax原来的值入栈，调用函数的地址放到eax</div><div class="line">	xchgl %eax,(%esp) </div><div class="line">	pushl %ebx</div><div class="line">	pushl %ecx</div><div class="line">	pushl %edx</div><div class="line">	pushl %edi</div><div class="line">	pushl %esi</div><div class="line">	pushl %ebp</div><div class="line">	push %ds</div><div class="line">	push %es</div><div class="line">	push %fs</div><div class="line">	pushl $0		# &quot;error code&quot; //调用函数的第一个参数</div><div class="line">	//将堆栈中原指向eip的指针装入edx, 之后压入栈中</div><div class="line">	lea 44(%esp),%edx </div><div class="line">	pushl %edx  //调用函数的第二个参数</div><div class="line">	//do_divide_err函数：</div><div class="line">	//void do_divide_error(long esp, long error_code)</div><div class="line">	//&#123;</div><div class="line">	//	die(&quot;divide error&quot;,esp,error_code);</div><div class="line">	//&#125;</div><div class="line">	movl $0x10,%edx</div><div class="line">	//设置ds, es, fs的内容： 内核数据段选择符</div><div class="line">	mov %dx,%ds</div><div class="line">	mov %dx,%es</div><div class="line">	mov %dx,%fs</div><div class="line">	call *%eax //调用操作数指定地址处的函数，比如do_divide_error();</div><div class="line">	addl $8,%esp //丢弃前面入栈的2个参数，当前esp重新指向fs</div><div class="line">	pop %fs</div><div class="line">	pop %es</div><div class="line">	pop %ds</div><div class="line">	popl %ebp</div><div class="line">	popl %esi</div><div class="line">	popl %edi</div><div class="line">	popl %edx</div><div class="line">	popl %ecx</div><div class="line">	popl %ebx</div><div class="line">	popl %eax  //弹出交换前eax的内容</div><div class="line">	iret</div></pre></td></tr></table></figure>
 <h3 id="2-中断调用有出错号"><a href="#2-中断调用有出错号" class="headerlink" title="2. 中断调用有出错号"></a>2. 中断调用有出错号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">_double_fault:</div><div class="line">	pushl $_do_double_fault</div><div class="line">error_code:</div><div class="line">	xchgl %eax,4(%esp)		# error code &lt;-&gt; %eax</div><div class="line">	xchgl %ebx,(%esp)		# &amp;function &lt;-&gt; %ebx</div><div class="line">	pushl %ecx</div><div class="line">	pushl %edx</div><div class="line">	pushl %edi</div><div class="line">	pushl %esi</div><div class="line">	pushl %ebp</div><div class="line">	push %ds</div><div class="line">	push %es</div><div class="line">	push %fs</div><div class="line">	pushl %eax			# error code</div><div class="line">	lea 44(%esp),%eax		# offset</div><div class="line">	//do_double_deault的具体实现：</div><div class="line">	//void do_double_fault(long esp, long error_code)</div><div class="line">	//&#123;</div><div class="line">	//	die(&quot;double fault&quot;,esp,error_code);</div><div class="line">	//&#125;</div><div class="line">	pushl %eax</div><div class="line">	movl $0x10,%eax </div><div class="line">	mov %ax,%ds</div><div class="line">	mov %ax,%es</div><div class="line">	mov %ax,%fs</div><div class="line">	call *%ebx  这两步与没有出错号的做法相同</div><div class="line">	addl $8,%esp</div><div class="line">	pop %fs</div><div class="line">	pop %es</div><div class="line">	pop %ds</div><div class="line">	popl %ebp</div><div class="line">	popl %esi</div><div class="line">	popl %edi</div><div class="line">	popl %edx</div><div class="line">	popl %ecx</div><div class="line">	popl %ebx</div><div class="line">	popl %eax</div><div class="line">	iret</div></pre></td></tr></table></figure>
 <p><img src="http://ous5r4na6.bkt.clouddn.com/asm.png" alt=""></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/leetcode22/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/01/leetcode22/" itemprop="url">Leetcode 22. 括号生成</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
-                2018-06-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/dfs-leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">dfs, leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/01/leetcode22/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/01/leetcode22/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</div><div class="line"></div><div class="line">例如，给出 n = 3，生成结果为：</div><div class="line">[</div><div class="line">  &quot;((()))&quot;,</div><div class="line">  &quot;(()())&quot;,</div><div class="line">  &quot;(())()&quot;,</div><div class="line">  &quot;()(())&quot;,</div><div class="line">  &quot;()()()&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>关键的一点，左括号的数目要小于等于右括号，这是生成有效括号组的前提。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    vector&lt;string&gt; generateParenthesis(int n) &#123;</div><div class="line">        vector&lt;string&gt; res;</div><div class="line">        dfs(n, n, &quot;&quot;, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    void dfs(int left, int right, string out, vector&lt;string&gt;&amp; res) &#123;</div><div class="line">        if (left &lt; 0 || right &lt; 0 || left &gt; right)</div><div class="line">            return;</div><div class="line">        if (left == 0 &amp;&amp; right == 0) &#123;</div><div class="line">            res.push_back(out);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        dfs(left - 1, right, out + &quot;(&quot;, res);</div><div class="line">        dfs(left, right - 1, out + &quot;)&quot;, res);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
           
         
@@ -1792,6 +1633,164 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/01/dup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/01/dup/" itemprop="url">dup和dup2的理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T00:00:00+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kernel/" itemprop="url" rel="index">
+                    <span itemprop="name">kernel</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/01/dup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/01/dup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-dup和dup2"><a href="#1-dup和dup2" class="headerlink" title="1. dup和dup2"></a>1. dup和dup2</h2><p>都用于复制现有的文件描述符。   </p>
+<blockquote>
+<p>int dup(int fd);<br>int dup2(int fd, int fd2);      </p>
+</blockquote>
+<p>区别：<br>dup返回的是当前可用文件描述符中的最小值。<br>dup2可以使用fd2指定新描述符的值。如果fd和fd2相等，dup2返回fd2， 而不关闭它。 否则，fd2的FD_CLOEXEC（执行时关闭）文件描述符的标志被清除，这样进程在调用exec时fd2时是打开状态。<br>返回的新文件描述符与fd共享同一个文件表项。   </p>
+<h2 id="2-源代码分析"><a href="#2-源代码分析" class="headerlink" title="2. 源代码分析"></a>2. 源代码分析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">static int dupfd(unsigned int fd, unsigned int arg)</div><div class="line">&#123;</div><div class="line">	//文件句柄的值不能超过一个程序最多打开文件数，保证当前句柄的文件结构非空</div><div class="line">	if (fd &gt;= NR_OPEN || !current-&gt;filp[fd])</div><div class="line">		return -EBADF;</div><div class="line">	if (arg &gt;= NR_OPEN)</div><div class="line">		return -EINVAL;</div><div class="line">	while (arg &lt; NR_OPEN)</div><div class="line">		if (current-&gt;filp[arg])</div><div class="line">			arg++;</div><div class="line">		else</div><div class="line">			break;</div><div class="line">	if (arg &gt;= NR_OPEN)</div><div class="line">		return -EMFILE;</div><div class="line">	//清除执行时关闭标志，即在运行exec时不会关闭dup创建的句柄。</div><div class="line">	current-&gt;close_on_exec &amp;= ~(1&lt;&lt;arg);</div><div class="line">	//指向同一个文件结构，文件引用计数+1</div><div class="line">	(current-&gt;filp[arg] = current-&gt;filp[fd])-&gt;f_count++;</div><div class="line">	return arg;</div><div class="line">&#125;</div><div class="line">int sys_dup2(unsigned int oldfd, unsigned int newfd)</div><div class="line">&#123;</div><div class="line">	//关闭文件系统调用</div><div class="line">	sys_close(newfd);</div><div class="line">	return dupfd(oldfd,newfd);</div><div class="line">&#125;</div><div class="line">sysclose:</div><div class="line">int sys_close(unsigned int fd)</div><div class="line">&#123;</div><div class="line">	struct file * filp;</div><div class="line"></div><div class="line">	if (fd &gt;= NR_OPEN)</div><div class="line">		return -EINVAL;</div><div class="line">	current-&gt;close_on_exec &amp;= ~(1&lt;&lt;fd);</div><div class="line">	if (!(filp = current-&gt;filp[fd]))</div><div class="line">		return -EINVAL;</div><div class="line">	current-&gt;filp[fd] = NULL;</div><div class="line">	//关闭之前引用计数为1说明内核出错</div><div class="line">	if (filp-&gt;f_count == 0)</div><div class="line">		panic(&quot;Close: file count is 0&quot;);</div><div class="line">	//-1之后还不为0说明有其他进程正在使用该文件</div><div class="line">	if (--filp-&gt;f_count)</div><div class="line">		return (0);</div><div class="line">	//否则释放文件的i节点结构</div><div class="line">	iput(filp-&gt;f_inode);</div><div class="line">	return (0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1842,7 +1841,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1853,7 +1852,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
