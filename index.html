@@ -379,7 +379,7 @@
 <p><strong>Programming abstraction.</strong> Dividing up work and assigning each division to a unit of execution (a thread) is a natural approach to many problems. Programming patterns that utilize this approach include the reactor, thread-per-connection, and thread pool patterns. Some, however, view threads as an anti-pattern. The inimitable Alan Cox summed this up well with the quote, “threads are for people who can’t program state machines.”<br><strong>Parallelism.</strong> In machines with multiple processors, threads provide an efficient way to achieve true parallelism. As each thread receives its own virtualized processor and is an independently-schedulable entity, multiple threads may run on multiple processors at the same time, improving a system’s throughput. To the extent that threads are used to achieve parallelism—that is, there are no more threads than processors—the “threads are for people who can’t program state machines” quote does not apply.<br><strong>Blocking I/O.</strong> Without threads, blocking I/O halts the whole process. This can be detrimental to both throughput and latency. In a multithreaded process, individual threads may block, waiting on I/O, while other threads make forward progress. Asynchronous &amp; non-blocking I/O are alternative solutions to threads for this issue.<br>Memory savings. Threads provide an efficient way to share memory yet utilize multiple units of execution. In this manner they are an alternative to multiple processes.</p>
 <p>The cost of these benefits of threading are increased complexity in the form of needing to manage concurrency through mechanisms such as mutexes and condition variables. Given the growing trend toward processors sporting multiple cores and systems sporting multiple processors, threading is only going to become a more important tool in system programming.</p>
 </blockquote>
-<h2 id="2-翻译"><a href="#2-翻译" class="headerlink" title="2.翻译"></a>2.翻译</h2><p>这是我在Linux内核开发时用的类比。<strong>进程是运行程序的抽象</strong>：二进制映像，虚拟内存，各种内核资源，an associated security context，等等。<strong>线程是一个进程的运行单位</strong>：虚拟处理器，栈以及程序状态。换句话说，进程是运行的二进制文件，而线程是操作系统进程调度程序的最小调度单位。<br>一个进程包含一个或多个线程，在单线程的进程中，进程只有一个线程，这时候可以把线程当成进程。在多线程的进程中，此时进程包含不止一个线程，即”more than one thing going on”。<br>现代操作系统有两个主要的虚拟抽象概念：虚拟主存和虚拟处理器。这两种抽象都带来了一种假象，什么假象呢?独占机器资源。<br>虚拟主存提供了一个独特的”view of memory”: seamlessly maps back to physical RAM or on-disk storage (swap space). 虚拟机处理器使进程好像就是单独在一个处理器上运行一样, 而事实上，多进程在多处理器上是按多重任务执行的。<br>虚拟主存与进程相关，与线程无关。因此，线程共享一个内存地址空间。相反地，每个虚拟处理器与一个线程相关，每个线程都是独立的调度实体。<br>本质是什么呢?很明显我们需要进程，但是为什么引入了单独的线程的概念，并允许多线程的进程。以下是多线程的四个主要优点:<br><strong>程序抽象</strong>  分割工作，把每个分割的部分分配到一个执行单元（线程），这是处理很多问题的方法。使用了这个方法的编程模式包括：eactor, thread-per-connection, and thread pool patterns. 然而，也有一些把线程当作是反面模式。The inimitable Alan Cox summed this up well with the quote, “threads are for people who can’t program state machines.”<br><strong>并行</strong>  在有多个处理器的机器中，线程提供了一种有效的实现真正并行的方式。每个线程都有它自己的虚拟处理器，而且是一个独立、可调度的实体，多线程可以在同一时间运行在多台处理器上，这提高了系统的吞吐量。<br><strong>阻塞IO</strong> 没有线程的话，阻塞IO会打断整个进程。这对于吞吐量和延时都有坏处。在一个多线程的进程中，单个线程可能会阻塞，等待IO完成。而另外一些线程能够继续执行。异步非阻塞IO也是解决这个问题的一种方式。<br><strong>节省内存</strong> 线程提供了一种有效共享内存，还能利用多个执行单元的方法。</p>
+<h2 id="2-翻译"><a href="#2-翻译" class="headerlink" title="2.翻译"></a>2.翻译</h2><p>这是我在Linux内核开发时用的类比。<strong>进程是对运行程序的抽象</strong>：包括二进制映像，虚拟内存，各种内核资源，an associated security context，等等。<strong>线程是进程的运行单元</strong>：包括虚拟处理器，栈以及程序状态。换句话说，进程是运行的二进制文件，而线程是操作系统进程调度程序所使用的的最小调度单位。<br>一个进程包含一个或多个线程，在单线程的进程中，进程只有一个线程，这时候可以认为线程就是进程，即”there is one thing going on”。在多线程的进程中，进程包含不止一个线程，即”more than one thing going on”。<br>现代操作系统两个主要的虚拟抽象：虚拟主存和虚拟处理器。这两种抽象都形成一种假象，什么假象呢?独占机器资源。<br>虚拟主存提供了一个独特的”view of memory”: seamlessly maps back to physical RAM or on-disk storage (swap space). 虚拟机处理器的作用使进程看起来就像是单独运行在处理器上, 而事实上，多进程在多处理器上是按多重任务处理的。<br>虚拟主存与进程相关，与线程无关。因此，线程共享一个内存地址空间。相反地，每个虚拟处理器与一个线程相关，每个线程都是独立的调度实体。<br>关键是什么呢?明显地，我们需要进程，但是为什么引入了线程的概念，并允许多线程的进程。以下是多线程的四个主要优点:<br><strong>程序抽象</strong>  任务划分，把每个分割部分分配到一个执行单元（线程），这是处理很多问题的方法。使用了这种方法的编程模式包括：eactor, thread-per-connection, and thread pool patterns. 然而，也有一些把线程当作是反面模式。The inimitable Alan Cox summed this up well with the quote, “threads are for people who can’t program state machines.”<br><strong>并行</strong>  在有多个处理器的机器中，线程提供了一种有效的实现真正并行的方式。每个线程都有它自己的虚拟处理器，而且是一个独立、可调度的实体，多线程可以在同一时间运行在多台处理器上，这提高了系统的吞吐量。<br><strong>阻塞IO</strong> 没有线程的话，阻塞IO会终止整个进程。这对于吞吐量和延时都不利。在一个多线程的进程中，单个线程可能会阻塞，直到IO完成。而另外一些线程能够继续执行。异步非阻塞IO也是解决这个问题的一种方式。<br><strong>节省内存</strong> 线程提供了一种有效共享内存的方法，它还能利用多个执行单元。这样讲的话线程就是多进程的一种替代方式。</p>
 
           
         
@@ -739,160 +739,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/leetcode443/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="好好活着。">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lin Niu">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/13/leetcode443/" itemprop="url">Leetcode443. String Compression</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
-                2018-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/13/leetcode443/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/06/13/leetcode443/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">Given an array of characters, compress it in-place.</div><div class="line"></div><div class="line">The length after compression must always be smaller than or equal to the original array.</div><div class="line"></div><div class="line">Every element of the array should be a character (not int) of length 1.</div><div class="line"></div><div class="line">After you are done modifying the input array in-place, return the new length of the array.</div><div class="line"></div><div class="line"></div><div class="line">Follow up:</div><div class="line">Could you solve it using only O(1) extra space?</div><div class="line"></div><div class="line"></div><div class="line">Example 1:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">&quot;aa&quot; is replaced by &quot;a2&quot;. &quot;bb&quot; is replaced by &quot;b2&quot;. &quot;ccc&quot; is replaced by &quot;c3&quot;.</div><div class="line">Example 2:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 1, and the first 1 characters of the input array should be: [&quot;a&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Nothing is replaced.</div><div class="line">Example 3:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 4, and the first 4 characters of the input array should be: [&quot;a&quot;,&quot;b&quot;,&quot;1&quot;,&quot;2&quot;].</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Since the character &quot;a&quot; does not repeat, it is not compressed. &quot;bbbbbbbbbbbb&quot; is replaced by &quot;b12&quot;.</div><div class="line">Notice each digit has it&apos;s own entry in the array.</div><div class="line">Note:</div><div class="line">All characters have an ASCII value in [35, 126].</div><div class="line">1 &lt;= len(chars) &lt;= 1000.</div></pre></td></tr></table></figure>
-<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>连续出现次数为1的只显示字符，大于1的要在字符之后显示该字符出现的次数，当字符连续出现的次数大于9时，要把这个计数值分割成单个的数字字符。<br>第一次写的代码没有考虑到题中要求的in-place原地算法，提交在leetcode上有热心网友给我提出了意见，之后修改为in-place. 大体的做法就是把i拿出来自己控制，这应该是一个技巧。count在这里起的作用：每次遍历的字符它连续出现的次数，每遍历完一次以后把count重置为0。<br>第二版的代码添加了两个类似于索引作用的index和size.index用来索引每次要处理的字符，size是为了in-place，它记录了本次应该写入的位置。</p>
-<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">//第一版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i]) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            if (count == 1) &#123; </div><div class="line">                vec.push_back(tmp);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                vec.push_back(to_string(count)[0]);    </div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                for (int j = 0; j &lt; to_string(count).size(); j++)</div><div class="line">                    vec.push_back(to_string(count)[j]);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        chars = vec;</div><div class="line">        return vec.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">//第二版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        int index = 0, size = 0;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i] &amp;&amp; i &lt; chars.size()) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            index = i - count;</div><div class="line">            chars[size] = chars[index];</div><div class="line">            if (count == 1) &#123; </div><div class="line">                count = 0;</div><div class="line">                size++;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                chars[size + 1] = to_string(count)[0];</div><div class="line">                size += 2;</div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                for (int j = 1; j &lt;= to_string(count).size(); j++)</div><div class="line">                    chars[size + j] = to_string(count)[j - 1];</div><div class="line">                size = size + 1 + to_string(count).size();</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int k = chars.size() - size; k &gt; 0; k--)</div><div class="line">            chars.pop_back();</div><div class="line">        return size;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/trapgate/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1007,6 +853,160 @@
 <li>movw %0,%%dx<br>%0存放的是4，5字节(从0开始)的内容，组成edx低2字节的内容.edx中原来存放的是中断处理程序的偏移地址，高2字节加前面的低2字节的内容组成陷阱门高4字节的内容。<br>后面的movl %%eax,%1； movl %%edx,%2； 就是根据前2步的结果填充gate_addr处的内容。</li>
 </ol>
 
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/leetcode443/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="好好活着。">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lin Niu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/leetcode443/" itemprop="url">Leetcode443. String Compression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T00:00:00+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/13/leetcode443/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/06/13/leetcode443/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">Given an array of characters, compress it in-place.</div><div class="line"></div><div class="line">The length after compression must always be smaller than or equal to the original array.</div><div class="line"></div><div class="line">Every element of the array should be a character (not int) of length 1.</div><div class="line"></div><div class="line">After you are done modifying the input array in-place, return the new length of the array.</div><div class="line"></div><div class="line"></div><div class="line">Follow up:</div><div class="line">Could you solve it using only O(1) extra space?</div><div class="line"></div><div class="line"></div><div class="line">Example 1:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 6, and the first 6 characters of the input array should be: [&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">&quot;aa&quot; is replaced by &quot;a2&quot;. &quot;bb&quot; is replaced by &quot;b2&quot;. &quot;ccc&quot; is replaced by &quot;c3&quot;.</div><div class="line">Example 2:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 1, and the first 1 characters of the input array should be: [&quot;a&quot;]</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Nothing is replaced.</div><div class="line">Example 3:</div><div class="line">Input:</div><div class="line">[&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;]</div><div class="line"></div><div class="line">Output:</div><div class="line">Return 4, and the first 4 characters of the input array should be: [&quot;a&quot;,&quot;b&quot;,&quot;1&quot;,&quot;2&quot;].</div><div class="line"></div><div class="line">Explanation:</div><div class="line">Since the character &quot;a&quot; does not repeat, it is not compressed. &quot;bbbbbbbbbbbb&quot; is replaced by &quot;b12&quot;.</div><div class="line">Notice each digit has it&apos;s own entry in the array.</div><div class="line">Note:</div><div class="line">All characters have an ASCII value in [35, 126].</div><div class="line">1 &lt;= len(chars) &lt;= 1000.</div></pre></td></tr></table></figure>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2. 思路"></a>2. 思路</h2><p>连续出现次数为1的只显示字符，大于1的要在字符之后显示该字符出现的次数，当字符连续出现的次数大于9时，要把这个计数值分割成单个的数字字符。<br>第一次写的代码没有考虑到题中要求的in-place原地算法，提交在leetcode上有热心网友给我提出了意见，之后修改为in-place. 大体的做法就是把i拿出来自己控制，这应该是一个技巧。count在这里起的作用：每次遍历的字符它连续出现的次数，每遍历完一次以后把count重置为0。<br>第二版的代码添加了两个类似于索引作用的index和size.index用来索引每次要处理的字符，size是为了in-place，它记录了本次应该写入的位置。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3. 代码"></a>3. 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">//第一版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i]) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            if (count == 1) &#123; </div><div class="line">                vec.push_back(tmp);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                vec.push_back(to_string(count)[0]);    </div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                vec.push_back(tmp);</div><div class="line">                for (int j = 0; j &lt; to_string(count).size(); j++)</div><div class="line">                    vec.push_back(to_string(count)[j]);</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        chars = vec;</div><div class="line">        return vec.size();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">//第二版</div><div class="line">class Solution &#123;</div><div class="line">public:</div><div class="line">    int compress(vector&lt;char&gt;&amp; chars) &#123;</div><div class="line">        int count = 0;</div><div class="line">        vector&lt;char&gt; vec;</div><div class="line">        int index = 0, size = 0;</div><div class="line">        for (int i = 0; i &lt; chars.size(); ) &#123;</div><div class="line">            char tmp = chars[i];</div><div class="line">            while (tmp == chars[i] &amp;&amp; i &lt; chars.size()) &#123;</div><div class="line">                count++;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            index = i - count;</div><div class="line">            chars[size] = chars[index];</div><div class="line">            if (count == 1) &#123; </div><div class="line">                count = 0;</div><div class="line">                size++;</div><div class="line">            &#125;</div><div class="line">            else if (count &gt; 1 &amp;&amp; count &lt;= 9) &#123;</div><div class="line">                chars[size + 1] = to_string(count)[0];</div><div class="line">                size += 2;</div><div class="line">                count = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                for (int j = 1; j &lt;= to_string(count).size(); j++)</div><div class="line">                    chars[size + j] = to_string(count)[j - 1];</div><div class="line">                size = size + 1 + to_string(count).size();</div><div class="line">                count = 0;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        for (int k = chars.size() - size; k &gt; 0; k--)</div><div class="line">            chars.pop_back();</div><div class="line">        return size;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
           
         
       
