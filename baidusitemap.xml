@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/05/25/signal1/</loc>
+    <lastmod>2018-11-28T10:02:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux 0.12内核中signal的实现</title>
+        <pubTime>2018-05-24T16:00:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="kernel 0.12" url="http://yoursite.com/categories/kernel-0-12/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/06/07/tcp/</loc>
     <lastmod>2018-07-25T07:48:40.000Z</lastmod>
     <data>
@@ -861,24 +879,6 @@
            
              
               <breadCrumb title="apue, signal" url="http://yoursite.com/categories/apue-signal/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/05/25/signal1/</loc>
-    <lastmod>2018-05-30T08:08:26.000Z</lastmod>
-    <data>
-        <display>
-        <title>Linux 0.12内核中signal的实现</title>
-        <pubTime>2018-05-24T16:00:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="kernel 0.12" url="http://yoursite.com/categories/kernel-0-12/"/>
           
         </display>
     </data>
